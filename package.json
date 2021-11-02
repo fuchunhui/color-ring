@@ -1,0 +1,24 @@
+{
+  "name": "color-ring",
+  "version": "1.0.0",
+  "description": "awesome color ring.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fuchunhui/color-ring.git"
+  },
+  "keywords": [
+    "color-ring",
+    "color",
+    "ring"
+  ],
+  "author": "fuchunhui",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fuchunhui/color-ring/issues"
+  },
+  "homepage": "https://github.com/fuchunhui/color-ring#readme"
+}
