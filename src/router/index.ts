@@ -1,11 +1,24 @@
 import {createRouter, createWebHistory} from 'vue-router';
 
-import ImageWrap from '../pages/ColorWrap.vue';
+import ColorWrap from '../pages/ColorWrap.vue';
+import Twelve from '../pages/Twelve.vue';
+import Newton from '../pages/Newton.vue';
 
 const routes = [
   {
     path: '/',
-    component: ImageWrap
+    name: 'home',
+    component: ColorWrap
+  },
+  {
+    path: '/twelve',
+    name: 'twelve',
+    component: Twelve
+  },
+  {
+    path: '/newton',
+    name: 'newton',
+    component: Newton
   }
 ];
 
