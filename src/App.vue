@@ -2,25 +2,11 @@
 import {ref, watch, computed} from 'vue';
 import {useRouter, useRoute} from 'vue-router';
 import Side from './components/Side.vue';
+import {catalogList} from './config/constant';
 
 const router = useRouter();
 const route = useRoute();
 const current = ref('HOME');
-
-const catalogList = [
-  {
-    label: '色彩世界',
-    value: 'HOME'
-  },
-  {
-    label: '十二色环',
-    value: 'TWELVE'
-  },
-  {
-    label: '牛顿色环',
-    value: 'NEWTON'
-  }
-];
 
 const routerChange = (value: string) => {
   current.value = value;
