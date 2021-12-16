@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import {ref} from 'vue';
-import {useRouter} from 'vue-router';
+import {ref, watch, computed} from 'vue';
+import {useRouter, useRoute} from 'vue-router';
 import Side from './components/Side.vue';
 
 const router = useRouter();
-const current = ref('');
+const route = useRoute();
+const current = ref('HOME');
 
 const catalogList = [
   {
@@ -27,6 +28,14 @@ const routerChange = (value: string) => {
     name: value.toLowerCase()
   });
 };
+
+const routeName = computed(() => {
+  return route.name as string || 'home';
+});
+
+watch(routeName, nv => {
+  current.value = nv.toUpperCase();
+});
 </script>
 
 <template>
