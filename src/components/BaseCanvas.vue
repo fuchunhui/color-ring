@@ -10,11 +10,9 @@ const makeCanvas = () => {
   canvas.height = height;
 
   const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
-  ctx.globalCompositeOperation = 'lighter';
   ctx.beginPath();
-  ctx.arc(200, 200, 100, 0, 2 * Math.PI);
-  ctx.fillStyle = '#FF0000';
-  ctx.fill();
+  ctx.arc(100, 75, 50, 0, 2 * Math.PI);
+  ctx.stroke();
 };
 
 onMounted(() => {
