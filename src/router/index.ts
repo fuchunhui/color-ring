@@ -1,10 +1,12 @@
 import {createRouter, createWebHistory} from 'vue-router';
 
-import ColorWrap from '../pages/ColorWrap.vue';
-import Twelve from '../pages/Twelve.vue';
-import Newton from '../pages/Newton.vue';
-import Light from '../pages/Light.vue';
-import CMYK from '../pages/CMYK.vue';
+import {
+  ColorWrap,
+  Light,
+  CMYK,
+  Twelve,
+  Newton
+} from '../pages';
 
 const routes = [
   {
