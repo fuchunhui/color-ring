@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {ref, watch, computed} from 'vue';
+import {ref, watch, computed, onMounted, provide} from 'vue';
 import {useRouter, useRoute} from 'vue-router';
 import Side from './components/Side.vue';
 import {catalogList} from './config/constant';
@@ -22,6 +22,25 @@ const routeName = computed(() => {
 watch(routeName, nv => {
   current.value = nv.toUpperCase();
 });
+
+const leftWidth = 180;
+const sideWidth = `${leftWidth}px`;
+const paddingNum = 10;
+const padding = `${paddingNum}px`;
+
+const setRank = () => {
+  const ele = document.getElementById('app') as HTMLElement;
+  const {width, height} = ele.getBoundingClientRect();
+
+  provide('rank', {
+    width: width - leftWidth - 2 * paddingNum,
+    height: height - 2* paddingNum
+  });
+};
+
+onMounted(() => {
+  setRank();
+});
 </script>
 
 <template>
@@ -35,7 +54,8 @@ watch(routeName, nv => {
 
 <style lang="less">
 @import url('src/assets/css/mixins.less');
-@width: 180px;
+@width: v-bind(sideWidth);
+@padding: v-bind(padding);
 
 #app {
   width: 100%;
@@ -52,7 +72,8 @@ watch(routeName, nv => {
   .container {
     flex: 1;
     width: calc(100% - @width);
-    padding: 10px;
+    height: 100%;
+    padding: @padding;
   }
 }
 </style>

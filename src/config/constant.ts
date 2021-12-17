@@ -9,7 +9,7 @@ export const catalogList = [
   },
   {
     label: '印刷四色',
-    value: 'HOME'
+    value: 'CMYK'
   },
   {
     label: '十二色环',
