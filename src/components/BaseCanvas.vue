@@ -10,14 +10,33 @@ const props = defineProps({
 
 const canvasRef = ref<HTMLCanvasElement | null>(null);
 const {width, height} = inject('rank') as DOMRect;
+let canvas = document.createElement('canvas');
 
 const makeCanvas = () => {
-  const canvas = canvasRef.value as HTMLCanvasElement;
+  canvas = canvasRef.value as HTMLCanvasElement;
   canvas.width = width;
   canvas.height = height;
 
   const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
   props.convert(ctx);
+};
+
+const hexConvert = (imageData: ImageData) => {
+  const hex = (num: number) => num.toString(16).padStart(2, '0');
+  const {0: r, 1: g, 2: b, 3: a} = imageData.data;
+  return `#${hex(r)}${hex(g)}${hex(b)}${hex(a)}`.toUpperCase();
+};
+
+const pickColor = (event: MouseEvent) => {
+  const {offsetX, offsetY} = event;
+  if (offsetX < 0 || offsetY < 0) {
+    return;
+  }
+
+  const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
+  const imageData = ctx.getImageData(offsetX, offsetY, 1, 1);
+  const color = hexConvert(imageData);
+  console.log('click----> ', color);
 };
 
 onMounted(() => {
@@ -28,7 +47,7 @@ onMounted(() => {
 
 <template>
   <div class="base-canvas">
-    <canvas ref="canvasRef"/>
+    <canvas ref="canvasRef" @click="pickColor"/>
   </div>
 </template>
 
