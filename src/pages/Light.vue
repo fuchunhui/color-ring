@@ -22,13 +22,13 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="template-replace">
+  <div class="light">
     <canvas ref="canvasRef"/>
   </div>
 </template>
 
 <style lang="less">
-.template-replace {
+.light {
   background-color: mintcream;
 }
 </style>

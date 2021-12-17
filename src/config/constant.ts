@@ -5,7 +5,7 @@ export const catalogList = [
   },
   {
     label: '光的三原色',
-    value: 'HOME'
+    value: 'RGB'
   },
   {
     label: '印刷四色',
