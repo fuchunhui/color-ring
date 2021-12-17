@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import {ref, onMounted, inject} from 'vue';
 
+const props = defineProps({
+  convert: {
+    type: Function,
+    default: () => {}
+  }
+});
+
 const canvasRef = ref<HTMLCanvasElement | null>(null);
 const {width, height} = inject('rank') as DOMRect;
 
@@ -10,9 +17,7 @@ const makeCanvas = () => {
   canvas.height = height;
 
   const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
-  ctx.beginPath();
-  ctx.arc(100, 75, 50, 0, 2 * Math.PI);
-  ctx.stroke();
+  props.convert(ctx);
 };
 
 onMounted(() => {
@@ -22,13 +27,13 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="template-replace">
+  <div class="base-canvas">
     <canvas ref="canvasRef"/>
   </div>
 </template>
 
 <style lang="less">
-.template-replace {
+.base-canvas {
   background-color: mintcream;
 }
 </style>
