@@ -4,6 +4,7 @@ import {
   ColorWrap,
   Light,
   CMYK,
+  Art,
   Twelve,
   Newton
 } from '../pages';
@@ -23,6 +24,11 @@ const routes = [
     path: '/cmyk',
     name: 'cmyk',
     component: CMYK
+  },
+  {
+    path: '/art',
+    name: 'art',
+    component: Art
   },
   {
     path: '/twelve',
