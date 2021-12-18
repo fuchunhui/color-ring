@@ -48,12 +48,15 @@ onMounted(() => {
 
 <template>
   <div class="base-canvas">
-    <canvas ref="canvasRef" @click="pickColor"/>
+    <canvas class="base-canvas-center" ref="canvasRef" @click="pickColor"/>
   </div>
 </template>
 
 <style lang="less">
 .base-canvas {
   background-color: mintcream;
+  &-center {
+    cursor: pointer;
+  }
 }
 </style>
