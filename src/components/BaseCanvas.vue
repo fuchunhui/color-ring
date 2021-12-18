@@ -2,7 +2,15 @@
 import {ref, onMounted, inject} from 'vue';
 
 const props = defineProps({
+  beforeConvert: {
+    type: Function,
+    default: () => {}
+  },
   convert: {
+    type: Function,
+    default: () => {}
+  },
+  afterConvert: {
     type: Function,
     default: () => {}
   }
@@ -19,7 +27,9 @@ const makeCanvas = () => {
 
   const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
   ctx.globalCompositeOperation = 'lighter';
+  props.beforeConvert(ctx);
   props.convert(ctx);
+  props.afterConvert(ctx);
 };
 
 const hexConvert = (imageData: ImageData) => {
