@@ -1,34 +1,14 @@
 <script setup lang="ts">
-import {ref, onMounted, inject} from 'vue';
-
-const canvasRef = ref<HTMLCanvasElement | null>(null);
-const {width, height} = inject('rank') as DOMRect;
-
-const makeCanvas = () => {
-  const canvas = canvasRef.value as HTMLCanvasElement;
-  canvas.width = width;
-  canvas.height = height;
-
-  const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
-  ctx.beginPath();
-  ctx.arc(100, 75, 50, 0, 2 * Math.PI);
-  ctx.stroke();
-};
-
-onMounted(() => {
-  makeCanvas();
-});
-
+import BaseCanvas from '../components/BaseCanvas.vue';
+import cmyk from '../composables/cmyk';
 </script>
 
 <template>
-  <div class="light">
-    <canvas ref="canvasRef"/>
-  </div>
+  <base-canvas class="cmyk" :convert="cmyk"/>
 </template>
 
 <style lang="less">
-.light {
+.cmyk {
   background-color: mintcream;
 }
 </style>

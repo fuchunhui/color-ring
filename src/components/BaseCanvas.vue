@@ -35,7 +35,8 @@ const makeCanvas = () => {
 const hexConvert = (imageData: ImageData) => {
   const hex = (num: number) => num.toString(16).padStart(2, '0');
   const {0: r, 1: g, 2: b, 3: a} = imageData.data;
-  return `#${hex(r)}${hex(g)}${hex(b)}${hex(a)}`.toUpperCase();
+  // return `#${hex(r)}${hex(g)}${hex(b)}${hex(a)}`.toUpperCase();
+  return `#${hex(r)}${hex(g)}${hex(b)}`.toUpperCase();
 };
 
 const pickColor = (event: MouseEvent) => {
