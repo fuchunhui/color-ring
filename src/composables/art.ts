@@ -4,6 +4,10 @@ const magenta = '#FF00FF';
 const yellow = '#FFFF00';
 const cyan = '#00FFFF';
 
+const red = '#FF0000';
+const green = '#00FF00'; // lime
+const blue = '#0000FF';
+
 // /.....
 // TODO 如何绘制美术三原色，红黄蓝，和对应的间色
 
@@ -12,13 +16,13 @@ const cyan = '#00FFFF';
 // 试试例子，本地运行那种 https://github.com/mdn/translated-content/blob/main/files/zh-cn/web/api/canvas_api/tutorial/compositing/example/index.html
 
 const art = (ctx: CanvasRenderingContext2D): void => {
-  // ctx.globalCompositeOperation = 'soft-light';
+  ctx.globalCompositeOperation = 'difference';
 
-  tricolor(magenta, yellow, cyan, ctx);
-  ctx.closePath();
-  ctx.beginPath();
-  ctx.fillStyle = 'white';
-  ctx.fillRect(0, 0, 600, 600);
+  tricolor(red, green, blue, ctx);
+  // ctx.closePath();
+  // ctx.beginPath();
+  // ctx.fillStyle = 'white';
+  // ctx.fillRect(0, 0, 600, 600);
   
 };
 
