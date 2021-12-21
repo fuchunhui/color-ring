@@ -14,6 +14,10 @@ const props = defineProps({
   afterConvert: {
     type: Function,
     default: () => {}
+  },
+  colors: {
+    type: Array,
+    default: () => []
   }
 });
 
@@ -37,7 +41,7 @@ const makeCanvas = () => {
 
 const hexConvert = (imageData: ImageData) => {
   const hex = (num: number) => num.toString(16).padStart(2, '0');
-  const {0: r, 1: g, 2: b, 3: a} = imageData.data;
+  const {0: r, 1: g, 2: b, 3: a} = imageData.data; // eslint-disable-line
   // return `#${hex(r)}${hex(g)}${hex(b)}${hex(a)}`.toUpperCase();
   return `#${hex(r)}${hex(g)}${hex(b)}`.toUpperCase();
 };
@@ -63,7 +67,7 @@ onMounted(() => {
 <template>
   <div class="base-canvas">
     <canvas class="base-canvas-center" ref="canvasRef" @click="pickColor"/>
-    <color-list/>
+    <color-list :colors="colors"/>
   </div>
 </template>
 

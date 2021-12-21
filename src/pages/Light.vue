@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import BaseCanvas from '../components/BaseCanvas.vue';
-import light from '../composables/light';
+import {light, colors} from '../composables/light';
 
 </script>
 
 <template>
-  <base-canvas class="light" :convert="light"/>
+  <base-canvas class="light" :convert="light" :colors="colors"/>
 </template>
 
 <style lang="less">

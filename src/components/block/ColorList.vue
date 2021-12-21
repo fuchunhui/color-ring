@@ -1,5 +1,12 @@
 <script setup lang="ts">
 import ColorDetail from './ColorDetail.vue';
+import Color from '../../base/color';
+
+const props = defineProps<{
+  colors: Color[]
+}>();
+
+console.log('list------>', props.colors);
 
 </script>
 
