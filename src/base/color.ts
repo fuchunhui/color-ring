@@ -6,7 +6,6 @@
 
 // import {RGB} from '../types';
 
-// TODO 传入rgb 或者hex 提供相互转换方法
 class Color {
   private _rgb: number[] = [0, 0, 0];
   private _alpha = 0;
@@ -51,6 +50,14 @@ class Color {
     });
     
     return `#${nums.join('')}`;
+  }
+
+  toHSL(): void {
+
+  }
+
+  toHSV(): void {
+    
   }
 }
 
