@@ -12,15 +12,15 @@ export const catalogList = [
     value: 'CMYK'
   },
   {
-    label: '美术三原色',
-    value: 'ART'
-  },
-  {
     label: '十二色环',
     value: 'TWELVE'
   },
   {
     label: '牛顿色环',
     value: 'NEWTON'
-  }
+  },
+  {
+    label: 'RYB模型测试中',
+    value: 'ART'
+  },
 ];
