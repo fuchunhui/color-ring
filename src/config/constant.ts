@@ -4,11 +4,11 @@ export const catalogList = [
     value: 'HOME'
   },
   {
-    label: '光的三原色',
+    label: '光的三原色（RGB模型）',
     value: 'RGB'
   },
   {
-    label: '印刷四色',
+    label: '印刷四色（CMYK模型）',
     value: 'CMYK'
   },
   {
@@ -20,7 +20,7 @@ export const catalogList = [
     value: 'NEWTON'
   },
   {
-    label: 'RYB模型测试中',
+    label: '美术三原色（RYB模型测试中）',
     value: 'ART'
   },
 ];
