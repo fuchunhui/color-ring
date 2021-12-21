@@ -26,6 +26,7 @@ const {width, height} = inject('rank') as DOMRect;
 let canvas = document.createElement('canvas');
 const listWidth = 500;
 const sideWidth = `${listWidth}px`;
+const current = ref('');
 
 const makeCanvas = () => {
   canvas = canvasRef.value as HTMLCanvasElement;
@@ -67,7 +68,10 @@ onMounted(() => {
 <template>
   <div class="base-canvas">
     <canvas class="base-canvas-center" ref="canvasRef" @click="pickColor"/>
-    <color-list :colors="colors"/>
+    <color-list
+      :colors="colors"
+      :current="current"
+    />
   </div>
 </template>
 
