@@ -8,8 +8,8 @@
   </div>
 </template>
 
-<style lang="ts">
+<style lang="less">
 .color-detail {
-
+  background: cyan;
 }
 </style>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {ref, onMounted, inject} from 'vue';
+import ColorList from './block/ColorList.vue';
 
 const props = defineProps({
   beforeConvert: {
@@ -19,10 +20,12 @@ const props = defineProps({
 const canvasRef = ref<HTMLCanvasElement | null>(null);
 const {width, height} = inject('rank') as DOMRect;
 let canvas = document.createElement('canvas');
+const listWidth = 500;
+const sideWidth = `${listWidth}px`;
 
 const makeCanvas = () => {
   canvas = canvasRef.value as HTMLCanvasElement;
-  canvas.width = width;
+  canvas.width = width - listWidth;
   canvas.height = height;
 
   const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
@@ -60,14 +63,19 @@ onMounted(() => {
 <template>
   <div class="base-canvas">
     <canvas class="base-canvas-center" ref="canvasRef" @click="pickColor"/>
+    <color-list/>
   </div>
 </template>
 
 <style lang="less">
 .base-canvas {
+  display: flex;
   background-color: mintcream;
   &-center {
     cursor: pointer;
+  }
+  .color-list {
+    width: v-bind(sideWidth);
   }
 }
 </style>

@@ -10,8 +10,8 @@ import ColorDetail from './ColorDetail.vue';
   </div>
 </template>
 
-<style lang="ts">
+<style lang="less">
 .color-list {
-
+  background-color: magenta;
 }
 </style>
