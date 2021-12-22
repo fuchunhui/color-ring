@@ -1,7 +1,3 @@
-// export interface Color {
-
-// }
-
 export interface RGB {
   r: number;
   g: number;

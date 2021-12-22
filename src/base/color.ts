@@ -4,7 +4,10 @@
  * #ff0000
  */
 
-import {RGB, HSV, HSL} from '../types';
+import {
+  RGB, RGBA,
+  HSV, HSL
+} from '../types';
 
 class Color {
   private _rgb: number[] = [0, 0, 0];
@@ -36,6 +39,13 @@ class Color {
       r,
       g,
       b
+    };
+  }
+
+  rgba(): RGBA {
+    return {
+      ...this.rgb(),
+      a: this.alpha()
     };
   }
 
