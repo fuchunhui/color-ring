@@ -3,7 +3,7 @@ import BaseCanvas from '../components/BaseCanvas.vue';
 import art from '../composables/art';
 
 import {onMounted} from 'vue';
-import {rybtorgb, rgbToRyb} from '../../.draft/ryb1'; // 看起来不是正确的转换算法
+// import {rybtorgb, rgbToRyb} from '../../.draft/ryb1'; // 看起来不是正确的转换算法
 
 // github 关于ryb to rgb的内容，供参考 https://github.com/search?l=JavaScript&p=1&q=rybtorgb&type=Code
 

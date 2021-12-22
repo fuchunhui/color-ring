@@ -4,8 +4,9 @@ import Color from '../base/color';
 
 onMounted(() => {
   const color = new Color('ffff00');
-  console.log({...color});
-  console.log('hex: ', color.toHex());
+  // console.log({...color});
+  // console.log('hex: ', color.toHex());
+  console.log('hsv: ', color.toHSV());
 });
 
 </script>

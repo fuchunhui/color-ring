@@ -14,3 +14,10 @@ export interface RGBA {
   b: number;
   a: number;
 }
+
+export interface HSV {
+  h: number;
+  s: number;
+  v: number;
+  a: number;
+}

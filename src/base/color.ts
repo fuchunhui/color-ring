@@ -4,7 +4,7 @@
  * #ff0000
  */
 
-// import {RGB} from '../types';
+import {RGB, HSV} from '../types';
 
 class Color {
   private _rgb: number[] = [0, 0, 0];
@@ -30,8 +30,13 @@ class Color {
     }
   }
 
-  rgb(): number[] {
-    return this._rgb;
+  rgb(): RGB {
+    const {0: r, 1: g, 2: b} = this._rgb;
+    return {
+      r,
+      g,
+      b
+    };
   }
 
   alpha(): number {
@@ -56,8 +61,39 @@ class Color {
 
   }
 
-  toHSV(): void {
-    
+  toHSV(): HSV {
+    const {0: r, 1: g, 2: b} = this._rgb;
+    console.log('rgb: ', r, g, b);
+
+    const max = Math.max(r, g, b); // 255
+    const min = Math.min(r, g, b); // 0
+
+    const v = max / 255;
+    const d = max - min;
+    const s = max === 0 ? 0 : d / max;
+
+    let h = 0;
+    if (r === max) {
+      h = (g - b) / d * 60;
+    } else if (g === max) {
+      h = (b - r) / d * 60 + 120;
+    } else if (b === max) {
+      h = (r - g) / d * 60 + 240;
+    }
+    if (h < 0) {
+      h += 360;
+    }
+
+    return {
+      h,
+      s,
+      v,
+      a: this._alpha
+    };
+  }
+
+  toHSVReal(): void { // 处理返回值，是否转换为真实内容。° 100 100 这样
+    // const {h, s, v, a} = this.toHSV();
   }
 }
 
