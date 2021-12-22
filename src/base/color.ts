@@ -64,16 +64,17 @@ class Color {
   toHSV(): HSV {
     const {0: r, 1: g, 2: b} = this._rgb;
     console.log('rgb: ', r, g, b);
+    const max = Math.max(r, g, b);
+    const min = Math.min(r, g, b);
 
-    const max = Math.max(r, g, b); // 255
-    const min = Math.min(r, g, b); // 0
-
-    const v = max / 255;
+    const v = max / 256;
     const d = max - min;
     const s = max === 0 ? 0 : d / max;
 
     let h = 0;
-    if (r === max) {
+    if (max === min) {
+      h = 0;
+    } else if (r === max) {
       h = (g - b) / d * 60;
     } else if (g === max) {
       h = (b - r) / d * 60 + 120;
@@ -93,6 +94,7 @@ class Color {
   }
 
   toHSVReal(): void { // 处理返回值，是否转换为真实内容。° 100 100 这样
+    // 0°-360° 0-100% 0-100%
     // const {h, s, v, a} = this.toHSV();
   }
 }
