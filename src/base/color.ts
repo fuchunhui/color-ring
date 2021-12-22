@@ -59,16 +59,14 @@ class Color {
 
   toHSL(): HSL {
     const {0: r, 1: g, 2: b} = this._rgb;
-    console.log('hsl------>初始rgb: ', r, g, b);
-
     const max = Math.max(r, g, b);
     const min = Math.min(r, g, b);
 
     const l = (max + min) / 2 / 255;
     const d = max - min;
     let s = 0;
-
     let h = 0;
+
     if (max === min) {
       h = 0;
       s = 0;
@@ -101,15 +99,14 @@ class Color {
 
   toHSV(): HSV {
     const {0: r, 1: g, 2: b} = this._rgb;
-    console.log('rgb: ', r, g, b);
     const max = Math.max(r, g, b);
     const min = Math.min(r, g, b);
 
     const v = Math.ceil(max / 255 * 1000) / 1000;
     const d = max - min;
     const s = max === 0 ? 0 : d / max;
-
     let h = 0;
+
     if (max === min) {
       h = 0;
     } else {
