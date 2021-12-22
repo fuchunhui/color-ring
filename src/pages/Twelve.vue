@@ -4,7 +4,7 @@ import Color from '../base/color';
 import {hsva} from '../utils/color';
 
 onMounted(() => {
-  const color = new Color('808080');
+  const color = new Color('123456');
 
   console.log('hex: ', color.toHex());
   console.log('hsv: ', color.toHSV());
