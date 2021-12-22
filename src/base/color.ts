@@ -4,7 +4,7 @@
  * #ff0000
  */
 
-import {RGB, HSV} from '../types';
+import {RGB, HSV, HSL} from '../types';
 
 class Color {
   private _rgb: number[] = [0, 0, 0];
@@ -57,8 +57,46 @@ class Color {
     return `#${nums.join('')}`;
   }
 
-  toHSL(): void {
+  toHSL(): HSL {
+    const {0: r, 1: g, 2: b} = this._rgb;
+    console.log('hsl------>初始rgb: ', r, g, b);
 
+    const max = Math.max(r, g, b);
+    const min = Math.min(r, g, b);
+
+    const l = (max + min) / 2 / 255;
+    const d = max - min;
+    let s = 0;
+
+    let h = 0;
+    if (max === min) {
+      h = 0;
+      s = 0;
+    } else {
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      switch (max) {
+        case r:
+          h = (g - b) / d * 60;
+          break;
+        case g:
+          h = (b - r) / d * 60 + 120;
+          break;
+        case b:
+          h = (r - g) / d * 60 + 240;
+          break;
+      }
+    }
+
+    if (h < 0) {
+      h += 360;
+    }
+
+    return {
+      h,
+      s,
+      l: Math.ceil(l * 1000) / 1000,
+      a: this._alpha
+    };
   }
 
   toHSV(): HSV {
@@ -67,19 +105,25 @@ class Color {
     const max = Math.max(r, g, b);
     const min = Math.min(r, g, b);
 
-    const v = max / 256;
+    const v = Math.ceil(max / 255 * 1000) / 1000;
     const d = max - min;
     const s = max === 0 ? 0 : d / max;
 
     let h = 0;
     if (max === min) {
       h = 0;
-    } else if (r === max) {
-      h = (g - b) / d * 60;
-    } else if (g === max) {
-      h = (b - r) / d * 60 + 120;
-    } else if (b === max) {
-      h = (r - g) / d * 60 + 240;
+    } else {
+      switch (max) {
+        case r:
+          h = (g - b) / d * 60;
+          break;
+        case g:
+          h = (b - r) / d * 60 + 120;
+          break;
+        case b:
+          h = (r - g) / d * 60 + 240;
+          break;
+      }
     }
     if (h < 0) {
       h += 360;

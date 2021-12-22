@@ -25,14 +25,13 @@ const hsva = (h: number, s: number, v: number, a: number): Color => {
     [1, 0, 3],
     [1, 2, 0],
     [3, 1, 0],
-    [0, 1, 2],
+    [0, 1, 2]
   ];
 
   const r = Math.floor(vv[perm[i][0]] * 256);
   const g = Math.floor(vv[perm[i][1]] * 256);
   const b = Math.floor(vv[perm[i][2]] * 256);
-  
-  console.log('hsv --->  rgb:', r, g, b);
+
   return new Color([r, g, b], a);
 };
 
