@@ -10,7 +10,7 @@ class Color {
   private _rgb: number[] = [0, 0, 0];
   private _alpha = 0;
 
-  constructor(rgb: string | number[], a: number = 1) {
+  constructor(rgb: string | number[] = [0, 0, 0], a: number = 1) {
     if (Array.isArray(rgb)) {
       this._rgb = rgb;
     } else {

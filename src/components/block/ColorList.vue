@@ -1,30 +1,31 @@
 <script setup lang="ts">
+import {ref} from 'vue';
 import ColorDetail from './ColorDetail.vue';
 import Color from '../../base/color';
 
 const props = defineProps<{
   colors: Color[];
-  current: string;
+  color: Color;
 }>();
 
-console.log('list------>', props.colors);
+const localColor = ref(props.color);
 
 const showCell = (color: Color) => {
   console.log('click', color);
+  localColor.value = color;
 };
-
 </script>
 
 <template>
   <div class="color-list">
-    <color-detail/>
+    <color-detail :color="localColor"/>
     <div class="color-list-wrap">
       <div
         v-for="(item, index) in colors"
         :key="index"
         :class="{
           'color-cell': true,
-          'color-cell-active': current === item.toHex()
+          'color-cell-active': color === item.toHex()
         }"
         :style="{
           backgroundColor: item.toRGB()

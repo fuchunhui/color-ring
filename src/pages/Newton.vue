@@ -22,13 +22,13 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="light">
+  <div class="newton">
     <canvas ref="canvasRef"/>
   </div>
 </template>
 
 <style lang="less">
-.light {
+.newton {
   background-color: mintcream;
 }
 </style>

@@ -10,6 +10,6 @@ import {light, colors} from '../composables/light';
 
 <style lang="less">
 .light {
-  background-color: mintcream;
+  // background-color: mintcream;
 }
 </style>

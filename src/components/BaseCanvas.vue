@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {ref, onMounted, inject} from 'vue';
+import Color from '../base/color';
 import ColorList from './block/ColorList.vue';
 
 const props = defineProps({
@@ -26,7 +27,7 @@ const {width, height} = inject('rank') as DOMRect;
 let canvas = document.createElement('canvas');
 const listWidth = 500;
 const sideWidth = `${listWidth}px`;
-const current = ref('');
+const color = ref(new Color());
 
 const makeCanvas = () => {
   canvas = canvasRef.value as HTMLCanvasElement;
@@ -70,7 +71,7 @@ onMounted(() => {
     <canvas class="base-canvas-center" ref="canvasRef" @click="pickColor"/>
     <color-list
       :colors="colors"
-      :current="current"
+      :color="color"
     />
   </div>
 </template>
@@ -78,7 +79,7 @@ onMounted(() => {
 <style lang="less">
 .base-canvas {
   display: flex;
-  background-color: mintcream;
+  background-color: #FFF;
   &-center {
     cursor: pointer;
   }
