@@ -1,8 +1,23 @@
 import Color from "../base/color";
 
-// const mix = (color1, color2, weight = 0.5) => {
+const mix = (color1: Color, color2: Color, weight = 0.5): Color => {
+  const {r: r1, g: g1, b: b1, a: a1} = color1.rgba();
+  const {r: r2, g: g2, b: b2, a: a2} = color2.rgba();
 
-// };
+  const w = weight * 2 - 1;
+  const a = a1 - a2;
+
+  const w1 = ((w * a === -1 ? w : (w + a) / (1 + w * a)) + 1) / 2;
+  const w2 = 1 - w1;
+  
+  const rgb = [
+    Math.round(r1 * w1 + r2 * w2),
+    Math.round(g1 * w1 + g2 * w2),
+    Math.round(b1 * w1 + b2 * w2)
+  ];
+  const alpha = a1 * weight + a2 * (1 - weight);
+  return new Color(rgb, alpha);
+};
 
 const hsv = (h: number, s: number, v: number): Color => {
   return hsva(h, s, v, 1.0);
@@ -79,7 +94,7 @@ const hsla = (h: number, s: number, l: number, a: number): Color => {
 };
 
 export {
-  // mix,
+  mix,
   hsv,
   hsva,
   hsl,
