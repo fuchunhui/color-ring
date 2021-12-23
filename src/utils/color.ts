@@ -19,6 +19,30 @@ const mix = (color1: Color, color2: Color, weight = 0.5): Color => {
   return new Color(rgb, alpha);
 };
 
+// TODO 
+// 当conversion两个的时候，特殊处理
+// 检测递归的正确性
+const make = (conversion: Color[], deep: number = 1, callback = mix): Color[] => {
+  const length = conversion.length;
+  if (deep < 1 || length < 2) {
+    return conversion;
+  }
+  const colors: Color[] = [];
+  conversion.forEach((color, index) => {
+    colors.push(color);
+
+    const next = index + 1 < length ? index + 1 : 0;
+    const nextColor = callback(color, conversion[next], 0.5);
+    colors.push(nextColor);
+  });
+  deep--;
+  if (deep) {
+    return make(colors, deep, callback);
+  }
+
+  return colors;
+};
+
 const hsv = (h: number, s: number, v: number): Color => {
   return hsva(h, s, v, 1.0);
 };
@@ -95,6 +119,7 @@ const hsla = (h: number, s: number, l: number, a: number): Color => {
 
 export {
   mix,
+  make,
   hsv,
   hsva,
   hsl,

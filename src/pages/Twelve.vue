@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {onMounted} from 'vue';
 import Color from '../base/color';
-import {hsva, hsla, mix} from '../utils/color';
+import {hsva, hsla, mix, make} from '../utils/color';
 
 onMounted(() => {
   const color = new Color('8e9e10');
@@ -23,6 +23,10 @@ onMounted(() => {
   console.log('test ------ mix ----->', color1.toHex(), color2.toHex(), 0.5);
   const mixColor = mix(color1, color2, 0.5);
   console.log(mixColor.rgba(), mixColor.toHex());
+  const makeColors = make([color1, color2], 1, mix);
+  makeColors.forEach((item, index) => {
+    console.log(index, item.toHex());
+  });
 });
 
 </script>
