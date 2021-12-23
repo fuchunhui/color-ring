@@ -35,7 +35,6 @@ const makeCanvas = () => {
   canvas.height = height;
 
   const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
-  ctx.globalCompositeOperation = 'lighter';
   props.beforeConvert(ctx);
   props.convert(ctx);
   props.afterConvert(ctx);

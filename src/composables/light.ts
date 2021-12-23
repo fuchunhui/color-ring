@@ -8,6 +8,7 @@ const blue = '#0000FF';
 const colors = [new Color(red), new Color(green), new Color(blue)];
 
 const light = (ctx: CanvasRenderingContext2D): void => {
+  ctx.globalCompositeOperation = 'screen'; // lighter在a = 1的时候，效果同screen
   tricolor(red, green, blue, ctx);
 };
 

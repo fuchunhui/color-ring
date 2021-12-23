@@ -19,20 +19,12 @@ const mix = (color1: Color, color2: Color, weight = 0.5): Color => {
   return new Color(rgb, alpha);
 };
 
-// TODO 
-// 当conversion两个的时候，特殊处理
-// 检测递归的正确性
 const make = (conversion: Color[], deep: number = 1, callback = mix): Color[] => {
   const length = conversion.length;
   if (deep < 1 || length < 2) {
     return conversion;
   }
   const weight = 0.5;
-  // if (length == 2) {
-  //   const nextColor = callback(conversion[0], conversion[1], weight);
-  //   conversion.splice(1, 0, nextColor);
-  //   return conversion;
-  // }
   const colors: Color[] = [];
   conversion.forEach((color, index) => {
     colors.push(color);
