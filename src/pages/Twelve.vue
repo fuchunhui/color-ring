@@ -24,12 +24,11 @@ onMounted(() => {
   console.log('test ------ mix ----->', color1.toHex(), color2.toHex(), 0.5);
   const mixColor = mix(color1, color2, 0.5);
   console.log(mixColor.rgba(), mixColor.toHex());
-  console.log('test ------ make ------');
-  const makeColors = make([color1, color2], 2, mix);
-  console.log('makeColors: ', makeColors);
-  makeColors.forEach((item, index) => {
-    console.log(index, item.toHex());
-  });
+  // console.log('test ------ make ------');
+  // const makeColors = make([color1, color2], 2, mix);
+  // makeColors.forEach((item, index) => {
+  //   console.log(index, item.toHex());
+  // });
 });
 
 </script>

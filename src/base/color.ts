@@ -29,8 +29,8 @@ class Color {
         }
       });
       this._rgb = nums;
-      this._alpha = this._alpha || (typeof a === 'number' ? a : 1);
     }
+    this._alpha = this._alpha || (typeof a === 'number' ? a : 1);
   }
 
   rgb(): RGB {
