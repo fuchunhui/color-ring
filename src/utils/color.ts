@@ -27,13 +27,21 @@ const make = (conversion: Color[], deep: number = 1, callback = mix): Color[] =>
   if (deep < 1 || length < 2) {
     return conversion;
   }
+  const weight = 0.5;
+  // if (length == 2) {
+  //   const nextColor = callback(conversion[0], conversion[1], weight);
+  //   conversion.splice(1, 0, nextColor);
+  //   return conversion;
+  // }
   const colors: Color[] = [];
   conversion.forEach((color, index) => {
     colors.push(color);
 
     const next = index + 1 < length ? index + 1 : 0;
-    const nextColor = callback(color, conversion[next], 0.5);
-    colors.push(nextColor);
+    if (next !== index - 1) {
+      const nextColor = callback(color, conversion[next], weight);
+      colors.push(nextColor);
+    }
   });
   deep--;
   if (deep) {
