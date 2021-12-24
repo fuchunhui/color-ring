@@ -1,21 +1,19 @@
 <script setup lang="ts">
-import {onMounted} from 'vue';
-// import Color from '../base/color';
-// import {hsva, hsla, mix, make} from '../utils/color';
-import '../test/model';
+import BaseCanvas from '../components/BaseCanvas.vue';
+import {light, colors} from '../composables/light';
 
-onMounted(() => {
-  
-});
+// 混色算法，传入指定的数字
+// 画圆，按照指定的数字拆分部分
+// 当前呢诶容组合
 
 </script>
 
 <template>
-  <div>
-    abbb
-  </div>
+  <base-canvas class="twelve" :convert="light" :colors="colors"/>
 </template>
 
 <style lang="less">
-
+.twelve {
+  background-color: mintcream;
+}
 </style>
