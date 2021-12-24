@@ -33,18 +33,16 @@ class Color {
     this._alpha = this._alpha || (typeof a === 'number' ? a : 1);
   }
 
-  rgb(): RGB {
-    const {0: r, 1: g, 2: b} = this._rgb;
-    return {
-      r,
-      g,
-      b
-    };
+  rgb(): number[] {
+    return this._rgb;
   }
 
   rgba(): RGBA {
+    const {0: r, 1: g, 2: b} = this.rgb();
     return {
-      ...this.rgb(),
+      r,
+      g,
+      b,
       a: this.alpha()
     };
   }
