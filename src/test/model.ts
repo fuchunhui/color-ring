@@ -31,7 +31,6 @@ import blending from '../utils/blending';
 const nc = blending('screen', new Color('#FF0000'), new Color('#0000FF'));
 console.log('screen: ', nc.toHex());
 const nd = blending('difference', new Color('#ff00ff'), new Color('#00ff00'));
-// const nd = blending('difference', new Color('#FF00FF'), new Color('#FFFF00'));
 console.log('difference: ', nd.rgba(), nd.toHex());
 
 export {};
