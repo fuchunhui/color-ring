@@ -7,7 +7,7 @@ const blue = '#0000FF';
 const colors = [new Color(red), new Color(green), new Color(blue), new Color('#FFFF00'), new Color('FF00FF')];
 
 const twelve = (ctx: CanvasRenderingContext2D): void => {
-  ring(colors, 1, ctx);
+  ring(colors, 3, ctx);
 };
 
 export {

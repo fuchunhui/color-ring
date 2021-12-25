@@ -5,8 +5,9 @@
  */
 
 import {
-  RGB, RGBA,
-  HSV, HSL
+  RGBA,
+  HSV,
+  HSL
 } from '../types';
 
 class Color {
@@ -53,6 +54,10 @@ class Color {
 
   toRGB(): string {
     return this.toHex(this._rgb);
+  }
+
+  toRGBA(): string {
+    return this.toHex(this._rgb.concat([this._alpha * 255]));
   }
 
   toHex(rgb: number[] = this._rgb): string {
