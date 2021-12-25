@@ -5,7 +5,7 @@ const WIDTH = 30;
 const RADIUS = 200;
 const AROUND = 10;
 
-const ring = (colors: Color[], deep: number = 1, ctx: CanvasRenderingContext2D, options: RING_OPTIONS): void => {
+const ring = (colors: Color[], deep: number = 1, ctx: CanvasRenderingContext2D, options?: RING_OPTIONS): void => {
   if (!colors.length || deep < 1) {
     return;
   }
@@ -28,24 +28,16 @@ const ring = (colors: Color[], deep: number = 1, ctx: CanvasRenderingContext2D, 
   ctx.lineWidth = lineWidth;
 
   // 循环画圆。
+  const radius = 2 * Math.PI / colors.length;
+  const offset = (Math.PI + radius) / 2;
 
-
-
-  ctx.beginPath();
-  ctx.strokeStyle = 'red';
-  ctx.arc(x, y, r, 0, Math.PI / 2);
-  ctx.stroke();
-  ctx.closePath();
-  ctx.beginPath();
-  ctx.strokeStyle = 'blue';
-  ctx.arc(x, y, r, Math.PI / 2, Math.PI);
-  ctx.stroke();
-  ctx.closePath();
-  ctx.beginPath();
-  ctx.strokeStyle = 'yellow';
-  ctx.arc(x, y, r2, 0, Math.PI / 2);
-  ctx.stroke();
-  ctx.closePath();
+  colors.forEach((color, index) => {
+    ctx.beginPath();
+    ctx.strokeStyle = color.toHex();
+    ctx.arc(x, y, r, index * radius - offset, (index + 1) * radius - offset);
+    ctx.stroke();
+    ctx.closePath();
+  });
 };
 
 export default ring;
