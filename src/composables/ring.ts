@@ -11,30 +11,19 @@ const ring = (colors: Color[], deep: number = 1, ctx: CanvasRenderingContext2D, 
   }
 
   const lineWidth = options?.width ?? WIDTH;
-  console.log('默认的linewidth为：', lineWidth);
-
   const r = options?.minr ?? RADIUS;
-  console.log('默认的最小半径为为：', r);
-
-  // 计算colors 的个数
-  // 把圆分成多少份，循环绘制每一层
-  // 根据deep的层数，把圆分成多少层，从最内层开始向外颜色加深。
-  // 最外层为alpha 1，加一次，颜色alpha小于10%。
-
   const x = r + deep * lineWidth + AROUND;
   const y = x;
-
-  ctx.lineWidth = lineWidth;
-
-  // 循环画圆。
   const radius = 2 * Math.PI / colors.length;
   const offset = (Math.PI + radius) / 2;
+
+  ctx.lineWidth = lineWidth;
 
   const draw = (deep: number) => {
     colors.forEach((color, index) => {
       const startAngle = index * radius - offset;
       const endAngle = startAngle + radius;
-      const alpha = 1 - 0.1 * (deep - 1);
+      const alpha = 1 - 0.1 * (deep - 1); // TODO 跟踪是否混合白色效果更好一些
       const cr = r - lineWidth * (deep - 1);
       const nc = new Color(color.rgb(), alpha);
 
@@ -43,6 +32,18 @@ const ring = (colors: Color[], deep: number = 1, ctx: CanvasRenderingContext2D, 
       ctx.arc(x, y, cr, startAngle, endAngle);
       ctx.stroke();
       ctx.closePath();
+
+      if (index !== 0) { // TODO 跟踪是否合适
+        ctx.save();
+        ctx.beginPath();
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = '#7A4D38';
+        ctx.arc(x, y, cr - lineWidth / 2, 0, 2 * Math.PI);
+        ctx.stroke();
+        ctx.closePath();
+        ctx.restore();
+      }
+      
     });
   };
 
