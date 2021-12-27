@@ -11,12 +11,13 @@ const props = defineProps<{
 const localColor = ref(props.color);
 
 const showCell = (color: Color) => {
-  console.log('click', color);
   localColor.value = color;
 };
 
-watch(props.color, nv => {
+watch(() => props.color, nv => {
   localColor.value = nv;
+}, {
+  deep: true
 });
 
 </script>
@@ -37,7 +38,7 @@ watch(props.color, nv => {
         }"
         @click="showCell(item)"
       >
-        {{ item.toRGB() }}
+        {{ item.toRGB().toUpperCase() }}
       </div>
     </div>
   </div>
@@ -69,6 +70,7 @@ watch(props.color, nv => {
     &:hover {
       background: #edf4fe;
       color: #4B98F8;
+      font-weight: 500;
     }
   }
 }

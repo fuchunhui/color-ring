@@ -100,6 +100,9 @@ const conversionList = computed(() => {
     white-space: nowrap;
     width: 120px;
   }
+  &-value {
+    width: 120px;
+  }
   &-code {
     border-radius: 0 3px 3px 0;
     opacity: .5;

@@ -67,7 +67,7 @@ class Color {
       nums.push(v.toString(16).padStart(2, '0'));
     });
     
-    return `#${nums.join('')}`;
+    return `#${nums.join('').toLowerCase()}`;
   }
 
   toHSL(): HSL {
