@@ -8,6 +8,8 @@ const colorList = [
   '#0000FF', '#8000FF', '#FF00FF', '#FF0080'
 ];
 
+// TODO 提供多种类十二色环
+
 const colors = colorList.map(color => new Color(color));
 
 const twelve = (ctx: CanvasRenderingContext2D): void => {
