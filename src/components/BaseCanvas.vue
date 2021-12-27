@@ -54,8 +54,9 @@ const pickColor = (event: MouseEvent) => {
 
   const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
   const imageData = ctx.getImageData(offsetX, offsetY, 1, 1);
-  const color = hexConvert(imageData);
-  console.log('click----> ', color);
+  const newColor = hexConvert(imageData);
+  console.log('click----> ', newColor);
+  color.value = new Color(newColor);
 };
 
 onMounted(() => {
@@ -68,8 +69,8 @@ onMounted(() => {
   <div class="base-canvas">
     <canvas class="base-canvas-center" ref="canvasRef" @click="pickColor"/>
     <color-list
-      :colors="colors"
-      :color="color"
+      :colors="colors as Color[]"
+      :color="color as Color"
     />
   </div>
 </template>

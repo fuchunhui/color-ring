@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {ref} from 'vue';
+import {ref, watch} from 'vue';
 import ColorDetail from './ColorDetail.vue';
 import Color from '../../base/color';
 
@@ -14,18 +14,23 @@ const showCell = (color: Color) => {
   console.log('click', color);
   localColor.value = color;
 };
+
+watch(props.color, nv => {
+  localColor.value = nv;
+});
+
 </script>
 
 <template>
   <div class="color-list">
-    <color-detail :color="localColor"/>
+    <color-detail :color="localColor as Color"/>
     <div class="color-list-wrap">
       <div
         v-for="(item, index) in colors"
         :key="index"
         :class="{
           'color-cell': true,
-          'color-cell-active': color === item.toHex()
+          'color-cell-active': color.toHex() === item.toHex()
         }"
         :style="{
           backgroundColor: item.toRGB()

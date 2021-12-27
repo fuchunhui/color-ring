@@ -1,14 +1,19 @@
 import Color from '../base/color';
 import ring from "./ring";
 
-const red = '#FF0000';
-const green = '#00FF00'; // lime
-const blue = '#0000FF';
-const colors = [new Color(red), new Color(green), new Color(blue), new Color('#FFFF00'), new Color('FF00FF')];
+// RGB
+const colorList = [
+  '#FF0000', '#FF8000', '#FFFF00', '#80FF00',
+  '#00FF00', '#00FF80', '#00FFFF', '#0080FF',
+  '#0000FF', '#8000FF', '#FF00FF', '#FF0080'
+];
+
+const colors = colorList.map(color => new Color(color));
 
 const twelve = (ctx: CanvasRenderingContext2D): void => {
-  ring(colors, 2, ctx, {
-    minr: 100
+  ring(colors, 1, ctx, {
+    minr: 200,
+    width: 40
   });
 };
 

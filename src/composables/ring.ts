@@ -14,7 +14,6 @@ const ring = (colors: Color[], deep: number = 1, ctx: CanvasRenderingContext2D, 
   const r = options?.minr ?? RADIUS;
   const x = r + lineWidth * deep + AROUND;
   const y = x;
-  console.log(x, y);
   const radius = 2 * Math.PI / colors.length;
   const offset = (Math.PI + radius) / 2;
 
@@ -34,16 +33,16 @@ const ring = (colors: Color[], deep: number = 1, ctx: CanvasRenderingContext2D, 
       ctx.stroke();
       ctx.closePath();
 
-      if (index !== 0) {
-        // ctx.save();
-        // ctx.beginPath();
-        // ctx.lineWidth = 1;
-        // ctx.strokeStyle = '#7A4D38'; // TODO 跟踪是否合适，是否渐变的线
-        // ctx.arc(x, y, cr - lineWidth / 2, 0, 2 * Math.PI);
-        // ctx.stroke();
-        // ctx.closePath();
-        // ctx.restore();
-      }
+      // if (index !== 0) {
+      //   ctx.save();
+      //   ctx.beginPath();
+      //   ctx.lineWidth = 1;
+      //   ctx.strokeStyle = '#7A4D38'; // TODO 跟踪是否合适，是否渐变的线
+      //   ctx.arc(x, y, cr - lineWidth / 2, 0, 2 * Math.PI);
+      //   ctx.stroke();
+      //   ctx.closePath();
+      //   ctx.restore();
+      // }
     });
   };
 
