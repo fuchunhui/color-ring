@@ -8,7 +8,7 @@ import {
   Twelve,
   FortyEight,
   Itten,
-  TwentyFourth
+  Palette
 } from '../pages';
 
 const routes = [
@@ -48,9 +48,9 @@ const routes = [
     component: FortyEight
   },
   {
-    path: '/twentyfourth',
-    name: 'twentyfourth',
-    component: TwentyFourth
+    path: '/palette',
+    name: 'palette',
+    component: Palette
   }
 ];
 

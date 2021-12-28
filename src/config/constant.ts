@@ -24,8 +24,8 @@ export const catalogList = [
     value: 'ITTEN'
   },
   {
-    label: '二十四色环（RYB模型）',
-    value: 'TWENTYFOURTH'
+    label: '调色板',
+    value: 'Palette'
   },
   {
     label: '美术三原色（RYB模型测试中）',

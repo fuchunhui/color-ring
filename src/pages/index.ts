@@ -5,7 +5,7 @@ import Art from './Art.vue';
 import Twelve from './Twelve.vue';
 import FortyEight from './FortyEight.vue';
 import Itten from './Itten.vue';
-import TwentyFourth from './TwentyFourth.vue';
+import Palette from './Palette.vue';
 
 export {
   ColorWrap,
@@ -15,5 +15,5 @@ export {
   Twelve,
   FortyEight,
   Itten,
-  TwentyFourth
+  Palette
 };
