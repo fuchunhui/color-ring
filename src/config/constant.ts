@@ -16,7 +16,7 @@ export const catalogList = [
     value: 'TWELVE'
   },
   {
-    label: '四十八色环',
+    label: '四十八色环（RGB模型）',
     value: 'FortyEight'
   },
   {
