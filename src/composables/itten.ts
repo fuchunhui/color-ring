@@ -1,24 +1,18 @@
 import Color from '../base/color';
 import ring from "./ring";
-import {makeBlending} from '../utils/color';
 
-// RGB
-// const colorList = [
-//   '#FF0000', '#FF8000', '#FFFF00', '#80FF00',
-//   '#00FF00', '#00FF80', '#00FFFF', '#0080FF',
-//   '#0000FF', '#8000FF', '#FF00FF', '#FF0080'
-// ];
+/**
+ * 理论上的RYB色值
+ * 基于https://blog.csdn.net/weixin_44938037/article/details/90599711 建立
+ * 使用目前的自定义的mix算法，不能满足要求，故直接给颜色值。
+ */
+const colorList = [
+  '#FF0000', '#FF5500', '#FF8000', '#FFAA00',
+  '#FFFF00', '#80FF00', '#00FF00', '#00FFFF',
+  '#0080FF', '#8080FF', '#FF00FF', '#FF0080'
+];
 
-const red = '#FF0000';
-const green = '#00FF00';
-const blue = '#0000FF';
-
-const baseList = [red, green, blue];
-const baseColor = baseList.map(color => new Color(color));
-
-const colors = makeBlending(baseColor, 1);
-
-console.log('itten: ', colors);
+const colors = colorList.map(color => new Color(color));
 
 const convert = (ctx: CanvasRenderingContext2D): void => {
   ring(colors, 1, ctx, {

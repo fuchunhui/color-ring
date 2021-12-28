@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import BaseCanvas from '../components/BaseCanvas.vue';
 import {convert, colors} from '../composables/itten';
-import '../test/model';
+// import '../test/model';
 
 // 混色算法，传入指定的数字
 // 画圆，按照指定的数字拆分部分
