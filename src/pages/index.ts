@@ -5,6 +5,7 @@ import Art from './Art.vue';
 import Twelve from './Twelve.vue';
 import FortyEight from './FortyEight.vue';
 import Itten from './Itten.vue';
+import TwentyFourth from './TwentyFourth.vue';
 
 export {
   ColorWrap,
@@ -13,5 +14,6 @@ export {
   Art,
   Twelve,
   FortyEight,
-  Itten
+  Itten,
+  TwentyFourth
 };

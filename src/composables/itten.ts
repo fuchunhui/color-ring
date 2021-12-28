@@ -19,7 +19,7 @@ const around = 10;
 
 const x = r + lineWidth + around;
 const y = x;
-const radius = 2 * Math.PI / 12;
+const radius = 2 * Math.PI / colors.length;
 const inner = r - lineWidth / 2;
 
 /**

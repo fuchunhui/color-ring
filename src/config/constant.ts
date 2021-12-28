@@ -17,11 +17,15 @@ export const catalogList = [
   },
   {
     label: '四十八色环（RGB模型）',
-    value: 'FortyEight'
+    value: 'FORTYEIGHT'
   },
   {
     label: '伊登十二色环（RYB模型）',
     value: 'ITTEN'
+  },
+  {
+    label: '二十四色环（RYB模型）',
+    value: 'TWENTYFOURTH'
   },
   {
     label: '美术三原色（RYB模型测试中）',

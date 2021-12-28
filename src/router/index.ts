@@ -7,7 +7,8 @@ import {
   Art,
   Twelve,
   FortyEight,
-  Itten
+  Itten,
+  TwentyFourth
 } from '../pages';
 
 const routes = [
@@ -45,6 +46,11 @@ const routes = [
     path: '/fortyeight',
     name: 'fortyeight',
     component: FortyEight
+  },
+  {
+    path: '/twentyfourth',
+    name: 'twentyfourth',
+    component: TwentyFourth
   }
 ];
 
