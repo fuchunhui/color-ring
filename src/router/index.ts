@@ -6,7 +6,8 @@ import {
   CMYK,
   Art,
   Twelve,
-  Newton
+  Newton,
+  Itten
 } from '../pages';
 
 const routes = [
@@ -34,6 +35,11 @@ const routes = [
     path: '/twelve',
     name: 'twelve',
     component: Twelve
+  },
+  {
+    path: '/itten',
+    name: 'itten',
+    component: Itten
   },
   {
     path: '/newton',
