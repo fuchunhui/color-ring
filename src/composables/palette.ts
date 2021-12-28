@@ -75,9 +75,65 @@ const hexagon = (x: number, y: number, edge: number, color: Color, ctx: CanvasRe
   ctx.closePath();
 };
 
+/**
+ * 计算某一层数下面的坐标点集合
+ * @param x 初始正六边形横坐标
+ * @param y 纵坐标
+ * @param edge 边
+ * @param deep 当前层数，只有一个六边形，deep为0
+ * @returns 
+ */
+const movePoints = (x: number, y: number, edge: number, deep: number = 1) => {
+  if (deep === 0) {
+    return [{x, y}];
+  }
+
+  const rightup = [], rightdown = [], down = [], leftdown = [], leftup = [], up = [];
+  for (let i = 1; i <= deep; i++) {
+    rightup.push({
+      x: x + i * edge * 3 / 2,
+      y: y - deep * edge * Math.sqrt(3) + i * edge * Math.sqrt(3) / 2
+    });
+    rightdown.push({
+      x: x + deep * edge * 3 / 2,
+      y: y + deep * edge * Math.sqrt(3) / 2 - (deep - i) * edge * Math.sqrt(3)
+    });
+    down.push({
+      x: x + (deep - i) * edge * 3 / 2,
+      y: y + deep * edge * Math.sqrt(3) - (deep - i) * edge * Math.sqrt(3) / 2
+    });
+    leftdown.push({
+      x: x - i * edge * 3 / 2,
+      y: y + deep * edge * Math.sqrt(3) - i * edge * Math.sqrt(3) / 2
+    });
+    leftup.push({
+      x: x - deep * edge * 3 / 2,
+      y: y + deep * edge * Math.sqrt(3) / 2 - i * edge * Math.sqrt(3)
+    });
+    up.push({
+      x: x - (deep - i) * edge * 3 / 2,
+      y: y - deep * edge * Math.sqrt(3) + (deep - i) * edge * Math.sqrt(3) / 2
+    });
+  }
+  const all = rightup.concat(rightdown, down, leftdown, leftup, up);
+  return all;
+};
+
 const convert = (ctx: CanvasRenderingContext2D): void => {
   // ring(colors, ctx);
   hexagon(x, y, edge, new Color('#FF0000'), ctx);
+
+  const outPoints = movePoints(x, y, edge, 2); // 获取2层的所有中心坐标点
+  outPoints.forEach(({x, y}) => {
+    const color = '#' + Math.floor(Math.random() * 0xFFFFFF).toString(16);
+    hexagon(x, y, edge, new Color(color), ctx);
+  });
+
+  // 绘图，绘制2层的六边形
+
+  // 上面为测试信息
+  // 递归绘制，首先根据deep层数，递归处理，没一层的六边形内容。
+  // 由中心开始，然后右上角，顺时针方向回来
 };
 
 export {
