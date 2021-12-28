@@ -3,7 +3,7 @@ import Light from './Light.vue';
 import CMYK from './CMYK.vue';
 import Art from './Art.vue';
 import Twelve from './Twelve.vue';
-import Newton from './Newton.vue';
+import FortyEight from './FortyEight.vue';
 import Itten from './Itten.vue';
 
 export {
@@ -12,6 +12,6 @@ export {
   CMYK,
   Art,
   Twelve,
-  Newton,
+  FortyEight,
   Itten
 };

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import BaseCanvas from '../components/BaseCanvas.vue';
-import {newton, colors} from '../composables/newton';
+import {convert, colors} from '../composables/forty-eight';
 import '../test/model';
 
 // 混色算法，传入指定的数字
@@ -10,11 +10,11 @@ import '../test/model';
 </script>
 
 <template>
-  <base-canvas class="newton" :convert="newton" :colors="colors"/>
+  <base-canvas class="forty-eight" :convert="convert" :colors="colors"/>
 </template>
 
 <style lang="less">
-.newton {
+.forty-eight {
   background-color: mintcream;
 }
 </style>

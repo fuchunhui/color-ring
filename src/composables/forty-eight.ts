@@ -18,9 +18,9 @@ const baseColor = baseList.map(color => new Color(color));
 
 const colors = makeBlending(baseColor, 1);
 
-console.log('newton: ', colors);
+console.log('48: ', colors);
 
-const newton = (ctx: CanvasRenderingContext2D): void => {
+const convert = (ctx: CanvasRenderingContext2D): void => {
   ring(colors, 1, ctx, {
     minr: 200,
     width: 40
@@ -28,6 +28,6 @@ const newton = (ctx: CanvasRenderingContext2D): void => {
 };
 
 export {
-  newton,
+  convert,
   colors
 };

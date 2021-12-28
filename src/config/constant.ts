@@ -16,12 +16,12 @@ export const catalogList = [
     value: 'TWELVE'
   },
   {
-    label: '伊登十二色环（RYB模型）',
-    value: 'ITTEN'
+    label: '四十八色环',
+    value: 'FortyEight'
   },
   {
-    label: '牛顿色环',
-    value: 'NEWTON'
+    label: '伊登十二色环（RYB模型）',
+    value: 'ITTEN'
   },
   {
     label: '美术三原色（RYB模型测试中）',
