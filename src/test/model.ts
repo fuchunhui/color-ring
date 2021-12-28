@@ -16,12 +16,11 @@ import blending from '../utils/blending';
 // const newHSL = hsla(lh, ls, ll, la);
 // console.log('hsl --> rgb转换', newHSL.toHex());
 
-// const color1 = new Color('ff00ff');
-// const color2 = new Color('ffff00');
+const color1 = new Color('ff8000');
+const color2 = new Color('ffff00');
+const mixColor = mix(color1, color2, 0.5);
+console.log('test ------ mix ----->', mixColor.rgba(), mixColor.toHex());
 // const color3 = new Color('#00ffff');
-// console.log('test ------ mix ----->', color1.toHex(), color2.toHex(), 0.5);
-// const mixColor = mix(color1, color2, 0.5);
-// console.log(mixColor.rgba(), mixColor.toHex());
 // console.log('test ------ make ------');
 // const makeColors = make([color1, color2, color3], 1, mix);
 // makeColors.forEach((item, index) => {
@@ -30,7 +29,9 @@ import blending from '../utils/blending';
 
 const nc = blending('screen', new Color('#FF0000'), new Color('#0000FF'));
 console.log('screen: ', nc.toHex());
-const nd = blending('difference', new Color('#ff00ff'), new Color('#00ff00'));
-console.log('difference: ', nd.rgba(), nd.toHex());
+// const nd = blending('difference', new Color('#ff00ff'), new Color('#00ff00'));
+// console.log('difference: ', nd.rgba(), nd.toHex());
 
 export {};
+
+// rgb mix -> ff0000 + ffff00 -> ff8000

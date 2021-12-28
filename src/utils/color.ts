@@ -1,4 +1,5 @@
-import Color from "../base/color";
+import Color from '../base/color';
+import blending from './blending';
 
 const mix = (color1: Color, color2: Color, weight = 0.5): Color => {
   const {r: r1, g: g1, b: b1, a: a1} = color1.rgba();
@@ -38,6 +39,30 @@ const make = (conversion: Color[], deep: number = 1, callback = mix): Color[] =>
   deep--;
   if (deep) {
     return make(colors, deep, callback);
+  }
+
+  return colors;
+};
+
+const makeBlending = (conversion: Color[], deep: number = 1, cm: string = 'screen'): Color[] => {
+  const length = conversion.length;
+  if (deep < 1 || length < 2) {
+    return conversion;
+  }
+
+  const colors: Color[] = [];
+  conversion.forEach((color, index) => {
+    colors.push(color);
+
+    const next = index + 1 < length ? index + 1 : 0;
+    if (next !== index - 1) {
+      const nextColor = blending(cm, color, conversion[next]);
+      colors.push(nextColor);
+    }
+  });
+  deep--;
+  if (deep) {
+    return makeBlending(colors, deep, cm);
   }
 
   return colors;
@@ -120,6 +145,7 @@ const hsla = (h: number, s: number, l: number, a: number): Color => {
 export {
   mix,
   make,
+  makeBlending,
   hsv,
   hsva,
   hsl,
