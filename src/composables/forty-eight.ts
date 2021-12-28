@@ -9,7 +9,7 @@ const yellow = '#ffff00';
 const cyan = '#00ffff';
 const magenta = '#ff00ff';
 
-const baseList = [red, magenta, blue, cyan, green, yellow];
+const baseList = [red, yellow, green, cyan, blue, magenta];
 const baseColor = baseList.map(color => new Color(color));
 const colors = make(baseColor, 3, mix);
 
