@@ -152,5 +152,6 @@ export {
   generatePoints,
   hexagon,
   computedCounts,
-  draw
+  draw,
+  Point
 };
