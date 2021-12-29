@@ -1,29 +1,6 @@
 import Color from '../base/color';
 import {make, mix} from '../utils/color';
 
-const colorList = [
-  '#FFFF00', '#FFAA00', '#FF8000', '#FF5500', 
-  '#FF0000', '#FF0080', '#FF00FF', '#8080FF', 
-  '#0080FF', '#00FFFF', '#00FF00', '#80FF00'
-];
-
-const baseColor = colorList.map(color => new Color(color));
-const colors = make(baseColor, 1, mix);
-
-/**
- * 顺时针绘制色相环
- * @param colors 颜色数组
- * @param ctx CanvasRenderingContext2D
- */
-const ring = (colors: Color[], ctx: CanvasRenderingContext2D): void => {
-  
-};
-
-const edge = 20;
-const deep = 3;
-const x = (1 + deep * 3 / 2) * edge;
-const y = x;
-
 /**
  * 根据正六边形中心点坐标，获取六个顶点坐标
  * @param x 横坐标
@@ -119,21 +96,65 @@ const movePoints = (x: number, y: number, edge: number, deep: number = 1) => {
   return all;
 };
 
-const convert = (ctx: CanvasRenderingContext2D): void => {
-  // ring(colors, ctx);
-  hexagon(x, y, edge, new Color('#FF0000'), ctx);
+/**
+ * 生产所有的六边形的点
+ * @param x 初始正六边形横坐标
+ * @param y 纵坐标
+ * @param edge 边
+ * @param deep 当前层数，只有一个六边形，deep为0
+ * @returns 所有点的坐标集合
+ */
+const generatePoints = (x: number, y: number, edge: number, deep: number = 1) => {
+  let result: {x: number; y: number}[] = [];
+  for (let i = 0; i <= deep; i++) {
+    const points = movePoints(x, y, edge, i);
+    result = result.concat(points);
+  }
+  return result;
+};
 
-  const outPoints = movePoints(x, y, edge, 2); // 获取2层的所有中心坐标点
-  outPoints.forEach(({x, y}) => {
-    const color = '#' + Math.floor(Math.random() * 0xFFFFFF).toString(16);
-    hexagon(x, y, edge, new Color(color), ctx);
+const counts = (deep: number = 1) => {
+  const nums = new Array(deep).fill('').map((item, index) => index * 6);
+  const count = nums.reduce((a, b) => a + b, 1);
+  return count;
+};
+
+/**
+ * 顺时针绘制色相环
+ * @param colors 颜色数组
+ * @param edge 边
+ * @param deep 六边形的层数
+ * @param ctx CanvasRenderingContext2D
+ */
+const draw = (colors: Color[], edge: number, deep: number = 1, ctx: CanvasRenderingContext2D): void => {
+  const x = (1 + deep * Math.sqrt(3)) * edge;
+  const y = x;
+
+  const outPoints = generatePoints(x, y, edge, deep);
+  outPoints.forEach(({x, y}, index) => {
+    const random = '#' + Math.floor(Math.random() * 0xFFFFFF).toString(16);
+    const color = colors[index] || new Color(random);
+    hexagon(x, y, edge, color, ctx);
   });
+};
 
-  // 绘图，绘制2层的六边形
+const colorList = [
+  '#FFFF00', '#FFAA00', '#FF8000', '#FF5500', 
+  '#FF0000', '#FF0080', '#FF00FF', '#8080FF', 
+  '#0080FF', '#00FFFF', '#00FF00', '#80FF00'
+];
 
-  // 上面为测试信息
-  // 递归绘制，首先根据deep层数，递归处理，没一层的六边形内容。
-  // 由中心开始，然后右上角，顺时针方向回来
+const baseColor = colorList.map(color => new Color(color));
+// const colors = make(baseColor, 1, mix);
+const colors: Color[] = [];
+
+const convert = (ctx: CanvasRenderingContext2D): void => {
+  const edge = 20;
+  const deep = 6;
+
+  // const all = counts(deep);
+
+  draw(colors, edge, deep, ctx);
 };
 
 export {
