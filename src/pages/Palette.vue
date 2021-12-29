@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import BaseCanvas from '../components/BaseCanvas.vue';
 import {convert, colors} from '../composables/palette';
-// 调色板 模拟实现
 </script>
 
 <template>

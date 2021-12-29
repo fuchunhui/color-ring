@@ -6,9 +6,3 @@ import cmyk from '../composables/cmyk';
 <template>
   <base-canvas class="cmyk" :convert="cmyk"/>
 </template>
-
-<style lang="less">
-.cmyk {
-  background-color: mintcream;
-}
-</style>

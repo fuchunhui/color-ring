@@ -7,9 +7,3 @@ import {convert, colors} from '../composables/itten';
 <template>
   <base-canvas class="itten" :convert="convert" :colors="colors"/>
 </template>
-
-<style lang="less">
-.itten {
-  background-color: mintcream;
-}
-</style>

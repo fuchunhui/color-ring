@@ -33,6 +33,7 @@ const ring = (colors: Color[], deep: number = 1, ctx: CanvasRenderingContext2D, 
       ctx.stroke();
       ctx.closePath();
 
+      // 隐藏画线
       // if (index !== 0) {
       //   ctx.save();
       //   ctx.beginPath();

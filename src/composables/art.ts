@@ -18,12 +18,3 @@ const art = (ctx: CanvasRenderingContext2D): void => {
 };
 
 export default art;
-
-
-// 美术三原色
-
-// 原色/基色：红黄蓝
-// 间色：绿橙紫
-// 原色与间色、间色与间色再次混合又形成了 6 种颜色，称为「复色」。最后，原色、间色和复色就组成了「十二色环 Color Wheel」。
-
-// 色环上相对的两个颜色，互补色的概念

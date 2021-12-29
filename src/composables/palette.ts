@@ -1,5 +1,4 @@
 import Color from '../base/color';
-import {hsl} from '../utils/color';
 import {computedCounts, generatePoints, hexagon} from './hexagon';
 
 const drawBackground = (x: number, y: number, edge: number, deep: number = 1, ctx: CanvasRenderingContext2D) => {
