@@ -41,6 +41,17 @@ const stupid = (length: number, max: number): number[][] => {
   return result;
 };
 
+/**
+ * 随机获取length个特殊类型的颜色，#AABBCC
+ * @param length 个数
+ * @returns 颜色值数据
+ */
+const specialColor = (length: number): string[] => {
+  // 获取颜色值
+
+  return [];
+};
+
 export {
   stupid
 };

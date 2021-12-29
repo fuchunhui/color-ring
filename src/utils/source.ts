@@ -148,3 +148,5 @@ const list = {
   yellowgreen: '#9acd32',
   rebeccapurple: '#663399'
 };
+
+export default list;

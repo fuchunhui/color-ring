@@ -1,6 +1,6 @@
 import Color from '../base/color';
 import {hsl} from '../utils/color';
-import {computedCounts, draw} from './hexagon';
+import {computedCounts, generatePoints, hexagon} from './hexagon';
 
 const drawBackground = (x: number, y: number, edge: number, deep: number = 1, ctx: CanvasRenderingContext2D) => {
   const ne = (deep + 1) * edge * Math.sqrt(3);
@@ -55,19 +55,26 @@ const make = (colors: Color[], edge: number, deep: number = 1, ctx: CanvasRender
   const y = x;
 
   drawBackground(x, y, edge, deep, ctx);
-  draw(x, y, edge, deep, colors, ctx);
+  const outPoints = generatePoints(x, y, edge, deep);
+  outPoints.forEach(({x, y}, index) => {
+    hexagon(x, y, edge, colors[index], ctx);
+  });
 };
 
-const colors: Color[] = [];
 const deep = 8;
 const all = computedCounts(deep);
 
+let colorStr = [];
 for (let i = 0; i < all; i++) {
-  colors.push(hsl(i, 1, 0.5));
+  const random = Math.floor(Math.random() * 0xFFF);
+  colorStr.push(random);
 }
+colorStr = colorStr.sort((a, b) => b - a);
+
+const colors: Color[] = colorStr.map(color => new Color(`#${color.toString(16).padStart(3, '0')}`));
 
 const convert = (ctx: CanvasRenderingContext2D): void => {
-  const edge = 10;
+  const edge = 25;
   make(colors, edge, deep, ctx);
 };
 
