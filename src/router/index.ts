@@ -15,44 +15,59 @@ const routes = [
   {
     path: '/',
     name: 'home',
+    label: '色彩的世界',
     component: ColorWrap
   },
   {
     path: '/rgb',
     name: 'rgb',
+    label: '光的三原色（RGB模型）',
     component: Light
   },
   {
     path: '/cmyk',
     name: 'cmyk',
+    label: '印刷四色（CMYK模型）',
     component: CMYK
-  },
-  {
-    path: '/art',
-    name: 'art',
-    component: Art
   },
   {
     path: '/twelve',
     name: 'twelve',
+    label: '十二色环',
     component: Twelve
-  },
-  {
-    path: '/itten',
-    name: 'itten',
-    component: Itten
   },
   {
     path: '/fortyeight',
     name: 'fortyeight',
+    label: '四十八色环（RGB模型）',
     component: FortyEight
+  },
+  {
+    path: '/itten',
+    name: 'itten',
+    label: '伊登十二色环（RYB模型）',
+    component: Itten
   },
   {
     path: '/palette',
     name: 'palette',
+    label: '调色板',
     component: Palette
+  },
+  {
+    path: '/art',
+    name: 'art',
+    label: '美术三原色（RYB模型测试中）',
+    component: Art
   }
 ];
+
+const catalogList = routes.map(({label, name}) => {
+  return {
+    label,
+    value: name.toUpperCase()
+  };
+});
 
 const router = createRouter({
   history: createWebHistory(),
@@ -60,3 +75,8 @@ const router = createRouter({
 });
 
 export default router;
+
+export {
+  catalogList
+};
+

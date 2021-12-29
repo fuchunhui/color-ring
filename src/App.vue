@@ -2,7 +2,7 @@
 import {ref, watch, computed, onMounted, provide} from 'vue';
 import {useRouter, useRoute} from 'vue-router';
 import Side from './components/Side.vue';
-import {catalogList} from './config/constant';
+import {catalogList} from './router';
 
 const router = useRouter();
 const route = useRoute();
