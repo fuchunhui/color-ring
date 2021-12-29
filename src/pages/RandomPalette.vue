@@ -1,15 +1,14 @@
 <script setup lang="ts">
+import {computed} from 'vue';
 import BaseCanvas from '../components/BaseCanvas.vue';
 import {convert, colors} from '../composables/random-palette';
-// 动态添加随机点。
+
+const randomColors = computed(() => {
+  return colors;
+});
 </script>
 
 <template>
-  <base-canvas class="random-palette" :convert="convert" :colors="colors"/>
+  <base-canvas class="random-palette" :convert="convert" :colors="randomColors"/>
 </template>
 
-<style lang="less">
-.random-palette {
-  background-color: mintcream;
-}
-</style>
