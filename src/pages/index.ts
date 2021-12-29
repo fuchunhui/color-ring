@@ -6,6 +6,8 @@ import Twelve from './Twelve.vue';
 import FortyEight from './FortyEight.vue';
 import Itten from './Itten.vue';
 import Palette from './Palette.vue';
+import RandomPalette from './RandomPalette.vue';
+import ProgressivePalette from './ProgressivePalette.vue';
 
 export {
   ColorWrap,
@@ -15,5 +17,7 @@ export {
   Twelve,
   FortyEight,
   Itten,
-  Palette
+  Palette,
+  RandomPalette,
+  ProgressivePalette
 };

@@ -8,7 +8,9 @@ import {
   Twelve,
   FortyEight,
   Itten,
-  Palette
+  Palette,
+  RandomPalette,
+  ProgressivePalette
 } from '../pages';
 
 const routes = [
@@ -53,6 +55,18 @@ const routes = [
     name: 'palette',
     label: '调色板',
     component: Palette
+  },
+  {
+    path: '/random',
+    name: 'random',
+    label: '嘿，动起来',
+    component: RandomPalette
+  },
+  {
+    path: '/progress',
+    name: 'progress',
+    label: '渐进式的调色板',
+    component: ProgressivePalette
   },
   {
     path: '/art',
