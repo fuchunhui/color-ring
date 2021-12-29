@@ -11,7 +11,7 @@ const magenta = '#ff00ff';
 
 const baseList = [red, yellow, green, cyan, blue, magenta];
 const baseColor = baseList.map(color => new Color(color));
-const colors = make(baseColor, 3, mix);
+const colors = make(baseColor, 4, mix);
 
 /**
  * 48色环，基于RGB模型绘制
@@ -19,9 +19,9 @@ const colors = make(baseColor, 3, mix);
  * @param ctx CanvasRenderingContext2D
  */
 const convert = (ctx: CanvasRenderingContext2D): void => {
-  ring(colors, 1, ctx, {
-    minr: 200,
-    width: 40
+  ring(colors, 10, ctx, {
+    minr: 160,
+    width: 20
   });
 };
 

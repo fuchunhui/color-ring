@@ -36,7 +36,7 @@ const routes = [
   {
     path: '/twelve',
     name: 'twelve',
-    label: '十二色环',
+    label: '十二色环（RGB模型）',
     component: Twelve
   },
   {

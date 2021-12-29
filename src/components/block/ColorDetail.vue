@@ -6,41 +6,60 @@ const props = defineProps<{
   color: Color;
 }>();
 
-// 处理值，然后列表渲染内容
-// 数据格式参见colorhexa
 const color = toRefs(props).color;
+
+const hex = computed(() => {
+  return color.value.toHex().toUpperCase();
+});
+
+const rgb = computed(() => {
+  return color.value.rgb().join(', ');
+});
+
+const percent = computed(() => {
+  const result: string[] = [];
+  color.value.rgb().forEach(item => {
+    const cell = item * 100 / 255;
+    result.push(`${cell}%`);
+  });
+  return result.join(', ');
+});
+
+const hsl = computed(() => {
+  const {h, s, l} = color.value.toHSL();
+  return [h, `${s * 100}%`, `${l * 100}`].join(', ');
+});
+
+const hsv = computed(() => {
+  const {h, s, v} = color.value.toHSV();
+  return [`${h}°`, `${s * 100}`, `${v * 100}`].join(', ');
+});
 
 const conversionList = computed(() => {
   return [
     {
       label: 'Hex triplet',
-      value: color.value.toHex(),
-      code: '#FF00FF'
+      code: hex.value
     },
     {
       label: 'RGB Decimal',
-      value: color.value.rgb(),
-      code: '123'
+      code: `rgb(${rgb.value})`
     },
     {
       label: 'RGB Percent',
-      value: 'RGB Percent',
-      code: '123'
+      code: `rgb(${percent.value})`
     },
     {
       label: 'CMYK',
-      value: 'CMYK',
-      code: '123'
+      code: 'TODO!!!'
     },
     {
       label: 'HSL',
-      value: 'HSL',
-      code: '123'
+      code: `hsl(${hsl.value})`
     },
     {
       label: 'HSV(or HSB)',
-      value: 'HSV',
-      code: '123'
+      code: hsv.value
     }
   ];
 });
@@ -51,15 +70,12 @@ const conversionList = computed(() => {
     <table class="color-detail-table">
       <tbody>
         <tr
-          v-for="({label, value, code}, index) in conversionList"
+          v-for="({label, code}, index) in conversionList"
           :key="index"
         >
           <th class="color-detail-title">
             {{ label }}
           </th> 
-          <td class="color-detail-value">
-            {{ value }}
-          </td> 
           <td class="color-detail-code">
             <code>
               {{ code }}
@@ -98,12 +114,10 @@ const conversionList = computed(() => {
     font-weight: bold;
     padding-left: 10px;
     white-space: nowrap;
-    width: 120px;
-  }
-  &-value {
-    width: 120px;
+    width: 115px;
   }
   &-code {
+    width: 185px;
     border-radius: 0 3px 3px 0;
     opacity: .5;
     padding: 5px 4px;

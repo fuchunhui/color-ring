@@ -25,7 +25,7 @@ const props = defineProps({
 const canvasRef = ref<HTMLCanvasElement | null>(null);
 const {width, height} = inject('rank') as DOMRect;
 let canvas = document.createElement('canvas');
-const listWidth = 500;
+const listWidth = 390;
 const sideWidth = `${listWidth}px`;
 const color = ref(new Color());
 

@@ -51,8 +51,10 @@ watch(() => props.color, nv => {
     flex: 1;
   }
   &-wrap {
-    width: 120px;
+    width: 90px;
     overflow: auto;
+    padding-top: 5px;
+    padding-left: 5px;
   }
   .color-cell {
     width: 100%;
