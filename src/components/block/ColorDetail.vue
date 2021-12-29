@@ -19,7 +19,7 @@ const rgb = computed(() => {
 const percent = computed(() => {
   const result: string[] = [];
   color.value.rgb().forEach(item => {
-    const cell = item * 100 / 255;
+    const cell = Math.round(item * 100 / 255);
     result.push(`${cell}%`);
   });
   return result.join(', ');

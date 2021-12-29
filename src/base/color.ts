@@ -103,7 +103,7 @@ class Color {
     }
 
     return {
-      h,
+      h: Math.round(h),
       s,
       l: Math.ceil(l * 1000) / 1000,
       a: this._alpha
@@ -140,16 +140,11 @@ class Color {
     }
 
     return {
-      h,
+      h: Math.round(h),
       s,
       v,
       a: this._alpha
     };
-  }
-
-  toHSVReal(): void { // 处理返回值，是否转换为真实内容。° 100 100 这样
-    // 0°-360° 0-100% 0-100%
-    // const {h, s, v, a} = this.toHSV();
   }
 }
 
