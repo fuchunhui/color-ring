@@ -1,5 +1,5 @@
 import Color from '../base/color';
-import {make, mix} from '../utils/color';
+import {hsl} from '../utils/color';
 
 /**
  * 根据正六边形中心点坐标，获取六个顶点坐标
@@ -114,9 +114,50 @@ const generatePoints = (x: number, y: number, edge: number, deep: number = 1) =>
 };
 
 const counts = (deep: number = 1) => {
-  const nums = new Array(deep).fill('').map((item, index) => index * 6);
+  const nums = new Array(deep).fill('').map((item, index) => (index + 1) * 6);
   const count = nums.reduce((a, b) => a + b, 1);
   return count;
+};
+
+const drawBackground = (x: number, y: number, edge: number, deep: number = 1, ctx: CanvasRenderingContext2D) => {
+  const ne = (deep + 1) * edge * Math.sqrt(3);
+  ctx.beginPath();
+  const points = [
+    {
+      x: x + ne * Math.sqrt(3) / 2,
+      y: y - ne / 2
+    },
+    {
+      x: x + ne * Math.sqrt(3) / 2,
+      y: y + ne / 2
+    },
+    {
+      x,
+      y: y + ne
+    },
+    {
+      x: x - ne * Math.sqrt(3) / 2,
+      y: y + ne / 2
+    },
+    {
+      x: x - ne * Math.sqrt(3) / 2,
+      y: y - ne / 2
+    },
+    {
+      x,
+      y: y - ne
+    }
+  ];
+  points.forEach(({x, y}, index) => {
+    if (index === 0) {
+      ctx.moveTo(x, y);
+    } else {
+      ctx.lineTo(x, y);
+    }
+  });
+  ctx.fillStyle = '#000000';
+  ctx.fill();
+  ctx.closePath();
 };
 
 /**
@@ -127,9 +168,10 @@ const counts = (deep: number = 1) => {
  * @param ctx CanvasRenderingContext2D
  */
 const draw = (colors: Color[], edge: number, deep: number = 1, ctx: CanvasRenderingContext2D): void => {
-  const x = (1 + deep * Math.sqrt(3)) * edge;
+  const x = (1 + deep * Math.sqrt(3)) * edge + edge;
   const y = x;
 
+  drawBackground(x, y, edge, deep, ctx);
   const outPoints = generatePoints(x, y, edge, deep);
   outPoints.forEach(({x, y}, index) => {
     const random = '#' + Math.floor(Math.random() * 0xFFFFFF).toString(16);
@@ -138,22 +180,16 @@ const draw = (colors: Color[], edge: number, deep: number = 1, ctx: CanvasRender
   });
 };
 
-const colorList = [
-  '#FFFF00', '#FFAA00', '#FF8000', '#FF5500', 
-  '#FF0000', '#FF0080', '#FF00FF', '#8080FF', 
-  '#0080FF', '#00FFFF', '#00FF00', '#80FF00'
-];
-
-const baseColor = colorList.map(color => new Color(color));
-// const colors = make(baseColor, 1, mix);
 const colors: Color[] = [];
+const deep = 8;
+const all = counts(deep);
+
+for (let i = 0; i < all; i++) {
+  colors.push(hsl(i, 1, 0.5));
+}
 
 const convert = (ctx: CanvasRenderingContext2D): void => {
-  const edge = 20;
-  const deep = 6;
-
-  // const all = counts(deep);
-
+  const edge = 10;
   draw(colors, edge, deep, ctx);
 };
 
