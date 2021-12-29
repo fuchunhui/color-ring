@@ -4,5 +4,5 @@ import {light, colors} from '../composables/light';
 </script>
 
 <template>
-  <base-canvas class="light" :convert="light" :colors="colors"/>
+  <base-canvas :convert="light" :colors="colors"/>
 </template>

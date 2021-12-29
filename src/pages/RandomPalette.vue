@@ -9,6 +9,5 @@ const randomColors = computed(() => {
 </script>
 
 <template>
-  <base-canvas class="random-palette" :convert="convert" :colors="randomColors"/>
+  <base-canvas :convert="convert" :colors="randomColors"/>
 </template>
-

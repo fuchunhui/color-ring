@@ -7,6 +7,7 @@ import {
   Art,
   Twelve,
   FortyEight,
+  NinetySix,
   Itten,
   Palette,
   RandomPalette,
@@ -43,6 +44,12 @@ const routes = [
     name: 'fortyeight',
     label: '四十八色环（RGB模型）',
     component: FortyEight
+  },
+  {
+    path: '/ninetysix',
+    name: 'ninetysix',
+    label: '九十六色环（RGB模型）',
+    component: NinetySix
   },
   {
     path: '/itten',

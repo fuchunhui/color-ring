@@ -4,5 +4,5 @@ import {convert, colors} from '../composables/forty-eight';
 </script>
 
 <template>
-  <base-canvas class="forty-eight" :convert="convert" :colors="colors"/>
+  <base-canvas :convert="convert" :colors="colors"/>
 </template>

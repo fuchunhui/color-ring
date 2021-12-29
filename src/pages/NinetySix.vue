@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import BaseCanvas from '../components/BaseCanvas.vue';
-import cmyk from '../composables/cmyk';
+import {convert, colors} from '../composables/ninety-six';
 </script>
 
 <template>
-  <base-canvas :convert="cmyk"/>
+  <base-canvas :convert="convert" :colors="colors"/>
 </template>
