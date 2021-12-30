@@ -37,7 +37,7 @@ const hsv = computed(() => {
 
 const cmyk = computed(() => {
   const {c, m, y, k} = color.value.toCMYK();
-  return `${c}, ${m * 100}, ${y * 100}, ${k}`;
+  return `${c * 100}, ${m * 100}, ${y * 100}, ${k}`;
 });
 
 const conversionList = computed(() => {

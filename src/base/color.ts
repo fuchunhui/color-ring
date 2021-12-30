@@ -155,9 +155,9 @@ class Color {
       return {c: 0, m: 0, y: 0, k: 1};
     }
     const k = 1 - max;
-    const c = (k - r / 255) / max;
-    const m = (k - g / 255) / max;
-    const y = (k - b / 255) / max;
+    const c = (max - r / 255) / max;
+    const m = (max - g / 255) / max;
+    const y = (max - b / 255) / max;
     return {c, m, y, k};
   }
 }
