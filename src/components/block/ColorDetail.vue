@@ -35,6 +35,11 @@ const hsv = computed(() => {
   return [`${h}°`, `${s * 100}`, `${v * 100}`].join(', ');
 });
 
+const cmyk = computed(() => {
+  const {c, m, y, k} = color.value.toCMYK();
+  return `${c}, ${m * 100}, ${y * 100}, ${k}`;
+});
+
 const conversionList = computed(() => {
   return [
     {
@@ -51,7 +56,7 @@ const conversionList = computed(() => {
     },
     {
       label: 'CMYK',
-      code: 'TODO!!!'
+      code: cmyk.value
     },
     {
       label: 'HSL',

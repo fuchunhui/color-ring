@@ -24,3 +24,10 @@ export interface HSL {
   l: number;
   a: number;
 }
+
+export interface CMYK {
+  c: number;
+  m: number;
+  y: number;
+  k: number;
+}

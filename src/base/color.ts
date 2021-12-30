@@ -7,7 +7,8 @@
 import {
   RGBA,
   HSV,
-  HSL
+  HSL,
+  CMYK
 } from '../types';
 
 class Color {
@@ -145,6 +146,19 @@ class Color {
       v,
       a: this._alpha
     };
+  }
+
+  toCMYK(): CMYK {
+    const {0: r, 1: g, 2: b} = this._rgb;
+    const max = Math.max(r, g, b) / 255;
+    if (max === 0) {
+      return {c: 0, m: 0, y: 0, k: 1};
+    }
+    const k = 1 - max;
+    const c = (k - r / 255) / max;
+    const m = (k - g / 255) / max;
+    const y = (k - b / 255) / max;
+    return {c, m, y, k};
   }
 }
 
