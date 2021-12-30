@@ -4,7 +4,7 @@ import {
   ColorWrap,
   Light,
   CMYK,
-  Art,
+  // Art,
   Twelve,
   FortyEight,
   NinetySix,
@@ -74,13 +74,13 @@ const routes = [
     name: 'progress',
     label: '渐进式的调色板',
     component: ProgressivePalette
-  },
-  {
-    path: '/art',
-    name: 'art',
-    label: '美术三原色（RYB模型测试中）',
-    component: Art
   }
+  // {
+  //   path: '/art',
+  //   name: 'art',
+  //   label: '美术三原色（RYB模型测试中）',
+  //   component: Art
+  // }
 ];
 
 const catalogList = routes.map(({label, name}) => {
