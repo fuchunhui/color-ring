@@ -87,7 +87,7 @@ const routes = [
   // }
 ];
 
-const catalogList: Record<string, string>[] = [];
+const catalogList: {label: string; value: string}[] = [];
 routes.forEach(({label, name}) => {
   if (label && name) {
     catalogList.push({
