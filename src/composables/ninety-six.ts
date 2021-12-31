@@ -14,7 +14,7 @@ const baseColor = baseList.map(color => new Color(color));
 const colors = make(baseColor, 4, mix);
 
 /**
- * 48色环，基于RGB模型绘制
+ * 96色环渐进色环，基于RGB模型绘制
  * 
  * @param ctx CanvasRenderingContext2D
  */

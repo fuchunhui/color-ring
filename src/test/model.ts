@@ -33,5 +33,3 @@ console.log('screen: ', nc.toHex());
 // console.log('difference: ', nd.rgba(), nd.toHex());
 
 export {};
-
-// rgb mix -> ff0000 + ffff00 -> ff8000

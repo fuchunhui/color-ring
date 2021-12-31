@@ -15,7 +15,6 @@ const colors = make(baseColor, 3, mix);
 
 /**
  * 48色环，基于RGB模型绘制
- * 
  * @param ctx CanvasRenderingContext2D
  */
 const convert = (ctx: CanvasRenderingContext2D): void => {
