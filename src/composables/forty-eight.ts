@@ -1,6 +1,7 @@
 import Color from '../base/color';
 import ring from "./ring";
 import {make, mix} from '../utils/color';
+import {inject} from 'vue';
 
 const red = '#FF0000';
 const green = '#00FF00';
@@ -18,6 +19,10 @@ const colors = make(baseColor, 3, mix);
  * @param ctx CanvasRenderingContext2D
  */
 const convert = (ctx: CanvasRenderingContext2D): void => {
+  const {width, height} = inject('rank') as DOMRect;
+  ctx.beginPath();
+  ctx.fillStyle = 'transparent'; // 与白色的difference混合，形成CMYK模型
+  ctx.fillRect(0, 0, width, height);
   ring(colors, 1, ctx, {
     minr: 200,
     width: 40
