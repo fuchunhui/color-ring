@@ -76,10 +76,6 @@ const routes = [
     component: ProgressivePalette
   }
   // {
-  //   path: '/:pathMatch(.*)',
-  //   component: ColorWrap
-  // }
-  // {
   //   path: '/art',
   //   name: 'art',
   //   label: '美术三原色（RYB模型测试中）',
@@ -98,7 +94,6 @@ routes.forEach(({label, name}) => {
 });
 
 const router = createRouter({
-  // history: createWebHistory('/color-ring/'),
   history: createWebHashHistory(),
   routes
 });

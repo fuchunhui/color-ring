@@ -4,7 +4,7 @@
 <template>
   <div class="color-wrap">
     <div class="logo">
-      <a href="/favicon.ico">Color Ring</a>
+      <a href="https://juejin.cn/post/7047529302140649486">Color Ring</a>
     </div>
     <div class="color-wrap-content">
       <p>这是什么？</p>
@@ -40,7 +40,7 @@
     height: 48px;
     line-height: 48px;
     padding: 0 15px;
-    background-image: url(../../favicon.ico), none;
+    background-image: url(/favicon.ico), none;
     background-attachment: scroll;
     background-color: transparent;
     background-position: 0 6px;
