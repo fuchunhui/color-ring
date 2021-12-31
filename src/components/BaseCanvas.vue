@@ -2,6 +2,8 @@
 import {ref, onMounted, inject} from 'vue';
 import Color from '../base/color';
 import ColorList from './block/ColorList.vue';
+import {download} from '../utils/download';
+import {ColorButton} from './common';
 
 const props = defineProps({
   beforeConvert: {
@@ -59,6 +61,10 @@ const pickColor = (event: MouseEvent) => {
   color.value = new Color(newColor);
 };
 
+const downloadCanvas = () => {
+  download(canvas, 'png', 'nannn');
+};
+
 onMounted(() => {
   makeCanvas();
 });
@@ -72,6 +78,7 @@ onMounted(() => {
       :colors="colors as Color[]"
       :color="color as Color"
     />
+    <color-button class="download" u="primary" label="下载" @click="downloadCanvas"/>
   </div>
 </template>
 
@@ -84,6 +91,16 @@ onMounted(() => {
   }
   .color-list {
     width: v-bind(sideWidth);
+  }
+  .download {
+    min-width: 40px;
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    opacity: 0.1;
+    &:hover {
+      opacity: 1;
+    }
   }
 }
 </style>
