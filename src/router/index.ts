@@ -91,7 +91,7 @@ const catalogList = routes.map(({label, name}) => {
 });
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory('/color-ring/'),
   routes
 });
 
