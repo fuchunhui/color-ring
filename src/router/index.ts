@@ -1,4 +1,4 @@
-import {createRouter, createWebHistory} from 'vue-router';
+import {createRouter, createWebHashHistory} from 'vue-router';
 
 import {
   ColorWrap,
@@ -74,11 +74,11 @@ const routes = [
     name: 'progress',
     label: '渐进式的调色板',
     component: ProgressivePalette
-  },
-  {
-    path: '/:pathMatch(.*)',
-    component: ColorWrap
   }
+  // {
+  //   path: '/:pathMatch(.*)',
+  //   component: ColorWrap
+  // }
   // {
   //   path: '/art',
   //   name: 'art',
@@ -98,7 +98,8 @@ routes.forEach(({label, name}) => {
 });
 
 const router = createRouter({
-  history: createWebHistory('/color-ring/'),
+  // history: createWebHistory('/color-ring/'),
+  history: createWebHashHistory(),
   routes
 });
 
