@@ -57,8 +57,9 @@ const pickColor = (event: MouseEvent) => {
   const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
   const imageData = ctx.getImageData(offsetX, offsetY, 1, 1);
   const newColor = hexConvert(imageData);
-  console.log('click----> ', newColor);
   color.value = new Color(newColor);
+
+  navigator.clipboard.writeText(newColor);
 };
 
 const downloadCanvas = () => {
