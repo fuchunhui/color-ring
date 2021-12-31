@@ -74,6 +74,10 @@ const routes = [
     name: 'progress',
     label: '渐进式的调色板',
     component: ProgressivePalette
+  },
+  {
+    path: '/:pathMatch(.*)',
+    component: ColorWrap
   }
   // {
   //   path: '/art',
@@ -83,11 +87,14 @@ const routes = [
   // }
 ];
 
-const catalogList = routes.map(({label, name}) => {
-  return {
-    label,
-    value: name.toUpperCase()
-  };
+const catalogList: Record<string, string>[] = [];
+routes.forEach(({label, name}) => {
+  if (label && name) {
+    catalogList.push({
+      label,
+      value: name.toUpperCase()
+    });
+  }
 });
 
 const router = createRouter({
