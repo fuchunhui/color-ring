@@ -3,6 +3,7 @@ import {provide} from 'vue';
 import CompositeCell from '../components/composite/CompositeCell.vue';
 import CompositeSource from '../components/composite/CompositeSource.vue';
 import CompositeDestination from '../components/composite/CompositeDestination.vue';
+import CompositeFeature from '../components/composite/CompositeFeature.vue';
 
 provide('size', 160);
 
@@ -35,11 +36,17 @@ const whiteList = [
         :white="whiteList[index]"
       />
     </div>
+    <h3 class="compositing-h3">
+      解释原理
+    </h3>
+    <composite-feature/>
   </div>
 </template>
 
 <style lang="less">
 .compositing {
+  margin-bottom: 20px;
+  overflow: auto;
   &-title {
     display: flex;
   }
@@ -47,7 +54,8 @@ const whiteList = [
     padding-top: 10px;
     height: 30px;
   }
-  .composite-source {
+  .composite-source,
+  .composite-destination {
     margin-right: 40px;
   }
   &-item {
