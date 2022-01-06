@@ -1,10 +1,6 @@
 <script setup lang="ts">
 import {ref, onMounted} from 'vue';
-import {createInterlace} from '../utils/canvas';
-
-const props = defineProps<{
-  operator: string
-}>();
+import {createInterlace} from '../../utils/canvas';
 
 const canvasRef = ref<HTMLCanvasElement | null>(null);
 
@@ -17,16 +13,9 @@ const makeCanvas = () => {
   canvas.height = size;
 
   const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
-  ctx.fillStyle = 'white';
-  ctx.fillRect(0, 0, size, size);
 
   const background = createInterlace(8, '#FFF', '#EEE');
   canvas.style.background = `url(${background})`;
-
-  ctx.globalCompositeOperation = props.operator;
-
-  ctx.fillStyle = 'blue';
-  ctx.fillRect(50, 50, 100, 100);
 
   ctx.fillStyle = 'red';
   ctx.fillRect(10, 10, 100, 100);
@@ -38,9 +27,9 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="composite-cell">
-    <p class="composite-cell-title">
-      {{ operator }}
+  <div class="composite-source">
+    <p class="composite-source-title">
+      source
     </p>
     <canvas ref="canvasRef"/>
   </div>
@@ -49,7 +38,7 @@ onMounted(() => {
 <style lang="less">
 @width: v-bind(sizePX);
 
-.composite-cell {
+.composite-source {
   &-title {
     width: @width;
     height: 28px;

@@ -1,26 +1,32 @@
 <script setup lang="ts">
-import CompositeCell from '../components/CompositeCell.vue';
+import CompositeCell from '../components/composite/CompositeCell.vue';
+import CompositeSource from '../components/composite/CompositeSource.vue';
+import CompositeDestination from '../components/composite/CompositeDestination.vue';
 
 const compositeList = [
   'clear', 'copy', 'source-over', 'destination-over',
   'source-in', 'destination-in', 'source-out', 'destination-out',
   'source-atop', 'destination-atop', 'xor', 'lighter'
 ];
+const whiteList = [
+  true, true, true, true, 
+  true, true, true, true, 
+  true, true, true, true 
+];
 </script>
 
 <template>
   <div class="compositing">
-    123
-    // 原始图形
-    // 4 * 3的对比效果展示。
-    <div>
-      source and dest
+    <div class="compositing-title">
+      <composite-source/>
+      <composite-destination/>
     </div>
     <div class="compositing-item">
       <composite-cell
-        v-for="item in compositeList"
+        v-for="(item, index) in compositeList"
         :key="item"
         :operator="item"
+        :white="whiteList[index]"
       />
     </div>
   </div>
@@ -28,6 +34,12 @@ const compositeList = [
 
 <style lang="less">
 .compositing {
+  &-title {
+    display: flex;
+  }
+  .composite-source {
+    margin-right: 40px;
+  }
   &-item {
     display: grid;
     grid-template-columns: repeat(auto-fill, 200px);
