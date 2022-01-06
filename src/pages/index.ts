@@ -9,6 +9,7 @@ import Itten from './Itten.vue';
 import Palette from './Palette.vue';
 import RandomPalette from './RandomPalette.vue';
 import ProgressivePalette from './ProgressivePalette.vue';
+import Compositing from './Compositing.vue';
 
 export {
   ColorWrap,
@@ -21,5 +22,6 @@ export {
   Itten,
   Palette,
   RandomPalette,
-  ProgressivePalette
+  ProgressivePalette,
+  Compositing
 };

@@ -11,7 +11,8 @@ import {
   Itten,
   Palette,
   RandomPalette,
-  ProgressivePalette
+  ProgressivePalette,
+  Compositing
 } from '../pages';
 
 const routes = [
@@ -74,13 +75,19 @@ const routes = [
     name: 'progress',
     label: '渐进式的调色板',
     component: ProgressivePalette
-  }
+  },
   // {
   //   path: '/art',
   //   name: 'art',
   //   label: '美术三原色（RYB模型测试中）',
   //   component: Art
   // }
+  {
+    path: '/compositing',
+    name: 'compositing',
+    label: '混合（Compositing）',
+    component: Compositing
+  }
 ];
 
 const catalogList: {label: string; value: string}[] = [];
