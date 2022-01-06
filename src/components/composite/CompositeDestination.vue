@@ -17,8 +17,8 @@ const makeCanvas = () => {
   const background = createInterlace(8, '#FFF', '#EEE');
   canvas.style.background = `url(${background})`;
 
-  ctx.fillStyle = 'blue';
-  ctx.fillRect(50, 50, 100, 100);
+  ctx.fillStyle = 'yellow'; // blue
+  ctx.fillRect(10, 10, 100, 100);
 };
 
 onMounted(() => {

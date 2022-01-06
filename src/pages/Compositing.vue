@@ -12,9 +12,9 @@ const compositeList = [
   'source-atop', 'destination-atop', 'xor', 'lighter'
 ];
 const whiteList = [
-  true, true, true, true, 
-  true, true, true, true, 
-  true, true, true, true 
+  true, true, true, false, 
+  true, true, false, true, 
+  true, false, false, false
 ];
 </script>
 
@@ -24,6 +24,9 @@ const whiteList = [
       <composite-source/>
       <composite-destination/>
     </div>
+    <h3 class="compositing-h3">
+      应用各种混合效果的结果
+    </h3>
     <div class="compositing-item">
       <composite-cell
         v-for="(item, index) in compositeList"
@@ -39,6 +42,10 @@ const whiteList = [
 .compositing {
   &-title {
     display: flex;
+  }
+  &-h3 {
+    padding-top: 10px;
+    height: 30px;
   }
   .composite-source {
     margin-right: 40px;

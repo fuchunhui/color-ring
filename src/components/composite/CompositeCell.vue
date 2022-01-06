@@ -29,10 +29,10 @@ const makeCanvas = () => {
 
   ctx.globalCompositeOperation = props.operator;
 
-  ctx.fillStyle = 'red';
+  ctx.fillStyle = '#f6dc05'; // blue
   ctx.fillRect(10, 10, 100, 100);
 
-  ctx.fillStyle = 'blue';
+  ctx.fillStyle = '#68c7e8'; // red
   ctx.fillRect(50, 50, 100, 100);
 };
 
