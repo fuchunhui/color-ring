@@ -12,7 +12,7 @@
       <p>仅作为个人兴趣的实验品，不具有任何学术性，如果有任何瑕疵，请一定帮忙指出，非常感谢。</p>
     </div>
     <div class="color-wrap-footer">
-      本文的博客地址：<a href="https://juejin.cn/post/7047529302140649486">水鳜鱼肥</a>
+      更多介绍内容 <a href="https://juejin.cn/column/7047522560166068254">神奇的颜色</a>
     </div>
   </div>
 </template>
