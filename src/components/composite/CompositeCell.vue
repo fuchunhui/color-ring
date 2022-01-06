@@ -23,16 +23,15 @@ const makeCanvas = () => {
   canvas.style.background = `url(${background})`;
 
   if (props.white) {
-    ctx.fillStyle = 'white';
-    ctx.fillRect(0, 0, size, size);
+    ctx.globalCompositeOperation = props.operator;
   }
+
+  ctx.fillStyle = 'red';
+  ctx.fillRect(10, 10, 100, 100);
 
   ctx.globalCompositeOperation = props.operator;
 
-  ctx.fillStyle = '#f6dc05'; // blue
-  ctx.fillRect(10, 10, 100, 100);
-
-  ctx.fillStyle = '#68c7e8'; // red
+  ctx.fillStyle = 'blue';
   ctx.fillRect(50, 50, 100, 100);
 };
 

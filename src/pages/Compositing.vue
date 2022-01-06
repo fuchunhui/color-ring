@@ -12,9 +12,9 @@ const compositeList = [
   'source-atop', 'destination-atop', 'xor', 'lighter'
 ];
 const whiteList = [
-  true, true, true, false, 
-  true, true, false, true, 
-  true, false, false, false
+  true, false, false, false, 
+  false, false, false, false,
+  false, false, false, false
 ];
 </script>
 
