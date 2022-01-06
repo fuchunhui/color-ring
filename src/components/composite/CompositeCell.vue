@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {ref, onMounted} from 'vue';
+import {ref, onMounted, inject} from 'vue';
 import {createInterlace} from '../../utils/canvas';
 
 const props = defineProps<{
@@ -9,7 +9,7 @@ const props = defineProps<{
 
 const canvasRef = ref<HTMLCanvasElement | null>(null);
 
-const size = 160;
+const size = inject('size') as number;
 const sizePX = `${size}px`;
 
 const makeCanvas = () => {

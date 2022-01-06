@@ -1,7 +1,10 @@
 <script setup lang="ts">
+import {provide} from 'vue';
 import CompositeCell from '../components/composite/CompositeCell.vue';
 import CompositeSource from '../components/composite/CompositeSource.vue';
 import CompositeDestination from '../components/composite/CompositeDestination.vue';
+
+provide('size', 160);
 
 const compositeList = [
   'clear', 'copy', 'source-over', 'destination-over',
