@@ -4,6 +4,7 @@ import CompositeCell from '../components/composite/CompositeCell.vue';
 import CompositeSource from '../components/composite/CompositeSource.vue';
 import CompositeDestination from '../components/composite/CompositeDestination.vue';
 import CompositeFeature from '../components/composite/CompositeFeature.vue';
+import BlendingCell from '../components/composite/BlendingCell.vue';
 
 provide('size', 160);
 
@@ -16,6 +17,11 @@ const whiteList = [
   true, false, false, false, 
   false, false, false, false,
   false, false, false, false
+];
+const blendingList = [
+  'normal', 'multiply', 'screen', 'overlay',
+  'darken', 'lighten', 'color-dodge', 'color-burn',
+  'hard-light', 'soft-light', 'difference', 'exclusion'
 ];
 </script>
 
@@ -40,6 +46,16 @@ const whiteList = [
       解释原理
     </h3>
     <composite-feature/>
+    <h3 class="compositing-h3">
+      Blending
+    </h3>
+    <div class="compositing-item">
+      <blending-cell
+        v-for="item in blendingList"
+        :key="item"
+        :formula="item"
+      />
+    </div>
   </div>
 </template>
 

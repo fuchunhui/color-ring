@@ -4,7 +4,7 @@
 <template>
   <div class="color-wrap">
     <div class="logo">
-      <a href="https://juejin.cn/post/7047529302140649486">Color Ring</a>
+      <a href="https://juejin.cn/column/7047522560166068254">Color Ring</a>
     </div>
     <div class="color-wrap-content">
       <p>这是什么？</p>
@@ -12,7 +12,7 @@
       <p>仅作为个人兴趣，不具有任何学术性，如果有任何瑕疵，请一定帮忙指出，非常感谢。</p>
     </div>
     <div class="color-wrap-footer">
-      更多介绍内容 <a href="https://juejin.cn/column/7047522560166068254">神奇的颜色</a>
+      更多介绍内容 <a href="https://juejin.cn/post/7047529302140649486">神奇的颜色</a>
     </div>
   </div>
 </template>
