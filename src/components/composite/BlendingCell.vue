@@ -46,8 +46,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="composite-cell">
-    <p class="composite-cell-title">
+  <div class="blending-cell">
+    <p class="blending-cell-title">
       {{ formula }}
     </p>
     <canvas ref="canvasRef"/>
@@ -57,7 +57,7 @@ onMounted(() => {
 <style lang="less">
 @width: v-bind(sizePX);
 
-.composite-cell {
+.blending-cell {
   &-title {
     width: @width;
     height: 28px;
