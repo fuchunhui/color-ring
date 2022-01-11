@@ -2,6 +2,10 @@
 import {ref, onMounted, inject} from 'vue';
 import {createInterlace} from '../../utils/canvas';
 
+const props = defineProps<{
+  alpha: number;
+}>();
+
 const canvasRef = ref<HTMLCanvasElement | null>(null);
 
 const size = inject('size') as number;
@@ -19,7 +23,7 @@ const makeCanvas = () => {
   canvas.style.background = `url(${background})`;
   
   ctx.beginPath();
-  ctx.fillStyle = 'blue';
+  ctx.fillStyle = `rgba(0, 0, 255, ${props.alpha})`; // blue
   ctx.moveTo(0, 0);
   ctx.lineTo(0, cell);
   ctx.lineTo(cell, 0);
@@ -29,7 +33,7 @@ const makeCanvas = () => {
   ctx.globalCompositeOperation = 'lighter';
 
   ctx.beginPath();
-  ctx.fillStyle = 'red';
+  ctx.fillStyle = `rgba(255, 0, 0, ${props.alpha})`; // red
   ctx.moveTo(0, 0);
   ctx.lineTo(cell, 0);
   ctx.lineTo(cell, cell);
@@ -54,7 +58,7 @@ onMounted(() => {
 <template>
   <div class="composite-source">
     <p class="composite-source-title">
-      合成feature
+      source & destination 的alpha均为{{ alpha }}
     </p>
     <canvas ref="canvasRef"/>
   </div>

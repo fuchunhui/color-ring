@@ -43,9 +43,12 @@ const blendingList = [
       />
     </div>
     <h3 class="compositing-h3">
-      解释原理
+      解释原理：颜色模型的4个子区域
     </h3>
-    <composite-feature/>
+    <div class="compositing-model">
+      <composite-feature :alpha="0.5"/>
+      <composite-feature :alpha="1"/>
+    </div>
     <h3 class="compositing-h3">
       Blending
     </h3>
@@ -73,6 +76,9 @@ const blendingList = [
   .composite-source,
   .composite-destination {
     margin-right: 40px;
+  }
+  &-model {
+    display: flex;
   }
   &-item {
     display: grid;
