@@ -63,7 +63,7 @@ const pickColor = (event: MouseEvent) => {
 };
 
 const downloadCanvas = () => {
-  download(canvas, 'png', 'nannn');
+  download(canvas, 'png', 'color');
 };
 
 onMounted(() => {
