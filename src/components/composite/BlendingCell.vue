@@ -26,7 +26,7 @@ const makeCanvas = () => {
   ctx.fillStyle = 'red';
   ctx.fillRect(10, 10, 100, 100);
 
-  ctx.globalCompositeOperation = props.formula;
+  ctx.globalCompositeOperation = props.formula as CanvasRenderingContext2D['globalCompositeOperation'];
 
   ctx.fillStyle = 'blue';
   ctx.fillRect(50, 50, 100, 100);

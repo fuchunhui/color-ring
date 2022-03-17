@@ -23,14 +23,16 @@ const makeCanvas = () => {
   canvas.style.background = `url(${background})`;
 
   if (props.white) {
-    ctx.globalCompositeOperation = props.operator;
+    ctx.globalCompositeOperation = props.operator as CanvasRenderingContext2D['globalCompositeOperation'];
   }
 
+  // destination
   ctx.fillStyle = 'red';
   ctx.fillRect(10, 10, 100, 100);
 
-  ctx.globalCompositeOperation = props.operator;
+  ctx.globalCompositeOperation = props.operator as CanvasRenderingContext2D['globalCompositeOperation'];
 
+  // source
   ctx.fillStyle = 'blue';
   ctx.fillRect(50, 50, 100, 100);
 };
