@@ -1,5 +1,5 @@
 import {inject} from 'vue';
-import tricolor from "./tricolor";
+import tricolor from './tricolor';
 
 const red = '#FF0000';
 const green = '#00FF00'; // lime

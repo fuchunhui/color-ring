@@ -23,7 +23,7 @@
  *  Co = (as * Cs + ab * (Cb - as * (Cb + Cs - Cm))) / ao
  */
 
-import Color from "../base/color";
+import Color from '../base/color';
 
 const blending = (cm: string, source: Color, backdrop: Color): Color => {
   const r = [];

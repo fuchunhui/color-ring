@@ -1,4 +1,4 @@
-import tricolor from "./tricolor";
+import tricolor from './tricolor';
 import Color from '../base/color';
 
 const red = '#FF0000';

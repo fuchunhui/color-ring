@@ -1,5 +1,5 @@
 import Color from '../base/color';
-import ring from "./ring";
+import ring from './ring';
 import {make, mix} from '../utils/color';
 import {inject} from 'vue';
 

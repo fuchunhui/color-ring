@@ -1,5 +1,5 @@
 import Color from '../base/color';
-import ring from "./ring";
+import ring from './ring';
 
 // RGB
 const colorList = [
