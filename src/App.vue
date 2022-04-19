@@ -34,7 +34,7 @@ const setRank = () => {
 
   provide('rank', {
     width: width - leftWidth - 2 * paddingNum,
-    height: height - 2* paddingNum
+    height: height - 2 * paddingNum
   });
 };
 
