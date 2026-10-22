@@ -20,6 +20,18 @@ import Contrast from './Contrast.vue';
 import Yuv from './Yuv.vue';
 import Spectrum from './Spectrum.vue';
 import Cie from './Cie.vue';
+import WhiteBalance from './WhiteBalance.vue';
+import Illusion from './Illusion.vue';
+import ToneMap from './ToneMap.vue';
+import Dither from './Dither.vue';
+import Munsell from './Munsell.vue';
+import DeltaE from './DeltaE.vue';
+import GamutMap from './GamutMap.vue';
+import ColorScale from './ColorScale.vue';
+import CssColor from './CssColor.vue';
+import Illuminant from './Illuminant.vue';
+import Lms from './Lms.vue';
+import Subtractive from './Subtractive.vue';
 
 export {
   ColorWrap,
@@ -43,5 +55,17 @@ export {
   Contrast,
   Yuv,
   Spectrum,
-  Cie
+  Cie,
+  WhiteBalance,
+  Illusion,
+  ToneMap,
+  Dither,
+  Munsell,
+  DeltaE,
+  GamutMap,
+  ColorScale,
+  CssColor,
+  Illuminant,
+  Lms,
+  Subtractive
 };

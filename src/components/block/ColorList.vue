@@ -22,7 +22,10 @@ watch(() => props.color, nv => {
 
 <template>
   <div class="color-list">
-    <color-detail :color="localColor"/>
+    <div class="color-list-main">
+      <color-detail :color="localColor"/>
+      <slot/>
+    </div>
     <div class="color-list-wrap">
       <div
         v-for="(item, index) in colors"
@@ -45,8 +48,9 @@ watch(() => props.color, nv => {
 <style lang="less">
 .color-list {
   display: flex;
-  .color-detail {
+  &-main {
     flex: 1;
+    min-width: 0;
   }
   &-wrap {
     width: 90px;

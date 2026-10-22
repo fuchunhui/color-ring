@@ -14,11 +14,15 @@ const props = withDefaults(defineProps<{
   convert?: Drawer;
   afterConvert?: Drawer;
   colors?: Color[];
+  title?: string;
+  intro?: string[];
 }>(), {
   beforeConvert: () => {},
   convert: () => {},
   afterConvert: () => {},
-  colors: () => []
+  colors: () => [],
+  title: '',
+  intro: () => []
 });
 
 const canvasRef = ref<HTMLCanvasElement | null>(null);
@@ -75,7 +79,16 @@ onMounted(() => {
     <color-list
       :colors="colors"
       :color="color"
-    />
+    >
+      <div v-if="intro.length" class="base-canvas-intro">
+        <h4 v-if="title">
+          {{ title }}
+        </h4>
+        <p v-for="(text, index) in intro" :key="index">
+          {{ text }}
+        </p>
+      </div>
+    </color-list>
     <color-button class="download" u="primary" label="下载" @click="downloadCanvas"/>
   </div>
 </template>
@@ -89,6 +102,20 @@ onMounted(() => {
   }
   .color-list {
     width: v-bind(sideWidth);
+  }
+  &-intro {
+    padding: 14px 10px 14px 0;
+    font-size: 13px;
+    line-height: 21px;
+    color: #555;
+    h4 {
+      margin-bottom: 8px;
+      font-size: 14px;
+      color: #2C3E50;
+    }
+    p {
+      margin-bottom: 8px;
+    }
   }
   .download {
     min-width: 40px;

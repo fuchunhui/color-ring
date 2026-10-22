@@ -22,7 +22,19 @@ import {
   Contrast,
   Yuv,
   Spectrum,
-  Cie
+  Cie,
+  WhiteBalance,
+  Illusion,
+  ToneMap,
+  Dither,
+  Munsell,
+  DeltaE,
+  GamutMap,
+  ColorScale,
+  CssColor,
+  Illuminant,
+  Lms,
+  Subtractive
 } from '../pages';
 
 const routes = [
@@ -157,6 +169,78 @@ const routes = [
     name: 'cie',
     label: 'CIE 1931 色度图',
     component: Cie
+  },
+  {
+    path: '/whitebalance',
+    name: 'whitebalance',
+    label: '色彩恒常与白平衡',
+    component: WhiteBalance
+  },
+  {
+    path: '/illusion',
+    name: 'illusion',
+    label: '同时对比与色彩错觉',
+    component: Illusion
+  },
+  {
+    path: '/tonemap',
+    name: 'tonemap',
+    label: '色调映射与HDR',
+    component: ToneMap
+  },
+  {
+    path: '/dither',
+    name: 'dither',
+    label: '抖动与色彩量化',
+    component: Dither
+  },
+  {
+    path: '/munsell',
+    name: 'munsell',
+    label: 'Munsell色立体切片',
+    component: Munsell
+  },
+  {
+    path: '/deltae',
+    name: 'deltae',
+    label: '色差公式（ΔE）',
+    component: DeltaE
+  },
+  {
+    path: '/gamutmap',
+    name: 'gamutmap',
+    label: '色域映射',
+    component: GamutMap
+  },
+  {
+    path: '/colorscale',
+    name: 'colorscale',
+    label: '色阶生成器（OKLCH）',
+    component: ColorScale
+  },
+  {
+    path: '/csscolor',
+    name: 'csscolor',
+    label: 'CSS颜色写法',
+    component: CssColor
+  },
+  {
+    path: '/illuminant',
+    name: 'illuminant',
+    label: '光源与显色指数',
+    component: Illuminant
+  },
+  {
+    path: '/lms',
+    name: 'lms',
+    label: '三色视锥响应（LMS）',
+    component: Lms
+  },
+  {
+    path: '/subtractive',
+    name: 'subtractive',
+    label: '光谱减色混合',
+    component: Subtractive
   }
 ];
 
