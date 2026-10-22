@@ -34,7 +34,22 @@ import {
   CssColor,
   Illuminant,
   Lms,
-  Subtractive
+  Subtractive,
+  HsLuv,
+  Luv,
+  Cam16,
+  Solid,
+  Opponent,
+  Matching,
+  Scotopic,
+  Ncs,
+  ThinFilm,
+  Sky,
+  Kubelka,
+  Bayer,
+  Subpixel,
+  Apca,
+  ColorName
 } from '../pages';
 
 const routes = [
@@ -241,6 +256,96 @@ const routes = [
     name: 'subtractive',
     label: '光谱减色混合',
     component: Subtractive
+  },
+  {
+    path: '/hsluv',
+    name: 'hsluv',
+    label: 'HSLuv：更均匀的HSL',
+    component: HsLuv
+  },
+  {
+    path: '/luv',
+    name: 'luv',
+    label: 'CIELUV与色度均匀性',
+    component: Luv
+  },
+  {
+    path: '/cam16',
+    name: 'cam16',
+    label: 'CAM16与HDR色彩空间',
+    component: Cam16
+  },
+  {
+    path: '/solid',
+    name: 'solid',
+    label: '色立体3D浏览器',
+    component: Solid
+  },
+  {
+    path: '/opponent',
+    name: 'opponent',
+    label: '对立色理论与后像',
+    component: Opponent
+  },
+  {
+    path: '/matching',
+    name: 'matching',
+    label: '颜色匹配实验（CIE RGB）',
+    component: Matching
+  },
+  {
+    path: '/scotopic',
+    name: 'scotopic',
+    label: '暗视觉与浦肯野效应',
+    component: Scotopic
+  },
+  {
+    path: '/ncs',
+    name: 'ncs',
+    label: 'NCS自然色系统（近似）',
+    component: Ncs
+  },
+  {
+    path: '/thinfilm',
+    name: 'thinfilm',
+    label: '结构色与薄膜干涉',
+    component: ThinFilm
+  },
+  {
+    path: '/sky',
+    name: 'sky',
+    label: '天空蓝与日落',
+    component: Sky
+  },
+  {
+    path: '/kubelka',
+    name: 'kubelka',
+    label: 'Kubelka–Munk颜料混合',
+    component: Kubelka
+  },
+  {
+    path: '/bayer',
+    name: 'bayer',
+    label: '拜耳滤镜与去马赛克',
+    component: Bayer
+  },
+  {
+    path: '/subpixel',
+    name: 'subpixel',
+    label: '显示器子像素',
+    component: Subpixel
+  },
+  {
+    path: '/apca',
+    name: 'apca',
+    label: 'APCA对比度',
+    component: Apca
+  },
+  {
+    path: '/colorname',
+    name: 'colorname',
+    label: '颜色命名与Berlin–Kay',
+    component: ColorName
   }
 ];
 

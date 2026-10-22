@@ -32,6 +32,21 @@ import CssColor from './CssColor.vue';
 import Illuminant from './Illuminant.vue';
 import Lms from './Lms.vue';
 import Subtractive from './Subtractive.vue';
+import HsLuv from './HsLuv.vue';
+import Luv from './Luv.vue';
+import Cam16 from './Cam16.vue';
+import Solid from './Solid.vue';
+import Opponent from './Opponent.vue';
+import Matching from './Matching.vue';
+import Scotopic from './Scotopic.vue';
+import Ncs from './Ncs.vue';
+import ThinFilm from './ThinFilm.vue';
+import Sky from './Sky.vue';
+import Kubelka from './Kubelka.vue';
+import Bayer from './Bayer.vue';
+import Subpixel from './Subpixel.vue';
+import Apca from './Apca.vue';
+import ColorName from './ColorName.vue';
 
 export {
   ColorWrap,
@@ -67,5 +82,20 @@ export {
   CssColor,
   Illuminant,
   Lms,
-  Subtractive
+  Subtractive,
+  HsLuv,
+  Luv,
+  Cam16,
+  Solid,
+  Opponent,
+  Matching,
+  Scotopic,
+  Ncs,
+  ThinFilm,
+  Sky,
+  Kubelka,
+  Bayer,
+  Subpixel,
+  Apca,
+  ColorName
 };
