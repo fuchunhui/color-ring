@@ -4,15 +4,25 @@ import {
   ColorWrap,
   Light,
   CMYK,
-  // Art,
+  Halftone,
+  Art,
   Twelve,
   FortyEight,
   NinetySix,
   Itten,
+  Harmony,
+  Picker,
   Palette,
   RandomPalette,
   ProgressivePalette,
-  Compositing
+  Compositing,
+  Gamma,
+  Perceptual,
+  ColorBlind,
+  Contrast,
+  Yuv,
+  Spectrum,
+  Cie
 } from '../pages';
 
 const routes = [
@@ -33,6 +43,12 @@ const routes = [
     name: 'cmyk',
     label: '印刷四色（CMYK模型）',
     component: CMYK
+  },
+  {
+    path: '/halftone',
+    name: 'halftone',
+    label: '印刷网点（CMYK半色调）',
+    component: Halftone
   },
   {
     path: '/twelve',
@@ -59,6 +75,24 @@ const routes = [
     component: Itten
   },
   {
+    path: '/art',
+    name: 'art',
+    label: '美术三原色（RYB模型）',
+    component: Art
+  },
+  {
+    path: '/harmony',
+    name: 'harmony',
+    label: '配色和谐（色环与角度）',
+    component: Harmony
+  },
+  {
+    path: '/picker',
+    name: 'picker',
+    label: 'HSV/HSL拾色盘',
+    component: Picker
+  },
+  {
     path: '/palette',
     name: 'palette',
     label: '调色板',
@@ -76,17 +110,53 @@ const routes = [
     label: '渐进式的调色板',
     component: ProgressivePalette
   },
-  // {
-  //   path: '/art',
-  //   name: 'art',
-  //   label: '美术三原色（RYB模型测试中）',
-  //   component: Art
-  // }
   {
     path: '/compositing',
     name: 'compositing',
     label: '混合（Compositing）',
     component: Compositing
+  },
+  {
+    path: '/gamma',
+    name: 'gamma',
+    label: 'Gamma与线性光',
+    component: Gamma
+  },
+  {
+    path: '/perceptual',
+    name: 'perceptual',
+    label: '感知均匀空间（Lab/OKLCH）',
+    component: Perceptual
+  },
+  {
+    path: '/colorblind',
+    name: 'colorblind',
+    label: '色盲模拟',
+    component: ColorBlind
+  },
+  {
+    path: '/contrast',
+    name: 'contrast',
+    label: '亮度与对比度（WCAG）',
+    component: Contrast
+  },
+  {
+    path: '/yuv',
+    name: 'yuv',
+    label: '视频色彩模型（YUV）',
+    component: Yuv
+  },
+  {
+    path: '/spectrum',
+    name: 'spectrum',
+    label: '光谱与色温',
+    component: Spectrum
+  },
+  {
+    path: '/cie',
+    name: 'cie',
+    label: 'CIE 1931 色度图',
+    component: Cie
   }
 ];
 
@@ -110,4 +180,3 @@ export default router;
 export {
   catalogList
 };
-

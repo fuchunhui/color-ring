@@ -3,6 +3,7 @@ import {shallowRef, ref, onMounted, onBeforeUnmount, inject} from 'vue';
 import Color from '../base/color';
 import ColorList from './block/ColorList.vue';
 import {download} from '../utils/download';
+import {pickHex} from '../utils/pixel';
 import {ColorButton} from './common';
 import {RANK} from '../types';
 
@@ -39,14 +40,6 @@ const makeCanvas = () => {
   props.afterConvert(ctx);
 };
 
-const hexConvert = (imageData: ImageData) => {
-  const hex = (num: number) => Math.round(num).toString(16).padStart(2, '0');
-  const {0: r, 1: g, 2: b, 3: a} = imageData.data;
-  // 半透明像素按白色背景合成，得到肉眼实际看到的颜色
-  const flatten = (c: number) => c * a / 255 + 255 * (1 - a / 255);
-  return `#${hex(flatten(r))}${hex(flatten(g))}${hex(flatten(b))}`.toUpperCase();
-};
-
 const pickColor = (event: MouseEvent) => {
   const {offsetX, offsetY} = event;
   if (offsetX < 0 || offsetY < 0) {
@@ -54,8 +47,7 @@ const pickColor = (event: MouseEvent) => {
   }
 
   const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
-  const imageData = ctx.getImageData(offsetX, offsetY, 1, 1);
-  const newColor = hexConvert(imageData);
+  const newColor = pickHex(ctx, offsetX, offsetY);
   color.value = new Color(newColor);
 
   navigator.clipboard?.writeText(newColor).catch(() => {});
