@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {ref, watch} from 'vue';
+import {shallowRef, watch} from 'vue';
 import ColorDetail from './ColorDetail.vue';
 import Color from '../../base/color';
 
@@ -8,7 +8,7 @@ const props = defineProps<{
   color: Color;
 }>();
 
-const localColor = ref(props.color);
+const localColor = shallowRef(props.color);
 
 const showCell = (color: Color) => {
   localColor.value = color;
@@ -16,15 +16,13 @@ const showCell = (color: Color) => {
 
 watch(() => props.color, nv => {
   localColor.value = nv;
-}, {
-  deep: true
 });
 
 </script>
 
 <template>
   <div class="color-list">
-    <color-detail :color="localColor as Color"/>
+    <color-detail :color="localColor"/>
     <div class="color-list-wrap">
       <div
         v-for="(item, index) in colors"

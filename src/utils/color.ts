@@ -73,7 +73,7 @@ const hsv = (h: number, s: number, v: number): Color => {
 };
 
 const hsva = (h: number, s: number, v: number, a: number): Color => {
-  const H = h / 60;
+  const H = (((h % 360) + 360) % 360) / 60;
   const i = Math.floor(H);
   const f = H - i;
 
@@ -92,9 +92,9 @@ const hsva = (h: number, s: number, v: number, a: number): Color => {
     [0, 1, 2]
   ];
 
-  const r = Math.floor(vv[perm[i][0]] * 256);
-  const g = Math.floor(vv[perm[i][1]] * 256);
-  const b = Math.floor(vv[perm[i][2]] * 256);
+  const r = Math.round(vv[perm[i][0]] * 255);
+  const g = Math.round(vv[perm[i][1]] * 255);
+  const b = Math.round(vv[perm[i][2]] * 255);
 
   return new Color([r, g, b], a);
 };
@@ -114,7 +114,7 @@ const hsla = (h: number, s: number, l: number, a: number): Color => {
   } else {
     const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
     const p = 2 * l - q;
-    const k = h / 360;
+    const k = (((h % 360) + 360) % 360) / 360;
 
     const hue = (t: number) => {
       if (t < 0) {

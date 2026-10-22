@@ -9,7 +9,6 @@ const {prompt} = enquirer;
 const pkgDir = process.cwd();
 const pkgPath = path.resolve(pkgDir, 'package.json');
 const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf-8'));
-const pkgName = pkg.name;
 const currentVersion = pkg.version;
 
 /**
@@ -87,14 +86,11 @@ async function main() {
   const {stdout} = await run('git', ['diff'], {stdio: 'pipe'});
   if (stdout) {
     step('\nCommitting changes...');
-    await run('git', ['add', '-A']);
+    await run('git', ['add', 'package.json']);
     await run('git', ['commit', '-m', `release: ${tag}`]);
   } else {
     console.log('No changes to commit.');
   }
-
-  step('\nPublishing package...');
-  await publishPackage(targetVersion, run);
 
   step('\nPushing to GitHub...');
   await run('git', ['tag', tag]);
@@ -110,26 +106,6 @@ async function main() {
 function updateVersion(version) {
   pkg.version = version;
   fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + '\n');
-}
-
-/**
- * @param {string} version
- * @param {Function} run
- */
-async function publishPackage(version, run) {
-  const publicArgs = ['publish', '--access', 'public'];
-  try {
-    await run('npm', publicArgs, {
-      stdio: 'pipe'
-    });
-    console.log(chalk.green(`Successfully published ${pkgName}@${version}`));
-  } catch (e) {
-    if (e.stderr.match(/previously published/)) {
-      console.log(chalk.red(`Skipping already published: ${pkgName}`));
-    } else {
-      throw e;
-    }
-  }
 }
 
 main().catch(err => {

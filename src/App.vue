@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import {ref, watch, computed, onMounted, provide} from 'vue';
+import {ref, watch, computed, provide} from 'vue';
 import {useRouter, useRoute} from 'vue-router';
 import Side from './components/Side.vue';
 import {catalogList} from './router';
+import {RANK} from './types';
 
 const router = useRouter();
 const route = useRoute();
@@ -32,15 +33,13 @@ const setRank = () => {
   const ele = document.getElementById('app') as HTMLElement;
   const {width, height} = ele.getBoundingClientRect();
 
-  provide('rank', {
+  provide<RANK>('rank', {
     width: width - leftWidth - 2 * paddingNum,
     height: height - 2 * paddingNum
   });
 };
 
-onMounted(() => {
-  setRank();
-});
+setRank();
 </script>
 
 <template>

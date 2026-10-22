@@ -55,7 +55,7 @@ const routes = [
   {
     path: '/itten',
     name: 'itten',
-    label: '伊登十二色环（RYB模型）',
+    label: '伊登十二色环（RYB近似）',
     component: Itten
   },
   {

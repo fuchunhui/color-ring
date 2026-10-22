@@ -102,6 +102,10 @@ const generatePoints = (x: number, y: number, edge: number, deep: number = 1): P
   return result;
 };
 
+const randomHex = (): string => {
+  return '#' + Math.floor(Math.random() * 0x1000000).toString(16).padStart(6, '0');
+};
+
 const hexagon = (x: number, y: number, edge: number, color: Color, ctx: CanvasRenderingContext2D): void => {
   const points = makePoints(x, y, edge);
   ctx.beginPath();
@@ -140,8 +144,7 @@ const computedCounts = (deep: number = 1): number => {
 const draw = (x: number, y: number, edge: number, deep: number = 1, colors: Color[], ctx: CanvasRenderingContext2D): void => {
   const outPoints = generatePoints(x, y, edge, deep);
   outPoints.forEach(({x, y}, index) => {
-    const random = '#' + Math.floor(Math.random() * 0xFFFFFF).toString(16);
-    const color = colors[index] || new Color(random);
+    const color = colors[index] || new Color(randomHex());
     hexagon(x, y, edge, color, ctx);
   });
 };
@@ -151,6 +154,7 @@ export {
   movePoints,
   generatePoints,
   hexagon,
+  randomHex,
   computedCounts,
   draw,
   Point

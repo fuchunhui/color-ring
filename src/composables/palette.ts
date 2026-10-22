@@ -63,14 +63,10 @@ const make = (colors: Color[], edge: number, deep: number = 1, ctx: CanvasRender
 const deep = 8;
 const all = computedCounts(deep);
 
-let colorStr = [];
-for (let i = 0; i < all; i++) {
-  const random = Math.floor(Math.random() * 0xFFF);
-  colorStr.push(random);
-}
-colorStr = colorStr.sort((a, b) => b - a);
-
-const colors: Color[] = colorStr.map(color => new Color(`#${color.toString(16).padStart(3, '0')}`));
+const colors: Color[] = Array.from({length: all}, () => {
+  const random = Math.floor(Math.random() * 0x1000);
+  return new Color(`#${random.toString(16).padStart(3, '0')}`);
+}).sort((a, b) => b.toHSL().l - a.toHSL().l || a.toHSL().h - b.toHSL().h);
 
 const convert = (ctx: CanvasRenderingContext2D): void => {
   const edge = 25;

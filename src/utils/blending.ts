@@ -26,22 +26,25 @@
 import Color from '../base/color';
 
 const blending = (cm: string, source: Color, backdrop: Color): Color => {
-  const r = [];
   const as = source.alpha();
   const ab = backdrop.alpha();
+  const Cs = source.rgb().map(v => v / 255);
+  const Cb = backdrop.rgb().map(v => v / 255);
 
   const ao = as + ab * (1 - as);
-  let Co = 0;
-  for (let i = 0; i < 3; i++) {
-    const Cs = source.rgb()[i] / 255;
-    const Cb = backdrop.rgb()[i] / 255;
-    const Cr = colorMethod[cm](Cb, Cs);
-    if (ao) {
-      Co = (as * Cs + ab * (Cb - as * (Cb + Cs - Cr))) / ao;
+  const nonSeparable = nonSeparableMethod[cm];
+  const Cr = nonSeparable
+    ? nonSeparable(Cb, Cs)
+    : Cs.map((s, i) => colorMethod[cm](Cb[i], s));
+
+  const r = Cs.map((s, i) => {
+    if (!ao) {
+      return 0;
     }
-    r[i] = parseInt(`${Co * 255}`, 10);
-  }
-  
+    const Co = (as * s + ab * (Cb[i] - as * (Cb[i] + s - Cr[i]))) / ao;
+    return Math.min(255, Math.max(0, Math.round(Co * 255)));
+  });
+
   return new Color(r, ao);
 };
 
@@ -109,6 +112,47 @@ const colorMethod: Record<string, (Cb: number, Cs: number) => number> = {
   exclusion: (Cb: number, Cs: number) => {
     return Cb + Cs - 2 * Cb * Cs;
   }
+};
+
+type RGB3 = number[];
+
+const lum = (c: RGB3): number => 0.3 * c[0] + 0.59 * c[1] + 0.11 * c[2];
+
+const clipColor = (c: RGB3): RGB3 => {
+  const l = lum(c);
+  const n = Math.min(...c);
+  const x = Math.max(...c);
+  let result = c;
+  if (n < 0) {
+    result = result.map(v => l + (v - l) * l / (l - n));
+  }
+  if (x > 1) {
+    result = result.map(v => l + (v - l) * (1 - l) / (x - l));
+  }
+  return result;
+};
+
+const setLum = (c: RGB3, l: number): RGB3 => {
+  const d = l - lum(c);
+  return clipColor(c.map(v => v + d));
+};
+
+const sat = (c: RGB3): number => Math.max(...c) - Math.min(...c);
+
+const setSat = (c: RGB3, s: number): RGB3 => {
+  const max = Math.max(...c);
+  const min = Math.min(...c);
+  if (max === min) {
+    return [0, 0, 0];
+  }
+  return c.map(v => (v - min) * s / (max - min));
+};
+
+const nonSeparableMethod: Record<string, (Cb: RGB3, Cs: RGB3) => RGB3> = {
+  hue: (Cb, Cs) => setLum(setSat(Cs, sat(Cb)), lum(Cb)),
+  saturation: (Cb, Cs) => setLum(setSat(Cb, sat(Cs)), lum(Cb)),
+  color: (Cb, Cs) => setLum(Cs, lum(Cb)),
+  luminosity: (Cb, Cs) => setLum(Cb, lum(Cs))
 };
 
 export default blending;

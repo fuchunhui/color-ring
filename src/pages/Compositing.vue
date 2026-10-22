@@ -14,14 +14,15 @@ const compositeList = [
   'source-atop', 'destination-atop', 'xor', 'lighter'
 ];
 const whiteList = [
-  true, false, false, false, 
+  true, false, false, false,
   false, false, false, false,
   false, false, false, false
 ];
 const blendingList = [
   'normal', 'multiply', 'screen', 'overlay',
   'darken', 'lighten', 'color-dodge', 'color-burn',
-  'hard-light', 'soft-light', 'difference', 'exclusion'
+  'hard-light', 'soft-light', 'difference', 'exclusion',
+  'hue', 'saturation', 'color', 'luminosity'
 ];
 </script>
 

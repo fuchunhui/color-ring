@@ -2,25 +2,22 @@
   "name": "color-ring",
   "version": "1.0.0",
   "description": "awesome color ring.",
-  "main": "index.ts",
+  "private": true,
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "serve": "vite preview",
-    "deploy": "",
-    "release": "node scripts/release.js",
-    "commitlint": "node scripts/verify-commit.js"
+    "prepare": "husky install",
+    "release": "node scripts/release.mjs",
+    "commitlint": "node scripts/verify-commit.mjs"
   },
   "dependencies": {
-    "axios": "^0.27.2",
     "vue": "^3.2.31",
     "vue-router": "^4.0.14"
   },
   "devDependencies": {
     "@babel/types": "^7.17.0",
-    "@types/estree": "^0.0.51",
     "@types/node": "^18.0.0",
-    "@types/ws": "^8.5.3",
     "@typescript-eslint/eslint-plugin": "^5.15.0",
     "@typescript-eslint/parser": "^5.15.0",
     "@vitejs/plugin-vue": "^2.2.4",
@@ -36,8 +33,7 @@
     "semver": "^7.3.5",
     "typescript": "^4.6.2",
     "vite": "^2.8.6",
-    "vue-tsc": "^0.38.2",
-    "ws": "^8.8.0"
+    "vue-tsc": "^0.38.2"
   },
   "repository": {
     "type": "git",

@@ -13,7 +13,6 @@ const createInterlace = (size: number, color1: string, color2: string): string =
   ctx.fillStyle = color1;
   ctx.fillRect(size, size, size, size);
 
-  ctx.createPattern(canvas, 'repeat');
   return canvas.toDataURL();
 };
 

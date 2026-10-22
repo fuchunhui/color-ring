@@ -21,7 +21,7 @@ const deep = 15;
 const all = computedCounts(deep);
 
 for (let i = 0; i < all; i++) {
-  colors.push(hsl(i, 1, 0.5));
+  colors.push(hsl(i * 360 / all, 1, 0.5));
 }
 
 const convert = (ctx: CanvasRenderingContext2D): void => {

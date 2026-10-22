@@ -25,19 +25,21 @@ const percent = computed(() => {
   return result.join(', ');
 });
 
+const pct = (n: number): number => Math.round(n * 1000) / 10;
+
 const hsl = computed(() => {
   const {h, s, l} = color.value.toHSL();
-  return [h, `${s * 100}%`, `${l * 100}`].join(', ');
+  return [h, `${pct(s)}%`, `${pct(l)}%`].join(', ');
 });
 
 const hsv = computed(() => {
   const {h, s, v} = color.value.toHSV();
-  return [`${h}°`, `${s * 100}`, `${v * 100}`].join(', ');
+  return [`${h}°`, `${pct(s)}%`, `${pct(v)}%`].join(', ');
 });
 
 const cmyk = computed(() => {
   const {c, m, y, k} = color.value.toCMYK();
-  return `${c * 100}, ${m * 100}, ${y * 100}, ${k}`;
+  return [c, m, y, k].map(n => `${pct(n)}%`).join(', ');
 });
 
 const conversionList = computed(() => {

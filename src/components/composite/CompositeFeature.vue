@@ -48,6 +48,11 @@ const makeCanvas = () => {
   ctx.fillText('both', size, size / 2);
   ctx.fillStyle = 'black';
   ctx.fillText('none', size, size / 2 + size);
+
+  ctx.globalCompositeOperation = 'source-over';
+  ctx.font = '12px sans-serif';
+  ctx.fillStyle = '#666';
+  ctx.fillText('lighter叠加，仅示意四个子区域', size, cell - 10);
 };
 
 onMounted(() => {

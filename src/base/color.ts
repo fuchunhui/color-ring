@@ -13,9 +13,10 @@ import {
 
 class Color {
   private _rgb: number[] = [0, 0, 0];
-  private _alpha = 0;
+  private _alpha = 1;
 
   constructor(rgb: string | number[] = [0, 0, 0], a: number = 1) {
+    this._alpha = typeof a === 'number' ? a : 1;
     if (Array.isArray(rgb)) {
       this._rgb = rgb;
     } else {
@@ -32,7 +33,6 @@ class Color {
       });
       this._rgb = nums;
     }
-    this._alpha = this._alpha || (typeof a === 'number' ? a : 1);
   }
 
   rgb(): number[] {
@@ -106,7 +106,7 @@ class Color {
     return {
       h: Math.round(h),
       s,
-      l: Math.ceil(l * 1000) / 1000,
+      l: Math.round(l * 1000) / 1000,
       a: this._alpha
     };
   }
@@ -116,7 +116,7 @@ class Color {
     const max = Math.max(r, g, b);
     const min = Math.min(r, g, b);
 
-    const v = Math.ceil(max / 255 * 1000) / 1000;
+    const v = Math.round(max / 255 * 1000) / 1000;
     const d = max - min;
     const s = max === 0 ? 0 : d / max;
     let h = 0;

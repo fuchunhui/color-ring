@@ -1,5 +1,6 @@
+import {shallowReactive} from 'vue';
 import Color from '../base/color';
-import {computedCounts, generatePoints, hexagon, Point} from './hexagon';
+import {computedCounts, generatePoints, hexagon, randomHex, Point} from './hexagon';
 import {stupid} from './random';
 
 /**
@@ -13,30 +14,31 @@ import {stupid} from './random';
  */
 const draw = (x: number, y: number, edge: number, points: Point[], ctx: CanvasRenderingContext2D): void => {
   points.forEach(({x, y}) => {
-    const random = '#' + Math.floor(Math.random() * 0xFFFFFF).toString(16);
-    colors.push(new Color(random));
-    hexagon(x, y, edge, new Color(random), ctx);
+    const color = new Color(randomHex());
+    colors.push(color);
+    hexagon(x, y, edge, color, ctx);
   });
 };
 
-const colors: Color[] = [];
+const colors = shallowReactive<Color[]>([]);
 const deep = 10;
 const all = computedCounts(deep);
-const indexs = stupid(all, 6);
 const duration = 100;
 
-const convert = (ctx: CanvasRenderingContext2D): void => {
+const convert = (ctx: CanvasRenderingContext2D): () => void => {
   const edge = 20;
   const x = (1 + deep * Math.sqrt(3)) * edge + edge;
   const y = x;
 
+  colors.length = 0;
+  const indexs = stupid(all, 6);
   const outPoints = generatePoints(x, y, edge, deep);
-  indexs.forEach((item, index) => {
-    setTimeout(() => {
-      const points = item.map(i => outPoints[i]);
-      draw(x, y, edge, points, ctx);
-    }, index * duration);
-  });
+  const timers = indexs.map((item, index) => setTimeout(() => {
+    const points = item.map(i => outPoints[i]);
+    draw(x, y, edge, points, ctx);
+  }, index * duration));
+
+  return () => timers.forEach(clearTimeout);
 };
 
 export {

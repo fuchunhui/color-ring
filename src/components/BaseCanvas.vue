@@ -1,35 +1,32 @@
 <script setup lang="ts">
-import {ref, onMounted, inject} from 'vue';
+import {shallowRef, ref, onMounted, onBeforeUnmount, inject} from 'vue';
 import Color from '../base/color';
 import ColorList from './block/ColorList.vue';
 import {download} from '../utils/download';
 import {ColorButton} from './common';
+import {RANK} from '../types';
 
-const props = defineProps({
-  beforeConvert: {
-    type: Function,
-    default: () => {}
-  },
-  convert: {
-    type: Function,
-    default: () => {}
-  },
-  afterConvert: {
-    type: Function,
-    default: () => {}
-  },
-  colors: {
-    type: Array,
-    default: () => []
-  }
+type Drawer = (ctx: CanvasRenderingContext2D) => void | (() => void);
+
+const props = withDefaults(defineProps<{
+  beforeConvert?: Drawer;
+  convert?: Drawer;
+  afterConvert?: Drawer;
+  colors?: Color[];
+}>(), {
+  beforeConvert: () => {},
+  convert: () => {},
+  afterConvert: () => {},
+  colors: () => []
 });
 
 const canvasRef = ref<HTMLCanvasElement | null>(null);
-const {width, height} = inject('rank') as DOMRect;
+const {width, height} = inject('rank') as RANK;
 let canvas = document.createElement('canvas');
 const listWidth = 390;
 const sideWidth = `${listWidth}px`;
-const color = ref(new Color());
+const color = shallowRef(new Color());
+let cleanup: void | (() => void);
 
 const makeCanvas = () => {
   canvas = canvasRef.value as HTMLCanvasElement;
@@ -38,14 +35,16 @@ const makeCanvas = () => {
 
   const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
   props.beforeConvert(ctx);
-  props.convert(ctx);
+  cleanup = props.convert(ctx);
   props.afterConvert(ctx);
 };
 
 const hexConvert = (imageData: ImageData) => {
-  const hex = (num: number) => num.toString(16).padStart(2, '0');
+  const hex = (num: number) => Math.round(num).toString(16).padStart(2, '0');
   const {0: r, 1: g, 2: b, 3: a} = imageData.data;
-  return `#${hex(r)}${hex(g)}${hex(b)}${hex(a)}`.toUpperCase();
+  // 半透明像素按白色背景合成，得到肉眼实际看到的颜色
+  const flatten = (c: number) => c * a / 255 + 255 * (1 - a / 255);
+  return `#${hex(flatten(r))}${hex(flatten(g))}${hex(flatten(b))}`.toUpperCase();
 };
 
 const pickColor = (event: MouseEvent) => {
@@ -59,12 +58,18 @@ const pickColor = (event: MouseEvent) => {
   const newColor = hexConvert(imageData);
   color.value = new Color(newColor);
 
-  navigator.clipboard.writeText(newColor);
+  navigator.clipboard?.writeText(newColor).catch(() => {});
 };
 
 const downloadCanvas = () => {
   download(canvas, 'png', 'color');
 };
+
+onBeforeUnmount(() => {
+  if (typeof cleanup === 'function') {
+    cleanup();
+  }
+});
 
 onMounted(() => {
   makeCanvas();
@@ -76,8 +81,8 @@ onMounted(() => {
   <div class="base-canvas">
     <canvas class="base-canvas-center" ref="canvasRef" @click="pickColor"/>
     <color-list
-      :colors="colors as Color[]"
-      :color="color as Color"
+      :colors="colors"
+      :color="color"
     />
     <color-button class="download" u="primary" label="下载" @click="downloadCanvas"/>
   </div>
