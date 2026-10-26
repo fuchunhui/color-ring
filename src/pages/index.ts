@@ -47,6 +47,45 @@ import Bayer from './Bayer.vue';
 import Subpixel from './Subpixel.vue';
 import Apca from './Apca.vue';
 import ColorName from './ColorName.vue';
+import Appearance from './Appearance.vue';
+import Lightness from './Lightness.vue';
+import Animals from './Animals.vue';
+import Stroop from './Stroop.vue';
+import Rainbow from './Rainbow.vue';
+import Diffraction from './Diffraction.vue';
+import Polarizer from './Polarizer.vue';
+import Emission from './Emission.vue';
+import Water from './Water.vue';
+import GamutMismatch from './GamutMismatch.vue';
+import Cat from './Cat.vue';
+import Neugebauer from './Neugebauer.vue';
+import Lut from './Lut.vue';
+import Prokudin from './Prokudin.vue';
+import Colormap from './Colormap.vue';
+import Traditional from './Traditional.vue';
+import Okhsl from './Okhsl.vue';
+import Grassmann from './Grassmann.vue';
+import NonSpectral from './NonSpectral.vue';
+import Duv from './Duv.vue';
+import Benham from './Benham.vue';
+import Aging from './Aging.vue';
+import Csf from './Csf.vue';
+import Shadows from './Shadows.vue';
+import Metals from './Metals.vue';
+import Gems from './Gems.vue';
+import Fluorescence from './Fluorescence.vue';
+import Mie from './Mie.vue';
+import Atmosphere from './Atmosphere.vue';
+import Stars from './Stars.vue';
+import Ndvi from './Ndvi.vue';
+import DisplaySpectra from './DisplaySpectra.vue';
+import CameraCcm from './CameraCcm.vue';
+import LogCurve from './LogCurve.vue';
+import RoundTrip from './RoundTrip.vue';
+import MonitorTest from './MonitorTest.vue';
+import Categorical from './Categorical.vue';
+import DarkMode from './DarkMode.vue';
+import WheelHistory from './WheelHistory.vue';
 
 export {
   ColorWrap,
@@ -97,5 +136,44 @@ export {
   Bayer,
   Subpixel,
   Apca,
-  ColorName
+  ColorName,
+  Appearance,
+  Lightness,
+  Animals,
+  Stroop,
+  Rainbow,
+  Diffraction,
+  Polarizer,
+  Emission,
+  Water,
+  GamutMismatch,
+  Cat,
+  Neugebauer,
+  Lut,
+  Prokudin,
+  Colormap,
+  Traditional,
+  Okhsl,
+  Grassmann,
+  NonSpectral,
+  Duv,
+  Benham,
+  Aging,
+  Csf,
+  Shadows,
+  Metals,
+  Gems,
+  Fluorescence,
+  Mie,
+  Atmosphere,
+  Stars,
+  Ndvi,
+  DisplaySpectra,
+  CameraCcm,
+  LogCurve,
+  RoundTrip,
+  MonitorTest,
+  Categorical,
+  DarkMode,
+  WheelHistory
 };

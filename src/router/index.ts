@@ -49,7 +49,46 @@ import {
   Bayer,
   Subpixel,
   Apca,
-  ColorName
+  ColorName,
+  Appearance,
+  Lightness,
+  Animals,
+  Stroop,
+  Rainbow,
+  Diffraction,
+  Polarizer,
+  Emission,
+  Water,
+  GamutMismatch,
+  Cat,
+  Neugebauer,
+  Lut,
+  Prokudin,
+  Colormap,
+  Traditional,
+  Okhsl,
+  Grassmann,
+  NonSpectral,
+  Duv,
+  Benham,
+  Aging,
+  Csf,
+  Shadows,
+  Metals,
+  Gems,
+  Fluorescence,
+  Mie,
+  Atmosphere,
+  Stars,
+  Ndvi,
+  DisplaySpectra,
+  CameraCcm,
+  LogCurve,
+  RoundTrip,
+  MonitorTest,
+  Categorical,
+  DarkMode,
+  WheelHistory
 } from '../pages';
 
 const routes = [
@@ -346,6 +385,240 @@ const routes = [
     name: 'colorname',
     label: '颜色命名与Berlin–Kay',
     component: ColorName
+  },
+  {
+    path: '/appearance',
+    name: 'appearance',
+    label: '色貌现象合集',
+    component: Appearance
+  },
+  {
+    path: '/lightness',
+    name: 'lightness',
+    label: '亮度感知与马赫带',
+    component: Lightness
+  },
+  {
+    path: '/animals',
+    name: 'animals',
+    label: '动物眼里的世界',
+    component: Animals
+  },
+  {
+    path: '/stroop',
+    name: 'stroop',
+    label: 'Stroop实验',
+    component: Stroop
+  },
+  {
+    path: '/rainbow',
+    name: 'rainbow',
+    label: '彩虹与棱镜',
+    component: Rainbow
+  },
+  {
+    path: '/diffraction',
+    name: 'diffraction',
+    label: '光栅与衍射',
+    component: Diffraction
+  },
+  {
+    path: '/polarizer',
+    name: 'polarizer',
+    label: '偏振片与透明胶带',
+    component: Polarizer
+  },
+  {
+    path: '/emission',
+    name: 'emission',
+    label: '焰色反应与气体放电灯',
+    component: Emission
+  },
+  {
+    path: '/water',
+    name: 'water',
+    label: '水为什么是蓝的',
+    component: Water
+  },
+  {
+    path: '/gamutmismatch',
+    name: 'gamutmismatch',
+    label: '色域错配的后果',
+    component: GamutMismatch
+  },
+  {
+    path: '/cat',
+    name: 'cat',
+    label: '色度适应变换对比',
+    component: Cat
+  },
+  {
+    path: '/neugebauer',
+    name: 'neugebauer',
+    label: 'Neugebauer与网点扩大',
+    component: Neugebauer
+  },
+  {
+    path: '/lut',
+    name: 'lut',
+    label: '调色与LUT',
+    component: Lut
+  },
+  {
+    path: '/prokudin',
+    name: 'prokudin',
+    label: '三色分色摄影',
+    component: Prokudin
+  },
+  {
+    path: '/colormap',
+    name: 'colormap',
+    label: '科学配色图（Colormap）',
+    component: Colormap
+  },
+  {
+    path: '/traditional',
+    name: 'traditional',
+    label: '中国传统色与日本传统色',
+    component: Traditional
+  },
+  {
+    path: '/okhsl',
+    name: 'okhsl',
+    label: 'Okhsl与Okhsv',
+    component: Okhsl
+  },
+  {
+    path: '/grassmann',
+    name: 'grassmann',
+    label: 'Grassmann定律与主波长',
+    component: Grassmann
+  },
+  {
+    path: '/nonspectral',
+    name: 'nonspectral',
+    label: '光谱外的颜色与棕色',
+    component: NonSpectral
+  },
+  {
+    path: '/duv',
+    name: 'duv',
+    label: '色温与Duv',
+    component: Duv
+  },
+  {
+    path: '/benham',
+    name: 'benham',
+    label: 'Benham陀螺',
+    component: Benham
+  },
+  {
+    path: '/aging',
+    name: 'aging',
+    label: '年龄与晶状体变黄',
+    component: Aging
+  },
+  {
+    path: '/csf',
+    name: 'csf',
+    label: '对比敏感度函数',
+    component: Csf
+  },
+  {
+    path: '/shadows',
+    name: 'shadows',
+    label: '彩色阴影与光照歧义',
+    component: Shadows
+  },
+  {
+    path: '/metals',
+    name: 'metals',
+    label: '金属为什么有颜色',
+    component: Metals
+  },
+  {
+    path: '/gems',
+    name: 'gems',
+    label: '变色石与二向色玻璃',
+    component: Gems
+  },
+  {
+    path: '/fluorescence',
+    name: 'fluorescence',
+    label: '荧光与增白剂',
+    component: Fluorescence
+  },
+  {
+    path: '/mie',
+    name: 'mie',
+    label: '散射的颜色（Mie）',
+    component: Mie
+  },
+  {
+    path: '/atmosphere',
+    name: 'atmosphere',
+    label: '大气光学与极光',
+    component: Atmosphere
+  },
+  {
+    path: '/stars',
+    name: 'stars',
+    label: '恒星的颜色与赫罗图',
+    component: Stars
+  },
+  {
+    path: '/ndvi',
+    name: 'ndvi',
+    label: '遥感假彩色与NDVI',
+    component: Ndvi
+  },
+  {
+    path: '/displayspectra',
+    name: 'displayspectra',
+    label: '显示器原色光谱',
+    component: DisplaySpectra
+  },
+  {
+    path: '/cameraccm',
+    name: 'cameraccm',
+    label: '相机色彩矩阵拟合',
+    component: CameraCcm
+  },
+  {
+    path: '/logcurve',
+    name: 'logcurve',
+    label: 'Log曲线与Zone System',
+    component: LogCurve
+  },
+  {
+    path: '/roundtrip',
+    name: 'roundtrip',
+    label: '色彩转换往返与色深',
+    component: RoundTrip
+  },
+  {
+    path: '/monitortest',
+    name: 'monitortest',
+    label: '显示器自检图',
+    component: MonitorTest
+  },
+  {
+    path: '/categorical',
+    name: 'categorical',
+    label: '分类配色生成',
+    component: Categorical
+  },
+  {
+    path: '/darkmode',
+    name: 'darkmode',
+    label: '深色模式转换',
+    component: DarkMode
+  },
+  {
+    path: '/wheelhistory',
+    name: 'wheelhistory',
+    label: '色环简史',
+    component: WheelHistory
   }
 ];
 
