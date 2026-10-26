@@ -1,4 +1,4 @@
-import {Vec3, rgbToLab, oklchToRgb} from '../utils/space';
+import {Vec3, oklchToRgb} from '../utils/space';
 import {munsellToRgb} from '../utils/munsell';
 import {colors as ittenColors} from './itten';
 
@@ -127,12 +127,12 @@ const drawNewton: DrawFn = ctx => {
 };
 
 const GOETHE: {name: string; rgb: Vec3}[] = [
-  {name: '红紫 Purpur', rgb: [194, 24, 91]},
-  {name: '橙 Orange', rgb: [245, 124, 0]},
-  {name: '黄 Gelb', rgb: [251, 192, 45]},
-  {name: '绿 Grün', rgb: [46, 158, 79]},
-  {name: '蓝 Blau', rgb: [30, 95, 208]},
-  {name: '紫 Violett', rgb: [123, 63, 160]}
+  {name: '红紫', rgb: [194, 24, 91]},
+  {name: '橙', rgb: [245, 124, 0]},
+  {name: '黄', rgb: [251, 192, 45]},
+  {name: '绿', rgb: [46, 158, 79]},
+  {name: '蓝', rgb: [30, 95, 208]},
+  {name: '紫', rgb: [123, 63, 160]}
 ];
 
 const drawGoethe: DrawFn = ctx => {
@@ -156,7 +156,7 @@ const drawGoethe: DrawFn = ctx => {
     ctx.stroke();
   });
   ctx.setLineDash([]);
-  text(ctx, '正对面互为补色', cx, 128, 'center', '#444');
+  text(ctx, '互补', cx, 128, 'center', '#444');
   text(ctx, '红紫 ↔ 绿，橙 ↔ 蓝，黄 ↔ 紫', cx, 252, 'center', '#666');
   text(ctx, '色块为近似重建', cx, 268, 'center', '#999');
 };
@@ -197,9 +197,8 @@ const drawRunge: DrawFn = ctx => {
   const rx = 56;
   const ry = 238;
   ring(ctx, rx, ry, 17, 34, Array.from({length: 12}, (_, i) => hsv(i * 30, 1, 1)));
-  text(ctx, '赤道：12 色相', 170, 228, 'left');
-  text(ctx, '纯色在赤道，向两极', 170, 244, 'left', '#666');
-  text(ctx, '分别掺白、掺黑', 170, 258, 'left', '#666');
+  text(ctx, '赤道：12 色相', 100, 228, 'left');
+  text(ctx, '向两极掺白、掺黑', 100, 244, 'left', '#666');
   text(ctx, '色块为近似重建', 130, 274, 'center', '#999');
 };
 
@@ -215,7 +214,7 @@ const drawChevreul: DrawFn = ctx => {
     ctx.fillStyle = css(gray);
     ctx.fillRect(cx + dx - 7, cy - 7, 14, 14);
   });
-  text(ctx, '72 个色相（12 色相 × 6 级明暗）', cx, 252, 'center', '#666');
+  text(ctx, '细分色相环（示意）', cx, 252, 'center', '#666');
   text(ctx, '中心：同样的灰在红、绿上看起来不同', cx, 268, 'center', '#999');
 };
 
@@ -273,9 +272,9 @@ const drawOstwald: DrawFn = ctx => {
     }
   }
   text(ctx, '白 W', W[0] + 6, W[1] - 16, 'left');
-  text(ctx, '黑 B', B[0] + 6, B[1] + 14, 'left');
+  text(ctx, '黑 B', B[0] + 16, B[1], 'left');
   text(ctx, '纯色 C', C[0] + 20, C[1] - 12, 'right');
-  text(ctx, '双锥体 = 24 个这样的三角形绕黑白轴排开', cx, 270, 'center', '#999');
+  text(ctx, '24 个这样的三角形绕黑白轴排开成双锥体', cx, 274, 'center', '#999');
 };
 
 const drawItten: DrawFn = ctx => {

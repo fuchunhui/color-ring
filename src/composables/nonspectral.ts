@@ -37,7 +37,7 @@ const describePurple = (s: PurpleState): PurpleInfo => {
   return {mixed, hex: hexOfXyY(mixed), dominant, inPurple: dominant.complementary};
 };
 
-const drawPurple = (ctx: CanvasRenderingContext2D, s: PurpleState) => {
+const drawPurple = (ctx: CanvasRenderingContext2D, s: PurpleState): void => {
   drawBase(ctx, D65, 'D65');
   const [w0, w1] = toPx(D65);
   const [a0, a1] = toPx(A_END);
@@ -93,7 +93,7 @@ const gray = (v: number): string => {
   return `rgb(${c}, ${c}, ${c})`;
 };
 
-const drawBrown = (ctx: CanvasRenderingContext2D, s: BrownState) => {
+const drawBrown = (ctx: CanvasRenderingContext2D, s: BrownState): void => {
   const cell = 160;
   const items: {bg: number; text: string}[] = [
     {bg: 1, text: '白色背景'},
@@ -149,7 +149,7 @@ const perceivedName = (L: number, C: number): string => {
   return L > 0.85 ? '米白 / 奶油' : '肉色 / 浅棕';
 };
 
-const drawLcGrid = (ctx: CanvasRenderingContext2D, hue: number) => {
+const drawLcGrid = (ctx: CanvasRenderingContext2D, hue: number): void => {
   ctx.font = '11px sans-serif';
   for (let row = 0; row < GRID_ROWS; row++) {
     for (let col = 0; col < GRID_COLS; col++) {

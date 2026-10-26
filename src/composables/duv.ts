@@ -135,7 +135,7 @@ const curve = (ctx: CanvasRenderingContext2D, duv: number, color: string, dash: 
 const ISOTHERMS = [2000, 2700, 3000, 4000, 5000, 6500, 10000];
 const LED_BAND = 0.006;
 
-const drawDuv = (ctx: CanvasRenderingContext2D, state: DuvState) => {
+const drawDuv = (ctx: CanvasRenderingContext2D, state: DuvState): void => {
   if (!background) {
     background = buildBackground();
   }

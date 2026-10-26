@@ -27,8 +27,8 @@ const drawOriginal = blurDrawer('original', () => sigma.value);
 const drawLuma = blurDrawer('luma', () => sigma.value);
 const drawChroma = blurDrawer('chroma', () => sigma.value);
 
-const lumRg = dirLuminance('rg').toExponential(1);
-const lumBy = dirLuminance('by').toExponential(1);
+const lumRg = Math.abs(dirLuminance('rg')).toFixed(3);
+const lumBy = Math.abs(dirLuminance('by')).toFixed(3);
 </script>
 
 <template>

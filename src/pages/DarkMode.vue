@@ -30,6 +30,11 @@ const vars = (colors: Record<string, string>): Record<string, string> => {
 
 const cell = (panel: Panel, fg: string, bg: string) => ratio(panel.colors[fg], panel.colors[bg]);
 
+const cellText = (panel: Panel, fg: string, bg: string): string => {
+  const now = cell(panel, fg, bg).toFixed(2);
+  return panel.key === 'designed' ? `${now}（原 ${cell(panels[0], fg, bg).toFixed(2)}）` : now;
+};
+
 const BARS = [
   [60, 40, 75, 50],
   [80, 55, 45, 70],
@@ -107,7 +112,7 @@ const BARS = [
               class="demo-code"
               :class="cell(p, pair.fg, pair.bg) >= pair.target ? 'dm-pass' : 'dm-fail'"
             >
-              {{ cell(p, pair.fg, pair.bg).toFixed(2) }}<template v-if="p.key === 'designed'">（原 {{ cell(panels[0], pair.fg, pair.bg).toFixed(2) }}）</template>
+              {{ cellText(p, pair.fg, pair.bg) }}
             </td>
           </tr>
         </tbody>

@@ -63,7 +63,7 @@ const drawDiagram: DrawFn = ctx => {
   ctx.stroke();
   ctx.setLineDash([]);
   text(ctx, '黑半圆', 150, 210, 'center', '#EEEEEE', 'bold 14px sans-serif');
-  text(ctx, '白半圆 + 四条黑弧', 150, 90, 'center', '#444', 'bold 13px sans-serif');
+  text(ctx, '白半圆 + 四条黑弧', 150, 14, 'center', '#444', 'bold 13px sans-serif');
   const steps = [
     '1. 打印或手绘此图案，沿圆周剪下，贴在硬纸板上',
     '2. 圆心穿一根牙签或铅笔，做成陀螺（或固定在电机上）',

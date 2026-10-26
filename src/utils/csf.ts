@@ -61,8 +61,8 @@ const gratingPixel = (axis: Axis, wave: number, amp: number): Vec3 => {
 
 const encode = (v: number): number => Math.round(linearToSrgb(Math.min(1, Math.max(0, v))) * 255);
 
-/** 渲染 Campbell–Robson 图 */
-const renderChart = (ctx: CanvasRenderingContext2D, width: number, height: number, axis: Axis): void => {
+/** 渲染 Campbell–Robson 图，左上角位于 (dx, dy)（putImageData 不受 translate 影响） */
+const renderChart = (ctx: CanvasRenderingContext2D, width: number, height: number, axis: Axis, dx = 0, dy = 0): void => {
   const img = ctx.createImageData(width, height);
   for (let y = 0; y < height; y++) {
     const amp = chartContrast(y / (height - 1));
@@ -76,7 +76,7 @@ const renderChart = (ctx: CanvasRenderingContext2D, width: number, height: numbe
       img.data[i + 3] = 255;
     }
   }
-  ctx.putImageData(img, 0, 0);
+  ctx.putImageData(img, dx, dy);
 };
 
 /** 检验：等亮度方向的亮度增量是否为 0 */

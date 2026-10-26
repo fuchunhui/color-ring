@@ -84,7 +84,7 @@ const label = (
   align: CanvasTextAlign = 'left',
   baseline: CanvasTextBaseline = 'middle',
   color = '#222'
-) => {
+): void => {
   ctx.textAlign = align;
   ctx.textBaseline = baseline;
   ctx.lineJoin = 'round';
@@ -95,7 +95,7 @@ const label = (
   ctx.fillText(text, x, y);
 };
 
-const dot = (ctx: CanvasRenderingContext2D, p: Point, r: number, fill: string, stroke = '#222') => {
+const dot = (ctx: CanvasRenderingContext2D, p: Point, r: number, fill: string, stroke = '#222'): void => {
   const [x, y] = toPx(p);
   ctx.beginPath();
   ctx.arc(x, y, r, 0, 2 * Math.PI);
@@ -106,7 +106,14 @@ const dot = (ctx: CanvasRenderingContext2D, p: Point, r: number, fill: string, s
   ctx.stroke();
 };
 
-const line = (ctx: CanvasRenderingContext2D, a: Point, b: Point, color: string, width = 1.5, dash: number[] = []) => {
+const line = (
+  ctx: CanvasRenderingContext2D,
+  a: Point,
+  b: Point,
+  color: string,
+  width = 1.5,
+  dash: number[] = []
+): void => {
   const [x1, y1] = toPx(a);
   const [x2, y2] = toPx(b);
   ctx.beginPath();
@@ -119,7 +126,7 @@ const line = (ctx: CanvasRenderingContext2D, a: Point, b: Point, color: string, 
   ctx.setLineDash([]);
 };
 
-const drawBase = (ctx: CanvasRenderingContext2D, white: Point, whiteName: string) => {
+const drawBase = (ctx: CanvasRenderingContext2D, white: Point, whiteName: string): void => {
   if (!background) {
     background = buildBackground();
   }
@@ -191,7 +198,7 @@ const hexOfXyY = (xy: Point, Y = 1): string => {
   return toHex(xyzToDisplayRgb([v[0] * Y, Y, v[2] * Y]));
 };
 
-const drawMix = (ctx: CanvasRenderingContext2D, s: MixState) => {
+const drawMix = (ctx: CanvasRenderingContext2D, s: MixState): void => {
   const white = whiteOf(s.white);
   drawBase(ctx, white, s.white === 'E' ? 'E' : 'D65');
   const lights = [{xy: s.a, Y: s.ya}, {xy: s.b, Y: s.yb}];
@@ -205,7 +212,7 @@ const drawMix = (ctx: CanvasRenderingContext2D, s: MixState) => {
   label(ctx, 'A+B', toPx(mixed)[0] + 9, toPx(mixed)[1] + 10, 'left', 'middle', '#d6336c');
 };
 
-const drawProbe = (ctx: CanvasRenderingContext2D, s: ProbeState) => {
+const drawProbe = (ctx: CanvasRenderingContext2D, s: ProbeState): void => {
   const white = whiteOf(s.white);
   drawBase(ctx, white, s.white === 'E' ? 'E' : 'D65');
   if (!s.point) {

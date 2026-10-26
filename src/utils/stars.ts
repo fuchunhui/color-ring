@@ -60,7 +60,7 @@ const STARS: Star[] = [
   {name: '老人星', temperature: 7350, luminosity: 10700, kind: '超巨星'},
   {name: '北极星', temperature: 6015, luminosity: 1260, kind: '超巨星'},
   {name: '天津四', temperature: 8525, luminosity: 196000, kind: '超巨星'},
-  {name: '参宿七（Rigel）', temperature: 12100, luminosity: 120000, kind: '超巨星'},
+  {name: '参宿七', temperature: 12100, luminosity: 120000, kind: '超巨星'},
   {name: '参宿四', temperature: 3600, luminosity: 100000, kind: '超巨星'},
   {name: '心宿二', temperature: 3400, luminosity: 75000, kind: '超巨星'},
   {name: '天狼星 B', temperature: 25200, luminosity: 0.056, kind: '白矮星'},

@@ -110,8 +110,7 @@ const drawZones: DrawFn = (ctx, w, h) => {
       const x = stopsToLinear(i - 5);
       const raw = c.encode(x);
       const v = clamp01(raw);
-      const gray = c.key === 'srgb' || c.key === 'rec709' ? v : v;
-      const code = Math.round(gray * 255);
+      const code = Math.round(v * 255);
       ctx.fillStyle = `rgb(${code}, ${code}, ${code})`;
       ctx.fillRect(left + cell * i + 1, y, cell - 2, 40);
       const clipped = raw > 1;

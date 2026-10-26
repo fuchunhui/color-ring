@@ -215,7 +215,7 @@ const uvToCctDuv = (uv: Point): {cct: number; duv: number} => {
   return {cct, duv};
 };
 
-const xyToCctDuv = (xy: Point) => uvToCctDuv(xyToUv(xy));
+const xyToCctDuv = (xy: Point): {cct: number; duv: number} => uvToCctDuv(xyToUv(xy));
 
 /** McCamy 近似公式（仅在黑体附近、2000–12500 K 较准） */
 const mccamyCct = ([x, y]: Point): number => {

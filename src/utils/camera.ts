@@ -52,8 +52,6 @@ const ILLUM_A: Spectrum = blackbody(2856);
 
 const whiteXyz = (illum: Spectrum): Vec3 => spectrumXyz(illum);
 
-const labOf = (xyz: Vec3): Vec3 => xyzToLab(xyz.map(v => Math.max(0, v)) as Vec3);
-
 /** 目标：sRGB 色块 → XYZ，再把 sRGB 的 D65 白换算到本模块用的 D65 白（Bradford） */
 const targetXyz = (srgb: Vec3): Vec3 => {
   const lin = srgb.map(v => srgbToLinear(v / 255)) as Vec3;

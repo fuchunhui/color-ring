@@ -19,10 +19,7 @@ const CHART_PAD = 44;
 // ---------- Campbell–Robson 图 ----------
 
 const chartDrawer = (axis: Axis): DrawFn => ctx => {
-  ctx.save();
-  ctx.translate(CHART_PAD, 6);
-  renderChart(ctx, CHART_W, CHART_H, axis);
-  ctx.restore();
+  renderChart(ctx, CHART_W, CHART_H, axis, CHART_PAD, 6);
   ctx.strokeStyle = '#999';
   ctx.strokeRect(CHART_PAD - 0.5, 5.5, CHART_W + 1, CHART_H + 1);
   [0.5, 1, 2, 5, 10, 20].forEach(f => {
@@ -56,9 +53,9 @@ const CHART_CANVAS_H = CHART_H + 50;
 
 // ---------- CSF 曲线 ----------
 
-const CURVE_W = 640;
+const CURVE_W = 800;
 const CURVE_H = 300;
-const CURVE_AREA: Area = {x: 56, y: 24, w: 560, h: 220};
+const CURVE_AREA: Area = {x: 56, y: 24, w: 520, h: 220};
 
 const drawCurves: DrawFn = ctx => {
   const a = CURVE_AREA;
@@ -106,8 +103,8 @@ const drawCurves: DrawFn = ctx => {
     ctx.strokeStyle = color;
     ctx.stroke();
     ctx.fillStyle = color;
-    ctx.fillRect(a.x + a.w - 250, a.y + 8 + i * 20, 14, 3);
-    text(ctx, curves[i].label, a.x + a.w - 230, a.y + 10 + i * 20, 'left', '#333', '12px sans-serif');
+    ctx.fillRect(a.x + a.w + 16, a.y + 8 + i * 22, 14, 3);
+    text(ctx, curves[i].label, a.x + a.w + 36, a.y + 10 + i * 22, 'left', '#333', '12px sans-serif');
   });
   ctx.setLineDash([4, 3]);
   ctx.strokeStyle = '#999';

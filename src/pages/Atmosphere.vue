@@ -75,10 +75,18 @@ const refRows = refractionRows();
         <tbody>
           <tr v-for="row in rows" :key="row.wavelength">
             <td><span class="atm-dot" :style="{background: row.color}"/>{{ row.label }}</td>
-            <td class="demo-code">{{ row.wavelength }} nm</td>
-            <td class="demo-code">{{ row.n.toFixed(4) }}</td>
-            <td class="demo-code">{{ row.d22.toFixed(2) }}°</td>
-            <td class="demo-code">{{ row.d46.toFixed(2) }}°</td>
+            <td class="demo-code">
+              {{ row.wavelength }} nm
+            </td>
+            <td class="demo-code">
+              {{ row.n.toFixed(4) }}
+            </td>
+            <td class="demo-code">
+              {{ row.d22.toFixed(2) }}°
+            </td>
+            <td class="demo-code">
+              {{ row.d46.toFixed(2) }}°
+            </td>
           </tr>
         </tbody>
       </table>
@@ -123,8 +131,12 @@ const refRows = refractionRows();
         <tbody>
           <tr v-for="row in refRows" :key="row.wavelength">
             <td><span class="atm-dot" :style="{background: row.color}"/><span class="demo-code">{{ row.wavelength }} nm</span></td>
-            <td class="demo-code">{{ row.arcmin.toFixed(2) }}′</td>
-            <td class="demo-code">{{ row.diff > 0 ? '+' : '' }}{{ row.diff.toFixed(1) }}″</td>
+            <td class="demo-code">
+              {{ row.arcmin.toFixed(2) }}′
+            </td>
+            <td class="demo-code">
+              {{ row.diff > 0 ? '+' : '' }}{{ row.diff.toFixed(1) }}″
+            </td>
           </tr>
         </tbody>
       </table>
@@ -148,7 +160,9 @@ const refRows = refractionRows();
         <tbody>
           <tr v-for="line in AURORA_LINE_COLORS" :key="line.key">
             <td><span class="atm-dot" :style="{background: line.color}"/>{{ line.label }}</td>
-            <td class="demo-code">{{ line.wavelength }} nm</td>
+            <td class="demo-code">
+              {{ line.wavelength }} nm
+            </td>
             <td>{{ line.note }}</td>
           </tr>
         </tbody>

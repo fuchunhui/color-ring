@@ -33,7 +33,7 @@ const GEMS: Gem[] = [
     key: 'alexandrite',
     name: '变石（Alexandrite）',
     note: '蓝绿窗口约 490nm，红光窗口 > 620nm，两者之间 560~590nm 被强烈吸收（Cr³⁺ 的吸收带）',
-    transmittance: sample(l => 0.03 + 0.5 * gauss(l, 490, 20, 18) + 0.95 * edge(l, 622, 9) * gauss(l, 700, 90, 400))
+    transmittance: sample(l => 0.03 + 0.75 * gauss(l, 500, 22, 18) + 0.85 * edge(l, 625, 9) * gauss(l, 700, 90, 400))
   },
   {
     key: 'ruby',
@@ -67,17 +67,20 @@ const ILLUMINANTS: Illuminant[] = [
 
 const D65_WHITE = spectrumXyz(D65);
 
-/** 在某光源下看透射谱 T 的颜色；adapt 为真时按 Bradford 适应到 D65，模拟人眼对光源颜色的适应 */
-const transmittedColor = (T: Spectrum, spd: Spectrum, adapt: boolean): Vec3 => {
-  let xyz = spectrumXyz(spd, T);
-  if (adapt) {
-    xyz = adaptXyz(xyz, spectrumXyz(spd), D65_WHITE);
-  }
+/**
+ * 在某光源下看透射谱 T 的颜色。degree 是对光源颜色的适应程度：
+ * 0 = 完全不适应（直接显示光源的颜色），1 = 完全适应（白纸始终看起来是白的）；
+ * 人眼通常是不完全适应，取中间值
+ */
+const transmittedColor = (T: Spectrum, spd: Spectrum, degree: number): Vec3 => {
+  const raw = spectrumXyz(spd, T);
+  const adapted = adaptXyz(raw, spectrumXyz(spd), D65_WHITE);
+  const xyz = raw.map((v, i) => v * (1 - degree) + adapted[i] * degree) as Vec3;
   return xyzToSrgb(xyz);
 };
 
-const gemDeltaE = (T: Spectrum, a: Illuminant, b: Illuminant, adapt: boolean): number => {
-  return deltaE2000(rgbToLab(transmittedColor(T, a.spd, adapt)), rgbToLab(transmittedColor(T, b.spd, adapt)));
+const gemDeltaE = (T: Spectrum, a: Illuminant, b: Illuminant, degree: number): number => {
+  return deltaE2000(rgbToLab(transmittedColor(T, a.spd, degree)), rgbToLab(transmittedColor(T, b.spd, degree)));
 };
 
 // ---------- 金纳米颗粒（Lycurgus 杯）----------

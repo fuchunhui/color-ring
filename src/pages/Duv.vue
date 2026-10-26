@@ -99,10 +99,18 @@ const tint = computed(() => {
         <tbody>
           <tr v-for="ref in REFERENCES" :key="ref.key" @click="jump(ref.key)">
             <td>{{ ref.label }}</td>
-            <td class="demo-code">{{ ref.xy[0].toFixed(4) }}</td>
-            <td class="demo-code">{{ ref.xy[1].toFixed(4) }}</td>
-            <td class="demo-code">{{ ref.cct.toFixed(0) }} K</td>
-            <td class="demo-code">{{ ref.duv >= 0 ? '+' : '' }}{{ ref.duv.toFixed(4) }}</td>
+            <td class="demo-code">
+              {{ ref.xy[0].toFixed(4) }}
+            </td>
+            <td class="demo-code">
+              {{ ref.xy[1].toFixed(4) }}
+            </td>
+            <td class="demo-code">
+              {{ ref.cct.toFixed(0) }} K
+            </td>
+            <td class="demo-code">
+              {{ ref.duv >= 0 ? '+' : '' }}{{ ref.duv.toFixed(4) }}
+            </td>
             <td>{{ ref.note }}</td>
           </tr>
         </tbody>
