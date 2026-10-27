@@ -20,7 +20,6 @@ import {
   perceivedName
 } from '../composables/nonspectral';
 import type {PurpleState, BrownState} from '../composables/nonspectral';
-import {formatDominant} from '../composables/grassmann';
 
 interface PickEvent {
   x: number;
@@ -95,7 +94,7 @@ const surroundText = computed(() => {
       <p class="nonspectral-note">
         <span class="demo-swatch" :style="{background: purpleInfo.hex}"/>
         混合点 x = {{ purpleInfo.mixed[0].toFixed(3) }}，y = {{ purpleInfo.mixed[1].toFixed(3) }}。
-        {{ purpleInfo.inPurple ? '落在粉色区域：没有主波长，补色波长为 ' : '落在马蹄形的光谱一侧：主波长 ' }}{{ formatDominant(purpleInfo.dominant) }}。
+        {{ purpleInfo.inPurple ? '落在粉色区域：没有主波长，补色波长为 ' : '落在马蹄形的光谱一侧：主波长 ' }}{{ purpleInfo.dominant.wavelength === null ? '无' : purpleInfo.dominant.wavelength.toFixed(1) + (purpleInfo.inPurple ? 'c' : '') + ' nm' }}。
         色块按最大通道归一显示。
       </p>
     </demo-section>

@@ -1,7 +1,8 @@
 import {METALS, reflectance, reflectedColor} from '../utils/metals';
 import type {Metal} from '../utils/metals';
-import {WL_MIN, WL_MAX, drawSpectrumBand, drawAxis, drawCurve, text} from '../utils/spectral';
+import {drawSpectrumBand, drawAxis, drawCurve, text} from '../utils/spectral';
 import type {Area, DrawFn} from '../utils/spectral';
+import type {Vec3} from '../utils/space';
 
 const PLOT_W = 640;
 const PLOT_H = 260;
@@ -48,8 +49,8 @@ const drawReflectance = (active: Metal, theta: () => number): DrawFn => ctx => {
   METALS.forEach((m, i) => {
     const x = area.x + 10 + i * 70;
     ctx.fillStyle = COLORS[m.key];
-    ctx.fillRect(x, area.y + area.h - 90, 14, 3);
-    text(ctx, m.name, x + 20, area.y + area.h - 89, 'left', '#333', '12px sans-serif');
+    ctx.fillRect(x, area.y + area.h - 14, 14, 3);
+    text(ctx, m.name, x + 20, area.y + area.h - 13, 'left', '#333', '12px sans-serif');
   });
 };
 
@@ -88,12 +89,12 @@ const drawAngles = (metal: () => Metal): DrawFn => ctx => {
   text(ctx, '入射角', a.x + a.w / 2, a.y + a.h + 32, 'center', '#555', '11px sans-serif');
   picks.forEach(([l, color], i) => {
     ctx.fillStyle = color;
-    ctx.fillRect(a.x + a.w - 80, a.y + 6 + i * 16, 14, 3);
-    text(ctx, `${l} nm`, a.x + a.w - 60, a.y + 7 + i * 16, 'left', '#333', '11px sans-serif');
+    ctx.fillRect(a.x + 24, a.y + a.h * 0.36 + i * 16, 14, 3);
+    text(ctx, `${l} nm`, a.x + 44, a.y + a.h * 0.36 + 1 + i * 16, 'left', '#333', '11px sans-serif');
   });
 };
 
-const swatches = (theta: number) => METALS.map(m => ({
+const swatches = (theta: number): {metal: Metal; srgb: Vec3; linear: Vec3}[] => METALS.map(m => ({
   metal: m,
   ...reflectedColor(m, theta)
 }));

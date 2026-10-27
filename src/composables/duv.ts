@@ -184,7 +184,8 @@ const drawDuv = (ctx: CanvasRenderingContext2D, state: DuvState): void => {
     ctx.strokeStyle = 'rgba(0, 0, 0, 0.55)';
     ctx.stroke();
     dot(ctx, cctDuvToUv(t, 0), 2.5, '#222');
-    label(ctx, `${t} K`, b[0], b[1] - 8, 'center', 'middle', '#222');
+    const top = b[1] - 8 >= TOP + 8;
+    label(ctx, `${t} K`, top ? b[0] : a[0], top ? b[1] - 8 : a[1] + 10, 'center', 'middle', '#222');
   });
 
   REFERENCES.forEach((ref, i) => {

@@ -25,7 +25,7 @@ type ViewKind = 'true' | 'false' | 'ndvi';
 const NDVI_MIN = -0.3;
 const NDVI_MAX = 0.9;
 
-const viridis = COLORMAPS.find(m => m.key === 'viridis')!.entries;
+const viridis = (COLORMAPS.find(m => m.key === 'viridis') || COLORMAPS[0]).entries;
 const ndviColor = (v: number): [number, number, number] => {
   const t = Math.min(1, Math.max(0, (v - NDVI_MIN) / (NDVI_MAX - NDVI_MIN)));
   return viridis[Math.round(t * 255)];
@@ -106,7 +106,7 @@ const drawNdviLegend: DrawFn = (ctx, w) => {
   text(ctx, 'NDVI 色标（viridis）', w / 2, 48, 'center', '#777', '11px sans-serif');
 };
 
-const SPEC_W = 760;
+const SPEC_W = 800;
 const SPEC_H = 300;
 const SPEC = {x: 50, y: 18, w: 680, h: 220};
 
@@ -151,9 +151,9 @@ const drawSpectra = (get: () => PickPoint): DrawFn => (ctx, w, h) => {
     ctx.lineWidth = 1.6;
     ctx.strokeStyle = e.color;
     ctx.stroke();
-    const idx = R_WAVELENGTHS.length - 8;
-    const ly = specY(Math.min(0.97, ENDMEMBER_SPECTRA[k][idx])) - 6;
-    text(ctx, e.label, specX(R_WAVELENGTHS[idx]), ly, 'right', e.color, '11px sans-serif');
+    ctx.fillStyle = e.color;
+    ctx.fillRect(SPEC.x + k * 112, SPEC.y + SPEC.h + 44, 12, 3);
+    text(ctx, e.label, SPEC.x + 18 + k * 112, SPEC.y + SPEC.h + 46, 'left', e.color, '11px sans-serif');
   });
 
   curve(ctx, info.spectrum);
@@ -178,8 +178,8 @@ const drawSpectra = (get: () => PickPoint): DrawFn => (ctx, w, h) => {
   for (let r = 0; r <= 1; r += 0.25) {
     text(ctx, r.toFixed(2), SPEC.x - 6, specY(r), 'right', '#555', '11px sans-serif');
   }
-  text(ctx, '波长 nm', SPEC.x + SPEC.w, SPEC.y + SPEC.h + 12, 'right', '#555', '11px sans-serif');
-  text(ctx, '反射率', 4, SPEC.y - 6, 'left', '#555', '11px sans-serif');
+  text(ctx, '波长 nm', SPEC.x + SPEC.w + 30, SPEC.y + SPEC.h + 12, 'left', '#555', '11px sans-serif');
+  text(ctx, '反射率', 4, 6, 'left', '#555', '11px sans-serif');
 };
 
 export {

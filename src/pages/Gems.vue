@@ -75,7 +75,9 @@ const dichroic = computed(() => dichroicColors(center.value, width.value));
           <span class="demo-code">{{ degree.toFixed(2) }}</span>
         </label>
       </div>
-      <p class="gems-note">{{ gem.note }}</p>
+      <p class="gems-note">
+        {{ gem.note }}
+      </p>
       <demo-canvas title="透射谱、光源与进入眼睛的光" :width="PLOT_W" :height="PLOT_H" :draw="gemDraw"/>
     </demo-section>
 
@@ -87,7 +89,9 @@ const dichroic = computed(() => dichroicColors(center.value, width.value));
         <thead>
           <tr>
             <th>宝石</th>
-            <th v-for="ill in ILLUMINANTS" :key="ill.key">{{ ill.name }}</th>
+            <th v-for="ill in ILLUMINANTS" :key="ill.key">
+              {{ ill.name }}
+            </th>
             <th>日光 vs 白炽灯 ΔE2000</th>
           </tr>
         </thead>
@@ -98,7 +102,9 @@ const dichroic = computed(() => dichroicColors(center.value, width.value));
               <span class="demo-swatch" :style="{background: cell.css}"/>
               <span class="demo-code gems-hex">{{ cell.hex }}</span>
             </td>
-            <td class="demo-code">{{ row.change.toFixed(1) }}</td>
+            <td class="demo-code">
+              {{ row.change.toFixed(1) }}
+            </td>
           </tr>
         </tbody>
       </table>

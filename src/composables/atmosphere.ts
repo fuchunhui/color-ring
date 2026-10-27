@@ -60,7 +60,7 @@ const cachedHalo = (w46: number): Float32Array => {
 
 const SKY_ZENITH = lin(38, 92, 188);
 const SKY_HORIZON = lin(150, 195, 240);
-const GROUND = lin(14, 22, 16);
+const GROUND = lin(34, 46, 32);
 
 const drawHaloScene = (get: () => HaloOptions): DrawFn => (ctx, w, h) => {
   const {elevation, ring46, dogs} = get();
@@ -226,7 +226,7 @@ const drawFlashScene = (get: () => FlashOptions): DrawFn => (ctx, w, h) => {
         continue;
       }
       const t = clamp01(1 - y / hy);
-      const bg: Vec3 = [0.05 + 0.1 * (1 - t), 0.04 + 0.03 * (1 - t), 0.06 + 0.1 * t];
+      const bg: Vec3 = [0.012 + 0.03 * (1 - t), 0.008 + 0.008 * (1 - t), 0.012 + 0.02 * t];
       const X = xyz[o] / maxY;
       const Y = xyz[o + 1] / maxY;
       const Z = xyz[o + 2] / maxY;
@@ -283,7 +283,7 @@ const BLUE = VIOLET_A.map((v, c) => 0.5 * v + 0.5 * VIOLET_B[c]) as Vec3;
 
 const auroraColor = (alt: number): Vec3 => {
   const p = auroraProfile(alt);
-  return [0, 1, 2].map(c => p.green * GREEN[c] * 1.3 + p.red * RED[c] * 0.9 + p.blue * BLUE[c] * 1.1) as Vec3;
+  return [0, 1, 2].map(c => p.green * GREEN[c] * 1.5 + p.red * RED[c] * 0.4 + p.blue * BLUE[c] * 1.1) as Vec3;
 };
 
 let stars: [number, number, number][] | null = null;

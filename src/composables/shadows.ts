@@ -89,14 +89,14 @@ const drawWall = (hex: () => string, power: () => number, mode: 'physical' | 'pe
 
 // ---------- 光照歧义 ----------
 
-const STRIPE_A: Vec3 = [118, 130, 175];
+const STRIPE_A: Vec3 = [125, 138, 170];
 const STRIPE_B: Vec3 = [152, 126, 96];
 const SWATCH_W = 150;
 const SWATCH_H = 120;
 
 const illuminantOf = (t: number): Vec3 => {
-  const cool: Vec3 = [0.68, 0.88, 1.12];
-  const warm: Vec3 = [1.18, 0.95, 0.62];
+  const cool: Vec3 = [0.62, 0.86, 1.25];
+  const warm: Vec3 = [1.25, 0.95, 0.58];
   const target = t < 0 ? cool : warm;
   const a = Math.abs(t);
   return [0, 1, 2].map(i => 1 + (target[i] - 1) * a) as Vec3;

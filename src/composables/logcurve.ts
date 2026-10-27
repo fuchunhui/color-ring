@@ -53,7 +53,7 @@ const drawStopsPlot: DrawFn = (ctx, w, h) => {
     text(ctx, v.toFixed(2), a.x - 6, py(v), 'right', '#555', '11px sans-serif');
   }
   text(ctx, '相对 18% 灰的档数（stops）', a.x + a.w / 2, h - 8, 'center', '#333', '12px sans-serif');
-  text(ctx, '编码值', 22, a.y + 6, 'center', '#333', '12px sans-serif');
+  text(ctx, '编码值', a.x + 4, 5, 'left', '#333', '12px sans-serif');
 
   ctx.setLineDash([4, 3]);
   ctx.strokeStyle = '#999';

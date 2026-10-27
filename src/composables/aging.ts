@@ -68,7 +68,7 @@ const toLinear = (rgb: Vec3): Vec3 => rgb.map(v => srgbToLinear(v / 255)) as Vec
 const toRgb = (c: Vec3): Vec3 => c.map(v => encodeCode(v)) as Vec3;
 
 const PAIR_W = 640;
-const PAIR_H = 232;
+const PAIR_H = 268;
 
 interface PairView {
   young: number;
@@ -98,7 +98,7 @@ const drawPairs = (age: () => number, adapt: () => number): DrawFn => ctx => {
   const none = agedFilter(years, 0);
   const deltas = pairDeltas(years, adapt());
   PAIRS.forEach(({name, a, b}, row) => {
-    const y = 10 + row * 56;
+    const y = 10 + row * 64;
     text(ctx, name, 4, y + 24, 'left', '#333', '12px sans-serif');
     const cols: {label: string; fa: Vec3; fb: Vec3; de: number}[] = [
       {label: '20 岁', fa: a, fb: b, de: deltas[row].young},

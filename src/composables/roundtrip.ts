@@ -186,7 +186,6 @@ const HIST_W = 560;
 const HIST_H = 330;
 
 const SRC_W = 512;
-const SRC_H = 32;
 
 /** 一条低反差的平滑渐变（只占中间一小段亮度），线性分布 */
 const smoothValue = (x: number): number => 0.42 + 0.16 * x;
@@ -200,13 +199,20 @@ const makeHistDraw = (gain: () => number): DrawFn => (ctx, w, h) => {
     const y0 = m * 160 + 8;
     const hist = new Array(256).fill(0);
     const img = ctx.createImageData(SRC_W, 20);
+    const samples = SRC_W * 16;
+    for (let s = 0; s < samples; s++) {
+      let v = smoothValue(s / (samples - 1));
+      if (is8) {
+        v = Math.round(v * 255) / 255;
+      }
+      hist[Math.round(stretch(v, g) * 255)] += 1;
+    }
     for (let x = 0; x < SRC_W; x++) {
       let v = smoothValue(x / (SRC_W - 1));
       if (is8) {
         v = Math.round(v * 255) / 255;
       }
       const out = Math.round(stretch(v, g) * 255);
-      hist[out] += SRC_H;
       for (let y = 0; y < 20; y++) {
         const i = (y * SRC_W + x) * 4;
         img.data[i] = out;
@@ -228,7 +234,9 @@ const makeHistDraw = (gain: () => number): DrawFn => (ctx, w, h) => {
       const bar = c / maxH * (hh - 4);
       ctx.fillRect(hx + i * 2, hy + hh - bar, 2, bar);
     });
-    const empty = hist.filter((c, i) => c === 0 && i > Math.min(...hist.map((_, k) => (hist[k] > 0 ? k : 256))) && i < 255).length;
+    const first = hist.findIndex(c => c > 0);
+    const last = hist.length - 1 - [...hist].reverse().findIndex(c => c > 0);
+    const empty = hist.filter((c, i) => c === 0 && i > first && i < last).length;
     text(ctx, `空缺的码值：${empty}`, hx + 512 - 4, hy + 10, 'right', '#C92A2A', '12px sans-serif');
   });
 };

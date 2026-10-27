@@ -100,20 +100,16 @@ const blob = (ctx: CanvasRenderingContext2D, lt: number, ll: number, rx: number,
 const radiusPx = (s: Star): number => 3 + Math.min(7, Math.log10(1 + starRadius(s)) * 2.4);
 
 const LABEL_OFFSET: Record<string, [number, number]> = {
-  太阳: [8, 10],
-  '南门二 A': [8, -8],
-  '南门二 B': [-8, 10],
-  天仓五: [-8, 12],
-  天苑四: [-8, 3],
-  巴纳德星: [8, 8],
-  比邻星: [8, 10],
-  '狼 359': [-8, 10],
-  北河三: [8, 4],
-  '五车二 Aa': [8, -4],
-  毕宿五: [-8, 4],
-  大角星: [8, 8],
-  '南河三 A': [8, 0]
+  太阳: [-9, 11],
+  比邻星: [-9, 2],
+  参宿四: [-12, -10],
+  心宿二: [12, 12],
+  毕宿五: [-12, 8],
+  大角星: [-12, -4],
+  织女星: [-10, -8]
 };
+
+const ALWAYS_LABEL = new Set(['太阳', '天狼星 A', '织女星', '参宿四', '心宿二', '参宿七', '天津四', '老人星', '北极星', '大角星', '毕宿五', '比邻星', '天狼星 B', '角宿一']);
 
 const drawHr = (get: () => number): DrawFn => ctx => {
   const selected = get();
@@ -171,9 +167,10 @@ const drawHr = (get: () => number): DrawFn => ctx => {
       ctx.lineWidth = 2;
       ctx.stroke();
     }
-    const [dx, dy] = LABEL_OFFSET[s.name] || [r + 4, -2];
-    const left = dx < 0;
-    text(ctx, s.name, x + dx + (left ? 0 : 0), y + dy, left ? 'right' : 'left', '#cfd8f0', '10px sans-serif');
+    if (ALWAYS_LABEL.has(s.name) || i === selected) {
+      const [dx, dy] = LABEL_OFFSET[s.name] || [r + 4, -2];
+      text(ctx, s.name, x + dx, y + dy, dx < 0 ? 'right' : 'left', i === selected ? '#fff' : '#cfd8f0', '10px sans-serif');
+    }
   });
 
   ctx.strokeStyle = '#666';
@@ -185,7 +182,7 @@ const drawHr = (get: () => number): DrawFn => ctx => {
   for (let l = -4; l <= 6; l += 2) {
     text(ctx, l === 0 ? '1' : `10${l < 0 ? '⁻' : ''}${'⁰¹²³⁴⁵⁶⁷⁸⁹'[Math.abs(l)]}`, HR.left - 6, hrYLog(l), 'right', '#555', '11px sans-serif');
   }
-  text(ctx, '光度（太阳 = 1）', 4, HR.top + HR.height / 2 - 8, 'left', '#444', '11px sans-serif');
+  text(ctx, 'L / L☉', 4, HR.top + 4, 'left', '#444', '11px sans-serif');
 };
 
 const nearestStar = (x: number, y: number): number => {
@@ -252,7 +249,9 @@ const drawPlanckChart = (get: () => number): DrawFn => (ctx, w, h) => {
     ctx.lineTo(plX(peak), base);
     ctx.stroke();
     ctx.setLineDash([]);
-    text(ctx, `峰值 ${peak.toFixed(0)} nm`, plX(peak) + 6, PL.y + 10, 'left', '#e0592a', '12px sans-serif');
+    ctx.fillStyle = 'rgba(255,255,255,0.88)';
+    ctx.fillRect(plX(peak) + 48, PL.y + 2, 92, 16);
+    text(ctx, `峰值 ${peak.toFixed(0)} nm`, plX(peak) + 52, PL.y + 10, 'left', '#c0361a', '12px sans-serif');
   } else {
     text(ctx, `峰值 ${peak.toFixed(0)} nm（在图外）`, PL.x + PL.w - 4, PL.y + 10, 'right', '#e0592a', '12px sans-serif');
   }

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {ref, computed} from 'vue';
 import {DemoPage, DemoSection, DemoCanvas} from '../components/demo';
-import {sConeSignal, density400} from '../utils/aging';
+import {sConeSignal, lensDensity} from '../utils/aging';
 import {
   PLOT_W,
   PLOT_H,
@@ -24,7 +24,7 @@ const drawAdapted = drawScene(() => age.value, () => adapt.value);
 const drawPair = drawPairs(() => age.value, () => adapt.value);
 
 const sSignal = computed(() => Math.round(sConeSignal(age.value) * 100));
-const d400 = computed(() => density400(age.value).toFixed(2));
+const d400 = computed(() => lensDensity(400, age.value).toFixed(2));
 </script>
 
 <template>

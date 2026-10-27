@@ -1,4 +1,26 @@
-import {makeNoise} from './scene';
+import {makeNoise, mulberry32} from './scene';
+
+/** 平滑的值噪声（无白噪声成分），0~1 */
+const smoothNoise = (width: number, height: number, cell: number, seed: number): (x: number, y: number) => number => {
+  const rand = mulberry32(seed);
+  const gw = Math.ceil(width / cell) + 3;
+  const gh = Math.ceil(height / cell) + 3;
+  const grid = Array.from({length: gw * gh}, () => rand());
+  return (x, y) => {
+    const gx = x / cell;
+    const gy = y / cell;
+    const ix = Math.floor(gx);
+    const iy = Math.floor(gy);
+    const fx = gx - ix;
+    const fy = gy - iy;
+    const sx = fx * fx * (3 - 2 * fx);
+    const sy = fy * fy * (3 - 2 * fy);
+    const at = (a: number, b: number) => grid[b * gw + a];
+    const top = at(ix, iy) * (1 - sx) + at(ix + 1, iy) * sx;
+    const bottom = at(ix, iy + 1) * (1 - sx) + at(ix + 1, iy + 1) * sx;
+    return top * (1 - sy) + bottom * sy;
+  };
+};
 
 /** 示意用的光谱反射率，波长范围 400~1000 nm，每 5 nm 一个值 */
 const R_MIN = 400;
@@ -142,8 +164,8 @@ const C = 5;
 let cached: LandMap | null = null;
 
 const buildLandMap = (): LandMap => {
-  const coarse = makeNoise(MAP_W, MAP_H, 40, 11);
-  const mid = makeNoise(MAP_W, MAP_H, 12, 5);
+  const coarse = smoothNoise(MAP_W, MAP_H, 40, 11);
+  const mid = smoothNoise(MAP_W, MAP_H, 12, 5);
   const fine = makeNoise(MAP_W, MAP_H, 4, 9);
   const abundance = new Float32Array(MAP_W * MAP_H * COUNT);
   const shade = new Float32Array(MAP_W * MAP_H);

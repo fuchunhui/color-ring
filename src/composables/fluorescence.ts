@@ -2,21 +2,20 @@ import {
   WAVELENGTHS,
   D65,
   sample,
-  gauss,
   edge,
   spectrumXyz,
   xyzToSrgb,
   rgbCss,
   drawSpectrumBand,
   drawAxis,
-  drawCurve,
   normalize,
   text,
   wlX
 } from '../utils/spectral';
 import type {Area, DrawFn, Spectrum} from '../utils/spectral';
+import {xyzToLab} from '../utils/space';
 import type {Vec3} from '../utils/space';
-import {xyzToDisplayRgb} from '../utils/cie';
+import {xyzToDisplayRgb, xyzToClipRgb, wavelengthToXyz} from '../utils/cie';
 
 interface Fluorophore {
   key: string;
@@ -55,7 +54,14 @@ const drawStokes = (dye: () => Fluorophore): DrawFn => ctx => {
   // 可见光部分铺色带，紫外部分用浅紫灰色
   ctx.fillStyle = '#EDE6F5';
   ctx.fillRect(area.x, area.y, fx(380) - area.x, area.h);
-  drawSpectrumBand(ctx, {x: fx(380), y: area.y, w: fx(700) - fx(380), h: area.h}, 0.28);
+  ctx.save();
+  ctx.globalAlpha = 0.28;
+  for (let px = Math.ceil(fx(380)); px < fx(FULL_MAX); px++) {
+    const l = FULL_MIN + (px - area.x) / area.w * (FULL_MAX - FULL_MIN);
+    ctx.fillStyle = rgbCss(xyzToClipRgb(wavelengthToXyz(l)));
+    ctx.fillRect(px, area.y, 1, area.h);
+  }
+  ctx.restore();
   const trace = (fn: (l: number) => number, color: string, fill: string) => {
     ctx.beginPath();
     for (let l = FULL_MIN; l <= FULL_MAX; l += 2) {
@@ -96,7 +102,7 @@ const drawStokes = (dye: () => Fluorophore): DrawFn => ctx => {
   ctx.moveTo(area.x, area.y + area.h + 0.5);
   ctx.lineTo(area.x + area.w, area.y + area.h + 0.5);
   ctx.stroke();
-  for (let l = 300; l <= 700; l += 50) {
+  for (let l = 300; l <= 650; l += 50) {
     text(ctx, `${l}`, fx(l), area.y + area.h + 14, 'center', '#555', '11px sans-serif');
   }
   text(ctx, 'nm', area.x + area.w + 4, area.y + area.h + 14, 'left', '#555', '11px sans-serif');
@@ -117,7 +123,7 @@ const uvPower = (l: number): number => {
 };
 
 const BRIGHTENER = DYES[0];
-const BRIGHTENER_GAIN = 0.55;
+const BRIGHTENER_GAIN = 0.75;
 
 /** 荧光项：被紫外激发的发射，以相对于 D65 的“辐亮度因子”表示 */
 const fluorescenceFactor = (uv: number, load: number): Spectrum => {
@@ -145,6 +151,7 @@ interface Whiteness {
   y: number;
   W: number;
   blue: number;
+  b: number;
 }
 
 const paperWhiteness = (uv: number, load: number): Whiteness => {
@@ -154,28 +161,45 @@ const paperWhiteness = (uv: number, load: number): Whiteness => {
   const x = X / sum;
   const y = Y / sum;
   const W = Y * 100 + 800 * (D65_X - x) + 1700 * (D65_Y - y);
-  return {rgb: xyzToSrgb([X, Y, Z]), Y: Y * 100, x, y, W, blue: factor[(450 - 380) / 5]};
+  return {rgb: xyzToSrgb([X, Y, Z]), Y: Y * 100, x, y, W, blue: factor[(450 - 380) / 5], b: xyzToLab([X, Y, Z])[2]};
 };
+
+const PAPER_MAX = 1.4;
 
 const drawPaperSpectrum = (uv: () => number): DrawFn => ctx => {
   drawSpectrumBand(ctx, area, 0.28);
-  drawCurve(ctx, {...area, h: area.h / 1.3}, PAPER, '#999', 2);
-  drawCurve(ctx, {...area, h: area.h / 1.3}, paperFactor(uv(), 0), '#555', 1.5);
-  drawCurve(ctx, {...area, h: area.h / 1.3}, paperFactor(uv(), 1), '#2E4BD6', 2.5);
-  drawAxis(ctx, area);
-  const base = area.y + area.h - area.h / 1.3;
+  const base = area.y + area.h;
+  const line = (values: Spectrum, color: string, width: number) => {
+    ctx.beginPath();
+    values.forEach((v, i) => {
+      const x = wlX(area, WAVELENGTHS[i]);
+      const y = base - Math.min(PAPER_MAX, v) / PAPER_MAX * area.h;
+      if (i === 0) {
+        ctx.moveTo(x, y);
+      } else {
+        ctx.lineTo(x, y);
+      }
+    });
+    ctx.strokeStyle = color;
+    ctx.lineWidth = width;
+    ctx.stroke();
+  };
+  const y100 = base - area.h / PAPER_MAX;
   ctx.strokeStyle = '#E8820C';
   ctx.setLineDash([4, 3]);
   ctx.beginPath();
-  ctx.moveTo(area.x, base + 0.5);
-  ctx.lineTo(area.x + area.w, base + 0.5);
+  ctx.moveTo(area.x, y100 + 0.5);
+  ctx.lineTo(area.x + area.w, y100 + 0.5);
   ctx.stroke();
   ctx.setLineDash([]);
-  text(ctx, '辐亮度因子 = 100%（虚线）', area.x + 6, base - 8, 'left', '#E8820C', '11px sans-serif');
-  [['#999', '未加增白剂的纸'], ['#2E4BD6', '加了增白剂（蓝端超过 100%）']].forEach(([color, label], i) => {
+  text(ctx, '100%（完全漫反射白）', area.x + area.w - 4, y100 - 8, 'right', '#E8820C', '11px sans-serif');
+  line(PAPER, '#999', 2);
+  line(paperFactor(uv(), 1), '#2E4BD6', 2.5);
+  drawAxis(ctx, area);
+  [['#999', '未加增白剂的纸'], ['#2E4BD6', '加了增白剂（蓝端可超过 100%）']].forEach(([color, label], i) => {
     ctx.fillStyle = color;
-    ctx.fillRect(area.x + 8 + i * 140, area.y + area.h - 40 + 22, 14, 3);
-    text(ctx, label, area.x + 28 + i * 140, area.y + area.h - 40 + 23, 'left', '#333', '11px sans-serif');
+    ctx.fillRect(area.x + 8 + i * 140, area.y + 8, 14, 3);
+    text(ctx, label, area.x + 28 + i * 140, area.y + 9, 'left', '#333', '11px sans-serif');
   });
 };
 
@@ -189,18 +213,18 @@ interface Item {
   glow: string | null;
 }
 
-const emissionColor = (d: Fluorophore, scale = 1): string => {
+const emissionColor = (d: Fluorophore, scale = 1, lighten = 0): string => {
   const em = normalize(sample(l => gaussSimple(l, d.emCenter, d.emWidth)));
   const [r, g, b] = xyzToDisplayRgb(spectrumXyz(em.map(() => 1), em));
-  return rgbCss([r, g, b].map(v => Math.round(v * scale)) as Vec3);
+  return rgbCss([r, g, b].map(v => Math.round(Math.min(255, v + lighten * (255 - v)) * scale)) as Vec3);
 };
 
 const ITEMS: Item[] = [
-  {name: '增白纸', visible: '#F7F7F4', glow: emissionColor(DYES[0])},
+  {name: '增白纸', visible: '#F7F7F4', glow: emissionColor(DYES[0], 1, 0.45)},
   {name: '汤力水', visible: '#EEF3F1', glow: emissionColor(DYES[1], 0.95)},
   {name: '荧光笔', visible: '#D8E83A', glow: emissionColor(DYES[3])},
   {name: '普通白棉衣', visible: '#E9E4D2', glow: null},
-  {name: '洗过增白剂的衬衫', visible: '#F3F3F0', glow: emissionColor(DYES[0], 0.85)},
+  {name: '洗过增白剂的衬衫', visible: '#F3F3F0', glow: emissionColor(DYES[0], 0.85, 0.4)},
   {name: '钞票防伪线', visible: '#CBB98F', glow: emissionColor(DYES[2], 0.9)}
 ];
 

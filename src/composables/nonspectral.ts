@@ -73,9 +73,7 @@ const drawPurple = (ctx: CanvasRenderingContext2D, s: PurpleState): void => {
   dot(ctx, red, 6, hexOfXyY(red), '#000');
   dot(ctx, blue, 6, hexOfXyY(blue), '#000');
   dot(ctx, mixed, 7, hexOfXyY(mixed), '#d6336c');
-  label(ctx, `${Math.round(s.lambdaRed)} nm`, toPx(red)[0] + 9, toPx(red)[1] - 8, 'left');
-  label(ctx, `${Math.round(s.lambdaBlue)} nm`, toPx(blue)[0] + 9, toPx(blue)[1] + 12, 'left');
-  label(ctx, '混合', toPx(mixed)[0] + 10, toPx(mixed)[1] + 8, 'left', 'middle', '#d6336c');
+  label(ctx, '混合', toPx(mixed)[0] + 14, toPx(mixed)[1] - 16, 'left', 'middle', '#d6336c');
 };
 
 // ---------- 棕色 ----------

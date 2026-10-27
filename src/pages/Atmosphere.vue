@@ -29,9 +29,9 @@ const drawHalo = drawHaloScene(() => ({elevation: elevation.value, ring46: ring4
 const rows = haloRows();
 const dogRows = sundogRows();
 
-const exaggeration = ref(15);
+const exaggeration = ref(30);
 const extinction = ref(true);
-const altitude = ref(0.05);
+const altitude = ref(-0.78);
 const drawFlash = drawFlashScene(() => ({
   exaggeration: exaggeration.value,
   extinction: extinction.value,
@@ -111,7 +111,7 @@ const refRows = refractionRows();
         </label>
         <label>
           太阳圆心真高度
-          <input v-model.number="altitude" type="range" min="-0.4" max="0.6" step="0.01">
+          <input v-model.number="altitude" type="range" min="-1" max="0.2" step="0.01">
           <span class="demo-code">{{ altitude.toFixed(2) }}°</span>
         </label>
         <label>

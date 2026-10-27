@@ -20,19 +20,20 @@ import {
   text
 } from '../utils/spectral';
 import type {Area, DrawFn, Spectrum} from '../utils/spectral';
+import type {Vec3} from '../utils/space';
 
 const PLOT_W = 640;
 const PLOT_H = 240;
 const CUP_W = 300;
 const CUP_H = 260;
 
-const area: Area = {x: 40, y: 16, w: PLOT_W - 70, h: PLOT_H - 56};
+const area: Area = {x: 40, y: 34, w: PLOT_W - 70, h: PLOT_H - 74};
 
 const legend = (ctx: CanvasRenderingContext2D, items: [string, string][]) => {
   items.forEach(([color, label], i) => {
     ctx.fillStyle = color;
-    ctx.fillRect(area.x + 8 + i * 150, area.y + 6, 14, 3);
-    text(ctx, label, area.x + 28 + i * 150, area.y + 7, 'left', '#333', '11px sans-serif');
+    ctx.fillRect(area.x + 8 + i * 150, area.y - 16, 14, 3);
+    text(ctx, label, area.x + 28 + i * 150, area.y - 15, 'left', '#333', '11px sans-serif');
   });
 };
 
@@ -67,7 +68,7 @@ const cupPath = (ctx: CanvasRenderingContext2D, cx: number, top: number) => {
   ctx.closePath();
 };
 
-const lycurgusColors = (thickness: number) => ({
+const lycurgusColors = (thickness: number): {transmit: Vec3; scatter: Vec3} => ({
   transmit: xyzToSrgb(spectrumXyz(D65, lycurgusTransmit(thickness))),
   scatter: xyzToSrgb(spectrumXyz(D65, lycurgusScatter()))
 });
@@ -110,7 +111,7 @@ const drawLycurgusSpectra = (thickness: () => number): DrawFn => ctx => {
 
 // ---------- 二向色玻璃 ----------
 
-const dichroicColors = (center: number, width: number) => ({
+const dichroicColors = (center: number, width: number): {reflect: Vec3; transmit: Vec3} => ({
   reflect: xyzToSrgb(spectrumXyz(D65, dichroicReflect(center, width))),
   transmit: xyzToSrgb(spectrumXyz(D65, dichroicTransmit(center, width)))
 });

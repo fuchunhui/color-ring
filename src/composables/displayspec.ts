@@ -111,7 +111,7 @@ const drawChart: DrawFn = ctx => {
   poly(ctx, REC709, '#999', 1.5, [4, 3]);
   poly(ctx, P3, '#999', 1.5, [8, 3]);
   poly(ctx, REC2020, '#999', 1.5, [2, 3]);
-  text(ctx, 'Rec.709 / P3 / Rec.2020（灰色虚线，由内到外）', LEFT + 4, CHART_H - 6, 'left', '#777', '11px sans-serif');
+  text(ctx, 'Rec.709 / P3 / Rec.2020：灰色虚线，由内到外', toPx([0.5, 0])[0], TOP + 14 + DISPLAYS.length * 18 + 6, 'left', '#777', '11px sans-serif');
 
   computeDisplays().forEach(d => {
     poly(ctx, d.xy, d.color, 2);
@@ -151,7 +151,7 @@ const makeShiftDraw = (rows: {label: string; color: string; du: number[]}[], shi
   const top = 26;
   const groupH = (h - top - 10) / rows.length;
   const max = Math.max(...rows.flatMap(r => r.du), 1e-6);
-  const barArea = w - left - 60;
+  const barArea = w - left - 150;
   text(ctx, "白点与标准观察者的距离 Δu'v'（越短越稳）", left, 10, 'left', '#333', '12px sans-serif');
   rows.forEach((r, i) => {
     const y0 = top + i * groupH;

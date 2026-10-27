@@ -68,9 +68,15 @@ const fmt = (v: number[]): string => v.map(x => x.toFixed(2)).join(', ');
           <tr v-for="item in list" :key="item.metal.key">
             <td>{{ item.metal.name }}</td>
             <td><span class="demo-swatch" :style="{background: rgbCss(item.srgb)}"/></td>
-            <td class="demo-code">{{ rgbHex(item.srgb) }}</td>
-            <td class="demo-code">{{ fmt(item.linear) }}</td>
-            <td class="demo-code">{{ fmt(PBR_F0[item.metal.key]) }}</td>
+            <td class="demo-code">
+              {{ rgbHex(item.srgb) }}
+            </td>
+            <td class="demo-code">
+              {{ fmt(item.linear) }}
+            </td>
+            <td class="demo-code">
+              {{ fmt(PBR_F0[item.metal.key]) }}
+            </td>
           </tr>
         </tbody>
       </table>
