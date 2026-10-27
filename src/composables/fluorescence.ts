@@ -220,11 +220,11 @@ const emissionColor = (d: Fluorophore, scale = 1, lighten = 0): string => {
 };
 
 const ITEMS: Item[] = [
-  {name: '增白纸', visible: '#F7F7F4', glow: emissionColor(DYES[0], 1, 0.45)},
+  {name: '增白纸', visible: '#F7F7F4', glow: '#AFC4FF'},
   {name: '汤力水', visible: '#EEF3F1', glow: emissionColor(DYES[1], 0.95)},
-  {name: '荧光笔', visible: '#D8E83A', glow: emissionColor(DYES[3])},
+  {name: '荧光笔', visible: '#D8E83A', glow: '#B4F01E'},
   {name: '普通白棉衣', visible: '#E9E4D2', glow: null},
-  {name: '洗过增白剂的衬衫', visible: '#F3F3F0', glow: emissionColor(DYES[0], 0.85, 0.4)},
+  {name: '洗过增白剂的衬衫', visible: '#F3F3F0', glow: '#9DB0F0'},
   {name: '钞票防伪线', visible: '#CBB98F', glow: emissionColor(DYES[2], 0.9)}
 ];
 

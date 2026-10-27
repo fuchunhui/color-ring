@@ -6,6 +6,7 @@
  */
 import type {Vec3} from './space';
 import {WAVELENGTHS, D65, spectrumXyz, xyzToSrgb} from './spectral';
+import {xyzToLinear} from './space';
 import type {Spectrum} from './spectral';
 
 interface Metal {
@@ -120,10 +121,7 @@ const reflectedColor = (metal: Metal, theta: number): {srgb: Vec3; linear: Vec3}
   const r = reflectance(metal, theta);
   const xyz = spectrumXyz(D65, r);
   const srgb = xyzToSrgb(xyz);
-  const linear = srgb.map(v => {
-    const c = v / 255;
-    return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
-  }) as Vec3;
+  const linear = xyzToLinear(xyz).map(v => Math.min(1, Math.max(0, v))) as Vec3;
   return {srgb, linear};
 };
 

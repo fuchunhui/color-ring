@@ -35,7 +35,7 @@ const lumBy = Math.abs(dirLuminance('by')).toFixed(3);
   <demo-page>
     <demo-section
       title="Campbell–Robson 图：看看你自己的对比敏感度"
-      desc="横轴是空间频率（条纹有多细，从左到右对数增大），纵轴是对比度（条纹有多淡，从上到下对数降低）。每一列的条纹粗细是固定的，每一行的深浅是固定的，所以理论上整幅图每处都是清晰的条纹，但实际看到的条纹可见区域有一条拱形的边界：中间（大约每度 4 到 10 周）最敏感，条纹一直延伸到画面很靠下的位置；向两侧，条纹都要更深才看得到。这条边界就是你的对比敏感度函数。边界位置取决于你与屏幕的距离，所以贴近或远离屏幕，拱的位置会左右移动。"
+      desc="横轴是空间频率（条纹有多细，从左到右对数增大），纵轴是对比度（条纹有多淡，从上到下对数降低）。每一列的条纹粗细是固定的，每一行的深浅是固定的，所以理论上整幅图每处都是清晰的条纹，但实际看到的条纹可见区域有一条拱形的边界：中间最敏感，条纹一直延伸到画面很靠下的位置；向两侧，条纹都要更深才看得到。这条边界就是你的对比敏感度函数。横轴标的是整幅图宽度内的条纹周数，换成“每度视角多少周”要看你离屏幕多远：人眼约在每度 4 到 10 周最敏感，而按 60 厘米估算，整幅图只有约 15°，右端也只有约 2.6 周/度，所以拱的峰值要退到两米以上才会落进画面。距离越远，拱越往左移。"
     >
       <demo-canvas title="亮度光栅（明暗条纹）" :width="CHART_CANVAS_W" :height="CHART_CANVAS_H" :draw="drawLumaChart"/>
     </demo-section>
@@ -70,10 +70,10 @@ const lumBy = Math.abs(dirLuminance('by')).toFixed(3);
           <input v-model.number="distance" type="range" min="30" max="200" step="5">
           <span class="demo-code">{{ distance }} cm</span>
         </label>
-        <span class="demo-code">1 度 ≈ {{ ppd.toFixed(0) }} 像素，模糊后的截止频率 ≈ {{ cutoff.toFixed(1) }} 周/度</span>
+        <span class="demo-code">1 度 ≈ {{ ppd.toFixed(0) }} 像素<template v-if="sigma >= 0.5">，模糊后的截止频率 ≈ {{ cutoff.toFixed(1) }} 周/度</template><template v-else>，未模糊</template></span>
       </div>
       <p class="demo-section-desc">
-        换算假设：屏幕像素间距 0.2646 mm（约 96 dpi），模糊的截止频率按高斯函数的 1/e 点 1 / (2πσ) 周/像素估算。色度的示意截止频率约 1.5 到 3 周/度，亮度的峰值在 8 周/度附近；当模糊的截止频率远低于亮度敏感范围、却还高于色度的截止时，就会出现“糊亮度很明显、糊色度不明显”。
+        换算假设：屏幕像素间距 0.2646 mm（约 96 dpi），模糊的截止频率按高斯模糊的传递函数下降到 e^(-1/2)（约 61%）的位置 1 / (2πσ) 周/像素估算。色度的示意截止频率约 1.5 到 3 周/度，亮度的峰值在 8 周/度附近；当模糊的截止频率远低于亮度敏感范围、却还高于色度的截止时，就会出现“糊亮度很明显、糊色度不明显”。
       </p>
       <demo-canvas title="原图" :width="IMG_W" :height="IMG_H" :draw="drawOriginal"/>
       <demo-canvas title="只模糊亮度 Y" :width="IMG_W" :height="IMG_H" :draw="drawLuma"/>

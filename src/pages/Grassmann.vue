@@ -184,7 +184,7 @@ const fmt = (n: number, digits = 4): string => n.toFixed(digits);
         <p>
           {{ probeInfo.complementary ? '补色波长' : '主波长' }}：{{ formatDominant(probeInfo) }}
         </p>
-        <p>兴奋纯度：{{ Number.isNaN(probeInfo.purity) ? '在马蹄形之外' : fmt(probeInfo.purity, 3) }}</p>
+        <p>兴奋纯度：{{ Number.isNaN(probeInfo.purity) || probeInfo.purity > 1.001 ? '在马蹄形之外（不对应任何真实的色光，上面的波长没有意义）' : fmt(probeInfo.purity, 3) }}</p>
         <p v-if="probeInfo.complementary">
           射线落在紫线上：这个颜色没有对应的单色光（见“光谱外的颜色”），补色波长表示在白点另一侧的光谱色与它互补。
         </p>

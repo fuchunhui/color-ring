@@ -32,7 +32,7 @@ const GEMS: Gem[] = [
   {
     key: 'alexandrite',
     name: '变石（Alexandrite）',
-    note: '蓝绿窗口约 490nm，红光窗口 > 620nm，两者之间 560~590nm 被强烈吸收（Cr³⁺ 的吸收带）',
+    note: '蓝绿窗口约 500nm，红光窗口 > 620nm，两者之间 560~590nm 被强烈吸收（Cr³⁺ 的吸收带）',
     transmittance: sample(l => 0.03 + 0.75 * gauss(l, 500, 22, 18) + 0.85 * edge(l, 625, 9) * gauss(l, 700, 90, 400))
   },
   {
@@ -85,7 +85,7 @@ const gemDeltaE = (T: Spectrum, a: Illuminant, b: Illuminant, degree: number): n
 
 // ---------- 金纳米颗粒（Lycurgus 杯）----------
 
-/** 金纳米颗粒：吸收峰约 520nm，散射峰偏向短波一侧（示意） */
+/** 金纳米颗粒：吸收峰约 520nm，散射峰略偏向长波一侧（示意） */
 const goldAbsorption = (l: number): number => 0.9 * gauss(l, 525, 35, 60) + 1.6 * (1 - edge(l, 490, 22));
 const goldScattering = (l: number): number => 0.5 * gauss(l, 545, 30, 45);
 

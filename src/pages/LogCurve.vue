@@ -21,7 +21,7 @@ const drawCapture = makeCaptureDraw(() => ev.value);
   <demo-page>
     <demo-section
       title="为什么要有 Log 曲线"
-      desc="横轴是相对 18% 中灰的档数（每加一档，光量翻倍），纵轴是编码值。sRGB 和 Rec.709 把光量取 0.45 或 1/2.4 次方，高光以上直接顶到 1.0；S-Log3、LogC3 则是对数曲线：每增加一档，编码值增加几乎相同的量，所以往上留出十几档的空间。PQ 是为 HDR 显示设计的绝对亮度曲线，这里把 1.0 当作 100 cd/m² 的参考白，仅作对照。"
+      desc="横轴是相对 18% 中灰的档数（每加一档，光量翻倍），纵轴是编码值。sRGB 和 Rec.709 把光量取 0.45 或 1/2.4 次方，高光以上直接顶到 1.0；S-Log3、LogC3 则是对数曲线：每增加一档，编码值增加几乎相同的量，所以高光一侧能留出约 8 档的空间（连同暗部，总动态范围约 14 档）。PQ 是为 HDR 显示设计的绝对亮度曲线，这里把 1.0 当作 100 cd/m² 的参考白，仅作对照。"
     >
       <demo-canvas :width="PLOT_W" :height="PLOT_H" :draw="drawStopsPlot"/>
       <p class="log-note">

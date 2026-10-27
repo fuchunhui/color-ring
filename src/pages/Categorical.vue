@@ -18,10 +18,12 @@ const lMax = ref(0.9);
 const cMin = ref(0.08);
 const cvdSafe = ref(false);
 
+const effectiveLMax = computed(() => Math.max(lMax.value, lMin.value + 0.05));
+
 const generated = computed(() => generatePalette({
   count: count.value,
   lMin: lMin.value,
-  lMax: Math.max(lMax.value, lMin.value + 0.05),
+  lMax: effectiveLMax.value,
   cMin: cMin.value,
   cvdSafe: cvdSafe.value
 }));
@@ -35,10 +37,17 @@ const palettes = computed(() => [
 const rows = computed(() => palettes.value.map(p => ({...p, stats: paletteStats(p.colors)})));
 
 const copied = ref('');
-const copy = (colors: string[]) => {
+const copyFailed = ref(false);
+const copy = async (colors: string[]) => {
   const text = colors.join(', ');
-  navigator.clipboard?.writeText(text).catch(() => {});
-  copied.value = text;
+  try {
+    await navigator.clipboard.writeText(text);
+    copied.value = text;
+    copyFailed.value = false;
+  } catch {
+    copied.value = '';
+    copyFailed.value = true;
+  }
 };
 
 const chartFns = computed(() => palettes.value.map(p => drawChart(() => p.colors)));
@@ -64,7 +73,7 @@ const chartFns = computed(() => palettes.value.map(p => drawChart(() => p.colors
         <label>
           亮度上限
           <input v-model.number="lMax" type="range" min="0.5" max="0.98" step="0.02">
-          <span class="demo-code">{{ lMax.toFixed(2) }}</span>
+          <span class="demo-code">{{ effectiveLMax.toFixed(2) }}</span>
         </label>
         <label>
           最小色度
@@ -92,6 +101,9 @@ const chartFns = computed(() => palettes.value.map(p => drawChart(() => p.colors
         <span v-for="c in p.colors" :key="c" class="demo-swatch" :style="{background: c}" :title="c"/>
         <color-button label="复制颜色列表" @click="copy(p.colors)"/>
       </div>
+      <p v-if="copyFailed" class="categorical-note">
+        复制失败：浏览器不允许写入剪贴板（非 HTTPS 页面或权限被拒绝），请手动选取颜色值。
+      </p>
       <p v-if="copied" class="categorical-note demo-code">
         已复制：{{ copied }}
       </p>

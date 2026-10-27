@@ -26,8 +26,8 @@ const mixOf = (s: PurpleState): Point => {
   const red = locusXy(s.lambdaRed);
   const blue = locusXy(s.lambdaBlue);
   return centroid([
-    {xy: red, Y: Math.max(s.redShare, 0.001)},
-    {xy: blue, Y: Math.max(1 - s.redShare, 0.001)}
+    {xy: red, Y: s.redShare},
+    {xy: blue, Y: 1 - s.redShare}
   ]);
 };
 

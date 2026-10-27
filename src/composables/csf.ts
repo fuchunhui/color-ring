@@ -22,7 +22,7 @@ const chartDrawer = (axis: Axis): DrawFn => ctx => {
   renderChart(ctx, CHART_W, CHART_H, axis, CHART_PAD, 6);
   ctx.strokeStyle = '#999';
   ctx.strokeRect(CHART_PAD - 0.5, 5.5, CHART_W + 1, CHART_H + 1);
-  [0.5, 1, 2, 5, 10, 20].forEach(f => {
+  [0.5, 1, 2, 5, 10, 20, 40].forEach(f => {
     const u = Math.log(f / CHART.fMin) / Math.log(CHART.fMax / CHART.fMin);
     const x = CHART_PAD + u * CHART_W;
     ctx.beginPath();
@@ -31,7 +31,7 @@ const chartDrawer = (axis: Axis): DrawFn => ctx => {
     ctx.stroke();
     text(ctx, `${f}`, x, CHART_H + 22, 'center', '#555', '11px sans-serif');
   });
-  text(ctx, '空间频率 (周/度) →', CHART_PAD + CHART_W / 2, CHART_H + 38, 'center', '#333', '12px sans-serif');
+  text(ctx, '空间频率 (整幅图宽度内的条纹周数，越靠右越细) →', CHART_PAD + CHART_W / 2, CHART_H + 38, 'center', '#333', '12px sans-serif');
   [1, 0.1, 0.01].forEach(c => {
     const v = Math.log(c) / Math.log(CHART.cMin);
     const y = 6 + v * (CHART_H - 1);

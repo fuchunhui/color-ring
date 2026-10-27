@@ -84,7 +84,7 @@ const fmt = (v: number[]): string => v.map(x => x.toFixed(2)).join(', ');
 
     <demo-section
       title="掠射角下金属会变白"
-      desc="入射角越大，所有金属的反射率都升向 100%，三种波长的差别缩小，颜色因此越来越白。这就是 Fresnel 效应：从很斜的角度看金色物体，边缘会泛白。这里按 s、p 两种偏振的反射率取平均。"
+      desc="入射角接近 90° 时，所有金属的反射率都急速升向 100%，三种波长的差别随之缩小，颜色因此越来越白（铝等金属在 80° 之前还会先略微下降，这是 p 偏振的伪布儒斯特角效应）。这就是 Fresnel 效应：从很斜的角度看金色物体，边缘会泛白。这里按 s、p 两种偏振的反射率取平均。"
     >
       <demo-canvas title="反射率随入射角（所选金属，450 / 550 / 650nm）" :width="ANGLE_W" :height="ANGLE_H" :draw="angleDraw"/>
     </demo-section>

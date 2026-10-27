@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {computed, reactive, ref} from 'vue';
+import {computed, reactive, ref, watch} from 'vue';
 import {DemoCanvas, DemoPage, DemoSection} from '../components/demo';
 import {rgbToOklch, oklchToRgb} from '../utils/space';
 import {
@@ -45,6 +45,9 @@ const drawGrid = (ctx: CanvasRenderingContext2D) => {
 const purpleInfo = computed(() => describePurple(purple));
 
 const picked = ref<{L: number; C: number; hex: string; name: string} | null>(null);
+watch(hue, () => {
+  picked.value = null;
+});
 const onPickGrid = ({x, y}: PickEvent) => {
   const cell = cellAt(x, y);
   if (!cell) {
@@ -101,7 +104,7 @@ const surroundText = computed(() => {
 
     <demo-section
       title="棕色是暗了的橙色"
-      desc="棕色不是一个独立的色相，它是橙色 / 黄色在较暗、且周围更亮时被我们感知成的颜色。这里的橙色块完全相同，只是背景不同：多数人看到的是，在近黑背景上它是明亮的橙色，在白色背景上更像棕色，（感知因人而异，这是一个常被引用的演示，不是严格的定量结论）。所以你找不到“棕色光”：舞台上的棕色灯光只会被看成暗橙色。拖动滑块改变中间那块的背景。"
+      desc="棕色不是一个独立的色相，它是橙色 / 黄色在较暗、且周围更亮时被我们感知成的颜色。这里的橙色块完全相同，只是背景不同：多数人看到的是，在近黑背景上它是明亮的橙色，在白色背景上更像棕色（感知因人而异，这是一个常被引用的演示，不是严格的定量结论）。所以你找不到“棕色光”：舞台上的棕色灯光只会被看成暗橙色。拖动滑块改变中间那块的背景。"
     >
       <div class="demo-controls">
         <label>
@@ -120,7 +123,7 @@ const surroundText = computed(() => {
       <div class="demo-controls">
         <label>
           OKLCH 色相
-          <input v-model.number="hue" type="range" min="20" max="110" step="1">
+          <input v-model.number="hue" type="range" min="40" max="80" step="1">
           <span class="demo-code">{{ hue }}°</span>
         </label>
         <span>橙色块的色相约 {{ orangeHue }}°</span>

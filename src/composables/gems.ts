@@ -98,7 +98,7 @@ const drawCup = (backLit: () => boolean, thickness: () => number): DrawFn => (ct
   ctx.strokeStyle = 'rgba(255,255,255,0.25)';
   ctx.lineWidth = 1.5;
   ctx.stroke();
-  text(ctx, back ? '背面打光：看到的是透射光（红）' : '正面打光：看到的是散射光（绿）', w / 2, h - 12, 'center', '#DDD', '12px sans-serif');
+  text(ctx, back ? '背面打光：看到的是透射光' : '正面打光：看到的是散射光', w / 2, h - 12, 'center', '#DDD', '12px sans-serif');
 };
 
 const drawLycurgusSpectra = (thickness: () => number): DrawFn => ctx => {

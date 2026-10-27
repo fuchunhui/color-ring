@@ -111,12 +111,12 @@ const refRows = refractionRows();
         </label>
         <label>
           太阳圆心真高度
-          <input v-model.number="altitude" type="range" min="-1" max="0.2" step="0.01">
+          <input v-model.number="altitude" type="range" min="-0.8" max="0.05" step="0.01">
           <span class="demo-code">{{ altitude.toFixed(2) }}°</span>
         </label>
         <label>
           <input v-model="extinction" type="checkbox">
-          计入大气瑞利消光（蓝紫光被吸收掉）
+          计入大气瑞利消光（蓝紫光被散射掉）
         </label>
       </div>
       <demo-canvas :width="FLASH_W" :height="FLASH_H" :draw="drawFlash"/>

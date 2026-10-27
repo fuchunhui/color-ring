@@ -39,7 +39,7 @@ const lost = computed(() => originalUnique(input.value) - stats.value.unique[cou
   <demo-page>
     <demo-section
       title="颜色空间转换会损失多少"
-      desc="每次从 sRGB 换到另一个空间再换回来，只要中间那个空间用 8 位整数保存，就会产生舍入误差，还会让一些原本不同的颜色并成同一个。把这个来回重复 N 次，看误差怎样累积。注意：这里的“往返”是 sRGB 8 位 → 目标空间 8 位 → sRGB 8 位，每一跳都取整。误差通常在最初几次就稳定下来，因为第二次转换的输入已经落在目标空间能表示的网格上。"
+      desc="每次从 sRGB 换到另一个空间再换回来，只要中间那个空间用 8 位整数保存，就会产生舍入误差，还会让一些原本不同的颜色并成同一个。把这个来回重复 N 次，看误差怎样累积。注意：这里的“往返”是 sRGB 8 位 → 目标空间 8 位 → sRGB 8 位，每一跳都取整。Lab、HSV、YCbCr 的误差通常在最初几次就稳定下来，因为第二次转换的输入已经落在目标空间能表示的网格上；XYZ 则不然，Y 以 8 位线性值保存，暗部精度很低，误差会随往返次数继续缓慢增大。"
     >
       <div class="demo-controls">
         <label>
@@ -67,7 +67,7 @@ const lost = computed(() => originalUnique(input.value) - stats.value.unique[cou
       <demo-canvas :width="TILES_W" :height="TILES_H" :draw="drawTiles"/>
       <p class="rt-note">
         第 {{ count }} 次往返后：最大误差 {{ stats.max[count - 1] }}，平均误差 {{ stats.mean[count - 1].toFixed(3) }}（码值，0~255），
-        不同颜色数 {{ originalUnique(input) }} → {{ stats.unique[count - 1] }}（减少 {{ lost }} 种）。
+        不同颜色数 {{ originalUnique(input) }} → {{ stats.unique[count - 1] }}（{{ lost >= 0 ? '减少' : '增加' }} {{ Math.abs(lost) }} 种）。
         {{ stats.converged < MAX_N ? `第 ${stats.converged} 次起结果不再变化。` : '' }}
       </p>
       <demo-canvas :width="PLOT_W" :height="PLOT_H" :draw="drawPlot"/>

@@ -3,15 +3,14 @@ import type {Point} from '../utils/cie';
 import {
   xyToUv,
   uvToXy,
-  planckianUv,
   cctDuvToUv,
   xyToCctDuv
 } from '../utils/colorimetry';
 
 const U_MIN = 0.16;
-const U_MAX = 0.34;
+const U_MAX = 0.37;
 const V_MIN = 0.26;
-const V_MAX = 0.38;
+const V_MAX = 0.39;
 const SCALE = 3600;
 const LEFT = 54;
 const TOP = 12;
@@ -46,7 +45,7 @@ const makeReference = (key: string, label: string, note: string, xy: Point): Ref
 /** CIE F 系列荧光灯的色度坐标取自 CIE 标准光源表 */
 const REFERENCES: Reference[] = [
   makeReference('d65', 'D65', '标准日光', D65),
-  makeReference('a', 'A', '钨丝灯，在黑体轨迹上', uvToXy(planckianUv(2856))),
+  makeReference('a', 'A', '钨丝灯，在黑体轨迹上', [0.44757, 0.40745]),
   makeReference('f1', 'F1', '荧光灯（日光型）', [0.3131, 0.3373]),
   makeReference('f2', 'F2', '荧光灯（冷白）', [0.3721, 0.3751]),
   makeReference('f11', 'F11', '三基色荧光灯（4000 K 型）', [0.3805, 0.3769])

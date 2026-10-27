@@ -68,7 +68,7 @@ const drawWall = (hex: () => string, power: () => number, mode: 'physical' | 'pe
         let v: number;
         if (onPole) {
           const t = (x - POLE_X) / (POLE_W / 2);
-          v = (0.25 + 0.15 * (1 - t * t)) * (l.white[k] * 0.6 + l.color[k] * 0.6) * exposure / ALBEDO;
+          v = (0.25 + 0.15 * (1 - t * t)) * (l.white[k] * 0.6 + l.color[k] * 0.6) * exposure / ALBEDO * gains[k];
         } else {
           v = (l.white[k] * vw + l.color[k] * vc) * shade * exposure * gains[k];
         }

@@ -49,7 +49,10 @@ const open = async (item: SolidColor) => {
   }
 };
 
-onMounted(() => {
+let lastRatio = 0;
+
+const drawPatterns = () => {
+  lastRatio = window.devicePixelRatio || 1;
   const host = root.value as HTMLElement;
   host.querySelectorAll<HTMLCanvasElement>('canvas[data-pattern]').forEach(canvas => {
     const p = PATTERNS.find(item => item.key === canvas.dataset.pattern);
@@ -57,11 +60,24 @@ onMounted(() => {
       mountPattern(canvas, p);
     }
   });
+};
+
+// 浏览器缩放或换屏会改变 devicePixelRatio，需要按新的物理像素重画，否则图案会被 CSS 缩放而模糊
+const onResize = () => {
+  if ((window.devicePixelRatio || 1) !== lastRatio) {
+    drawPatterns();
+  }
+};
+
+onMounted(() => {
+  drawPatterns();
+  window.addEventListener('resize', onResize);
   window.addEventListener('keydown', onKey);
   document.addEventListener('fullscreenchange', onFullscreenChange);
 });
 
 onBeforeUnmount(() => {
+  window.removeEventListener('resize', onResize);
   window.removeEventListener('keydown', onKey);
   document.removeEventListener('fullscreenchange', onFullscreenChange);
   if (document.fullscreenElement) {

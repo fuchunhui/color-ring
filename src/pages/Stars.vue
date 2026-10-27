@@ -164,11 +164,19 @@ const rows = dopplerRows();
           </tr>
         </tbody>
       </table>
+      <p class="stars-hint">
+        说明：显示器无法如实呈现 654 nm 以上的深红，这里的色块都被归一成同一种最饱和的红，所以只看色块看不出变化，请以观测波长为准。超过 780 nm 就移进了红外，肉眼不可见，用深灰表示。
+      </p>
     </demo-section>
   </demo-page>
 </template>
 
 <style lang="less">
+.stars-hint {
+  font-size: 13px;
+  line-height: 22px;
+  color: #666;
+}
 .stars-table {
   border-collapse: collapse;
   margin: 8px 0 12px;

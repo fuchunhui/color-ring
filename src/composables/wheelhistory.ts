@@ -326,7 +326,7 @@ const drawTimeline: DrawFn = (ctx, w, h) => {
     [1839, '谢弗勒尔 1839', 0],
     [1905, '孟塞尔 约 1905', 0],
     [1916, '奥斯特瓦尔德 约 1916', 1],
-    [1961, '伊登 约 1961', 0]
+    [1961, '伊登 1961', 0]
   ];
   events.forEach(([year, label, row]) => {
     const x = pos(year);

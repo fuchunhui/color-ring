@@ -305,7 +305,7 @@ const drawDoppler = (get: () => DopplerOptions): DrawFn => (ctx, w) => {
   };
   drawLine(REST, 'rgba(0,0,0,0.55)', true, `静止 ${REST} nm`, 0);
   drawLine(shifted, '#000', false, `观测 ${shifted.toFixed(3)} nm`, 1);
-  text(ctx, '放大 1000 倍的波长窗口：650~660 nm 之间只有 3.6 nm', w / 2, 128, 'center', '#777', '11px sans-serif');
+  text(ctx, '波长窗口 654.5~658.1 nm（仅 3.6 nm 宽，约放大 110 倍）', w / 2, 128, 'center', '#777', '11px sans-serif');
   text(ctx, `${DOP_MIN} nm`, x0, 14, 'left', '#999', '11px sans-serif');
   text(ctx, `${DOP_MAX} nm`, x0 + pw, 14, 'right', '#999', '11px sans-serif');
 };

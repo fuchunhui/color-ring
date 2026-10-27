@@ -50,13 +50,13 @@ const coneMatrix = (age: number | null): Matrix => {
   }));
 };
 
-const YOUNG_RAW = coneMatrix(null);
-const ROW_SUM = YOUNG_RAW.map(row => row[0] + row[1] + row[2]);
+const BASE_AGE = 20;
+const ROW_SUM = coneMatrix(BASE_AGE).map(row => row[0] + row[1] + row[2]);
 
-/** 线性 sRGB → 视锥响应，行已按“年轻眼睛看白色 = 1”归一化 */
+/** 线性 sRGB → 视锥响应，行已按“20 岁的眼睛看白色 = 1”归一化 */
 const conesOf = (age: number | null): Matrix => coneMatrix(age).map((row, c) => row.map(v => v / ROW_SUM[c]));
 
-const YOUNG = conesOf(null);
+const YOUNG = conesOf(BASE_AGE);
 const YOUNG_INV = invert3(YOUNG);
 
 const mul3 = (a: Matrix, b: Matrix): Matrix => {
