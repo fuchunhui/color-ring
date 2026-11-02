@@ -92,6 +92,13 @@ import ColorTransfer from './ColorTransfer.vue';
 import ColorGrade from './ColorGrade.vue';
 import Photonic from './Photonic.vue';
 import Constancy from './Constancy.vue';
+import ChromaticAberration from './ChromaticAberration.vue';
+import ColorNegative from './ColorNegative.vue';
+import Narrowband from './Narrowband.vue';
+import Mired from './Mired.vue';
+import GradientSpace from './GradientSpace.vue';
+import ConeMosaic from './ConeMosaic.vue';
+import SkinColor from './SkinColor.vue';
 
 export {
   ColorWrap,
@@ -187,5 +194,12 @@ export {
   ColorTransfer,
   ColorGrade,
   Photonic,
-  Constancy
+  Constancy,
+  ChromaticAberration,
+  ColorNegative,
+  Narrowband,
+  Mired,
+  GradientSpace,
+  ConeMosaic,
+  SkinColor
 };

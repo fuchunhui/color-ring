@@ -94,7 +94,14 @@ import {
   ColorTransfer,
   ColorGrade,
   Photonic,
-  Constancy
+  Constancy,
+  ChromaticAberration,
+  ColorNegative,
+  Narrowband,
+  Mired,
+  GradientSpace,
+  ConeMosaic,
+  SkinColor
 } from '../pages';
 
 const routes = [
@@ -661,6 +668,48 @@ const routes = [
     name: 'constancy',
     label: '色彩恒常性算法（灰度世界·白块·Retinex）',
     component: Constancy
+  },
+  {
+    path: '/chromaticaberration',
+    name: 'chromaticaberration',
+    label: '镜头色差与消色差透镜',
+    component: ChromaticAberration
+  },
+  {
+    path: '/colornegative',
+    name: 'colornegative',
+    label: '彩色负片为什么是橙色',
+    component: ColorNegative
+  },
+  {
+    path: '/narrowband',
+    name: 'narrowband',
+    label: '窄带假彩色（哈勃调色板）',
+    component: Narrowband
+  },
+  {
+    path: '/mired',
+    name: 'mired',
+    label: '色温滤镜与迈尔德（Mired）',
+    component: Mired
+  },
+  {
+    path: '/gradientspace',
+    name: 'gradientspace',
+    label: '渐变插值：哪个空间最自然',
+    component: GradientSpace
+  },
+  {
+    path: '/conemosaic',
+    name: 'conemosaic',
+    label: '视网膜锥细胞镶嵌',
+    component: ConeMosaic
+  },
+  {
+    path: '/skincolor',
+    name: 'skincolor',
+    label: '肤色的物理：黑色素与血红蛋白',
+    component: SkinColor
   }
 ];
 
