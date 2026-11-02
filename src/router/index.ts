@@ -88,7 +88,13 @@ import {
   MonitorTest,
   Categorical,
   DarkMode,
-  WheelHistory
+  WheelHistory,
+  SpectralUp,
+  PaletteExtract,
+  ColorTransfer,
+  ColorGrade,
+  Photonic,
+  Constancy
 } from '../pages';
 
 const routes = [
@@ -619,6 +625,42 @@ const routes = [
     name: 'wheelhistory',
     label: '色环简史',
     component: WheelHistory
+  },
+  {
+    path: '/spectralup',
+    name: 'spectralup',
+    label: 'RGB还原光谱（光谱上采样）',
+    component: SpectralUp
+  },
+  {
+    path: '/paletteextract',
+    name: 'paletteextract',
+    label: '主色提取（中位切分与k-means）',
+    component: PaletteExtract
+  },
+  {
+    path: '/colortransfer',
+    name: 'colortransfer',
+    label: '色彩迁移（Reinhard）',
+    component: ColorTransfer
+  },
+  {
+    path: '/colorgrade',
+    name: 'colorgrade',
+    label: '三向调色与CDL',
+    component: ColorGrade
+  },
+  {
+    path: '/photonic',
+    name: 'photonic',
+    label: '光子晶体与蛋白石（Bragg）',
+    component: Photonic
+  },
+  {
+    path: '/constancy',
+    name: 'constancy',
+    label: '色彩恒常性算法（灰度世界·白块·Retinex）',
+    component: Constancy
   }
 ];
 

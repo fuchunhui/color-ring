@@ -86,6 +86,12 @@ import MonitorTest from './MonitorTest.vue';
 import Categorical from './Categorical.vue';
 import DarkMode from './DarkMode.vue';
 import WheelHistory from './WheelHistory.vue';
+import SpectralUp from './SpectralUp.vue';
+import PaletteExtract from './PaletteExtract.vue';
+import ColorTransfer from './ColorTransfer.vue';
+import ColorGrade from './ColorGrade.vue';
+import Photonic from './Photonic.vue';
+import Constancy from './Constancy.vue';
 
 export {
   ColorWrap,
@@ -175,5 +181,11 @@ export {
   MonitorTest,
   Categorical,
   DarkMode,
-  WheelHistory
+  WheelHistory,
+  SpectralUp,
+  PaletteExtract,
+  ColorTransfer,
+  ColorGrade,
+  Photonic,
+  Constancy
 };
